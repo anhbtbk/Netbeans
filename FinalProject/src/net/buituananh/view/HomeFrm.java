@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import net.buituananh.model.Registering;
@@ -23,7 +24,7 @@ import net.buituananh.model.controller.DataControllerImp;
  * @author Tuan Anh
  */
 public class HomeFrm extends javax.swing.JFrame implements ActionListener {
-
+    
     private List<Subject> subjects;
     private List<Student> students;
     private List<Registering> registerings;
@@ -487,35 +488,35 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private void addButtonGroup() {
         buttonGroupSearchSubject.add(rbSearchSubjectByName);
         buttonGroupSearchSubject.add(rbSearchSubjectByNumOfLesson);
-
+        
         buttonGroupSortSubject.add(rbSortSubjectLessonASC);
         buttonGroupSortSubject.add(rbSortSubjectLessonDESC);
         buttonGroupSortSubject.add(rbSortSubjectNameASC);
         buttonGroupSortSubject.add(rbSortSubjectNameDESC);
     }
-
+    
     private void addActionListener() {
         btnAddNewSubject.addActionListener(this);
         btnEditSubject.addActionListener(this);
         btnRefreshSubject.addActionListener(this);
         btnRemoveSubject.addActionListener(this);
         btnSearchSubject.addActionListener(this);
-
+        
         rbSearchSubjectByName.addActionListener(this);
         rbSearchSubjectByNumOfLesson.addActionListener(this);
         rbSortSubjectLessonASC.addActionListener(this);
         rbSortSubjectLessonDESC.addActionListener(this);
         rbSortSubjectNameASC.addActionListener(this);
         rbSortSubjectNameDESC.addActionListener(this);
-
+        
     }
-
+    
     public void addSubjectCallback(Subject subject) {
         subjects.add(subject);
         showSubject(subject);
         saveData(DataController.SUBJECT);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         // thực hiện các hành động
@@ -538,9 +539,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         } else if (obj.equals(btnSearchSubject)) {
             searchSubjects();
         }
-
+        
     }
-
+    
     private void showSubject(Subject subject) {
         Object[] row = new Object[]{
             subject.getId(), subject.getName(),
@@ -548,28 +549,28 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         };
         tableModelSubject.addRow(row);
     }
-
+    
     private void loadData() {
         subjects = dataController
                 .<Subject>readDataFromFile(DataController.SUBJECT_FILE);
         // đọc danh sách sinh viên
         // đọc danh sách bảng đăng ký
         editSubjectId();
-
+        
     }
-
+    
     private void showData() {
         showSubjects();
-
+        
     }
-
+    
     private void showSubjects() {
         tableModelSubject.setRowCount(0); //clear data
         for (Subject subject : subjects) {
             showSubject(subject);
         }
     }
-
+    
     private void saveData(int choice) {
         switch (choice) {
             case DataController.SUBJECT:
@@ -586,19 +587,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 break;
         }
     }
-
+    
     private void editSubjectId() {
         int maxId = Subject.getsId();
         for (Subject subject : subjects) {
             if (subject.getId() > maxId) {
                 maxId = subject.getId();
             }
-
+            
         }
         Subject.setsId(maxId + 1);
-
+        
     }
-
+    
     private void removeSubject() {
         int selectedIdex = tblSubject.getSelectedRow();
         if (selectedIdex > -1) {
@@ -609,32 +610,34 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 tableModelSubject.removeRow(selectedIdex);
                 dataController.<Subject>writeToFile(subjects,
                         DataController.SUBJECT_FILE);
-                JOptionPane.showMessageDialog(rootPane, "Xóa môn học thành công!");
+                JOptionPane.showMessageDialog(rootPane, 
+                        "Xóa môn học thành công!");
             }
         } else {
             var msg = "Vui lòng chọn một bản ghi để xóa!";
             showDialogMessage(msg);
         }
     }
-
+    
     private void showDialogMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
     }
-
+    
     private void editSubject() {
         int selectedIdex = tblSubject.getSelectedRow();
         if (selectedIdex > -1) {
             Subject subject = subjects.get(selectedIdex);
             EditSubjectDialog editSubjectDialog
-                    = new EditSubjectDialog(this, rootPaneCheckingEnabled, subject);
+                    = new EditSubjectDialog(this, 
+                            rootPaneCheckingEnabled, subject);
             editSubjectDialog.setVisible(true);
         } else {
             var msg = "Vui lòng chọn một bản ghi để xóa!";
             showDialogMessage(msg);
         }
-
+        
     }
-
+    
     public void editSubjectCallback(Subject subject) {
         int selectedIdex = tblSubject.getSelectedRow();
         subjects.set(selectedIdex, subject);
@@ -646,7 +649,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelSubject.insertRow(selectedIdex, row);
         saveData(DataController.SUBJECT);
     }
-
+    
     private void sortSubjects(Object obj) {
         if (obj.equals(rbSortSubjectLessonASC)) {
             dataController.sortSubjectByNunOfLessonASC(subjects);
@@ -659,7 +662,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
         showSubjects();
     }
-
+    
     private void searchSubjects() {
         if (rbSearchSubjectByName.isSelected()) {
             var key = txtSearchSubjectByName.getText();
@@ -670,28 +673,52 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 var result = dataController.searchSubjectByName(subjects, key);
                 subjects.clear();
                 subjects.addAll(result);
-                if (subjects.size() > 0) {
-                    showSubjects();
-                    var msg = "Tìm thấy " + subjects.size() + " kết quả";
-                    showDialogMessage(msg);
-                } else {
-                    subjects.clear();
-                    showSubjects();
-                    var msg = "Không tìm thấy kết quả nào!";
-                    showDialogMessage(msg);
-                }
+                checkAndShowSearchResult();
             }
         } else if (rbSearchSubjectByNumOfLesson.isSelected()) {
-
+            var fromValString = txtSearchSubjectLessonFrom.getText();
+            var toValSring = txtSearchSubjectLessonTo.getText();
+            if (!fromValString.isEmpty() && !toValSring.isEmpty()) {
+                var fromValue = Integer.parseInt(fromValString);
+                var toValue = Integer.parseInt(toValSring);
+                var result = dataController.searchSubjectByLessonRange(subjects, 
+                        fromValue, toValue);
+                subjects.clear();
+                subjects.addAll(result);
+                checkAndShowSearchResult();
+            } else {
+                var msg = "Vui lòng nhập số tiết học cần tìm kiếm!";
+                showDialogMessage(msg);
+            }
         } else {
             var msg = "Vui lòng chọn tiêu chí tìm kiếm trước!";
             showDialogMessage(msg);
         }
     }
-
+    
+    private void checkAndShowSearchResult() {
+        if (subjects.size() > 0) {
+            showSubjects();
+            var msg = "Tìm thấy " + subjects.size() + " kết quả";
+            showDialogMessage(msg);
+        } else {
+            subjects.clear();
+            showSubjects();
+            var msg = "Không tìm thấy kết quả nào!";
+            showDialogMessage(msg);
+        }
+    }
+    
     private void refreshSubjects() {
+        var text ="";
+        txtSearchSubjectByName.setText(text);
+        txtSearchSubjectLessonFrom.setText(text);
+        txtSearchSubjectLessonTo.setText(text);
+        buttonGroupSortSubject.clearSelection();
+        buttonGroupSearchSubject.clearSelection();
         subjects.clear();
-        subjects.addAll(dataController.<Subject>readDataFromFile(DataController.SUBJECT_FILE));
+        subjects.addAll(dataController.
+                <Subject>readDataFromFile(DataController.SUBJECT_FILE));
         showSubjects();
     }
 }
