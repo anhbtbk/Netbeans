@@ -6,7 +6,9 @@ package net.buituananh.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JOptionPane;
+import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
 
 /**
@@ -17,6 +19,7 @@ public class AddStudentDialog extends javax.swing.JDialog implements ActionListe
 
     private HomeFrm homeFrm;
     private Subject subject;
+    private List<Student> students;
 
     /**
      * Creates new form AddSubjectDialog
@@ -30,6 +33,11 @@ public class AddStudentDialog extends javax.swing.JDialog implements ActionListe
         txtPersonId.setText(subject.getId() + "");
         homeFrm = (HomeFrm) parent;
     }
+    
+     public AddStudentDialog(java.awt.Frame parent, boolean modal, List<Student> students) {
+         this(parent,modal);
+         this.students = students;
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.

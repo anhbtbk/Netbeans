@@ -5,8 +5,16 @@
 package net.buituananh.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+import net.buituananh.model.controller.InfoFilterImp;
+import net.buituananh.model.exception.InvalidDateOfBirthException;
+import net.buituananh.model.exception.InvalidEmailException;
+import net.buituananh.model.exception.InvalidNameException;
+import net.buituananh.model.exception.InvalidPersionIdException;
+import net.buituananh.model.exception.InvalidPhoneNumberException;
 
 /**
  *
@@ -25,27 +33,37 @@ public class Person implements Serializable {
         fullName = new FullName();
     }
 
-    public Person(String id) {
-        this.id = id;
+    public Person(String id) throws InvalidPersionIdException {
+        setId(id);
     }
 
     public Person(String id, String address, String email,
-            String phoneNumber, String fullName, Date dob) {
+            String phoneNumber, String fullName, String dob)
+            throws InvalidPersionIdException, InvalidEmailException,
+            InvalidPhoneNumberException, InvalidDateOfBirthException, 
+            InvalidNameException {
         this();
-        this.id = id;
+        setId(id);
         this.address = address;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+        setEmail(email);
+        setPhoneNumber(phoneNumber);
         setFullName(fullName);
-        this.dob = dob;
+        setDob(dob);
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String id) throws InvalidPersionIdException {
+        var infoFilter = new InfoFilterImp();
+        try {
+            if (infoFilter.isPersonIdValid(id)) {
+                this.id = id;
+            }
+        } catch (InvalidPersionIdException ex) {
+            throw ex;
+        }
     }
 
     public String getAddress() {
@@ -60,29 +78,52 @@ public class Person implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws InvalidEmailException {
+        var infoFilter = new InfoFilterImp();
+        try {
+            if (infoFilter.isEmailValid(email)) {
+                this.email = email;
+            }
+        } catch (InvalidEmailException ex) {
+            throw ex;
+        }
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
+        var infoFilter = new InfoFilterImp();
+        try {
+            if (infoFilter.isPhoneNumberValid(phoneNumber)) {
+                this.phoneNumber = phoneNumber;
+            }
+        } catch (InvalidPhoneNumberException ex) {
+            throw ex;
+        }
     }
 
     public String getFullName() {
         return fullName.last + " " + this.fullName.mid + this.fullName.first;
     }
 
-    public void setFullName(String fullName) {
-        var words = fullName.split("\\s+");
-        this.fullName.first = words[words.length - 1];
-        this.fullName.last = words[0];
-        for (int i = 0; i < words.length; i++) {
-            this.fullName.mid += words[i] + " "; //Đối với những người 
-            //có 2 từ đệm trở lên, dấu cách " " ở đây sẽ dùng để phân tách
+    public void setFullName(String fullName) throws InvalidNameException {
+        var infoFilter = new InfoFilterImp();
+        try {
+            if (infoFilter.isNameValid(fullName)) {
+                var words = fullName.split("\\s+");
+                this.fullName.first = words[words.length - 1];
+                this.fullName.last = words[0];
+                for (int i = 0; i < words.length; i++) {
+                    this.fullName.mid += words[i] + " "; //Đối với những người
+                    //có 2 từ đệm trở lên, dấu cách " " ở đây sẽ dùng để phân tách
+
+                }
+
+            }
+        } catch (InvalidNameException ex) {
+            throw ex;
         }
     }
 
@@ -90,8 +131,19 @@ public class Person implements Serializable {
         return dob;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setDob(String dob) throws InvalidDateOfBirthException {
+        var infoFilter = new InfoFilterImp();
+        try {
+            if (infoFilter.isDateOfBirthValid(dob)) {
+                var dobStr = "dd/MM/yyyy";
+                SimpleDateFormat dateFormat = new SimpleDateFormat(dobStr);
+                this.dob = dateFormat.parse(dob);
+            }
+        } catch (InvalidDateOfBirthException ex) {
+            throw ex;
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
     }
 
     class FullName implements Serializable {
@@ -162,5 +214,5 @@ public class Person implements Serializable {
         }
         return true;
     }
-    
+
 }

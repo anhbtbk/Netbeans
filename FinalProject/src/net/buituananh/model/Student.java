@@ -4,15 +4,21 @@
  */
 package net.buituananh.model;
 
-import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
+import net.buituananh.model.controller.InfoFilterImp;
+import net.buituananh.model.exception.InvalidDateOfBirthException;
+import net.buituananh.model.exception.InvalidEmailException;
+import net.buituananh.model.exception.InvalidNameException;
+import net.buituananh.model.exception.InvalidPersionIdException;
+import net.buituananh.model.exception.InvalidPhoneNumberException;
+import net.buituananh.model.exception.InvalidStudentIdException;
 
 /**
  *
  * @author Tuan Anh
  */
 public class Student extends Person {
+
     private String studentId;
     private String studentClass;
     private String major;
@@ -21,20 +27,24 @@ public class Student extends Person {
     public Student() {
     }
 
-    public Student(String studentId) {
-        this.studentId = studentId;
+    public Student(String studentId) throws InvalidStudentIdException {
+        setStudentId(studentId);
     }
 
-    public Student(String studentId, String id) {
+    public Student(String studentId, String id) throws InvalidStudentIdException,
+            InvalidPersionIdException {
         super(id);
-        this.studentId = studentId;
+        setStudentId(studentId);
     }
 
-    public Student(String studentId, String studentClass, String major, 
-            String schoolYear, String id, String address, String email, 
-            String phoneNumber, String fullName, Date dob) {
+    public Student(String studentId, String studentClass, String major,
+            String schoolYear, String id, String address, String email,
+            String phoneNumber, String fullName, String dob)
+            throws InvalidStudentIdException, InvalidPersionIdException,
+            InvalidEmailException, InvalidPhoneNumberException,
+            InvalidDateOfBirthException, InvalidNameException {
         super(id, address, email, phoneNumber, fullName, dob);
-        this.studentId = studentId;
+        this.setStudentId(studentId);
         this.studentClass = studentClass;
         this.major = major;
         this.schoolYear = schoolYear;
@@ -44,7 +54,15 @@ public class Student extends Person {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(String studentId) throws InvalidStudentIdException {
+        var infoFilter = new InfoFilterImp();
+        try {
+            if (infoFilter.isStudentIdValid(studentId)) {
+                this.studentId = studentId;
+            }
+        } catch (InvalidStudentIdException e) {
+            throw e;
+        }
         this.studentId = studentId;
     }
 
@@ -96,7 +114,5 @@ public class Student extends Person {
         }
         return true;
     }
- 
-    
-    
+
 }
