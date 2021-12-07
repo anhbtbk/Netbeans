@@ -6,6 +6,7 @@ package net.buituananh.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private List<Student> students;
     private List<Registering> registerings;
     private DefaultTableModel tableModelSubject;
+    private DefaultTableModel tableModelStudent;
     private DataController dataController;
 
     /**
@@ -41,6 +43,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         addActionListener();
         subjects = new ArrayList<>();
         tableModelSubject = (DefaultTableModel) tblSubject.getModel();
+        tableModelStudent = (DefaultTableModel) tblStudent.getModel();
         dataController = new DataControllerImp();
         loadData();
         showData();
@@ -801,9 +804,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnRefreshSubject.addActionListener(this);
         btnRemoveSubject.addActionListener(this);
         btnSearchSubject.addActionListener(this);
-        
+
         btnAddNewStudent.addActionListener(this);
-        btnEditStudent.
+        btnEditStudent.addActionListener(this);
+        btnRefreshStudent.addActionListener(this);
+        btnRemoveStudent.addActionListener(this);
 
         rbSearchSubjectByName.addActionListener(this);
         rbSearchSubjectByNumOfLesson.addActionListener(this);
@@ -818,6 +823,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         subjects.add(subject);
         showSubject(subject);
         saveData(DataController.SUBJECT);
+    }
+
+    public void addStudentCallback(Student student) {
+        students.add(student);
+        showStudent(student);
+        saveData(DataController.STUDENT);
     }
 
     @Override
@@ -856,9 +867,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     private void loadData() {
+        // đọc danh sách môn học
         subjects = dataController
                 .<Subject>readDataFromFile(DataController.SUBJECT_FILE);
         // đọc danh sách sinh viên
+        students = dataController
+                .<Student>readDataFromFile(DataController.STUDENT_FILE);
         // đọc danh sách bảng đăng ký
         editSubjectId();
 
@@ -866,6 +880,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
     private void showData() {
         showSubjects();
+        showStudents();
 
     }
 
@@ -1028,7 +1043,27 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     private void addNewStudent() {
-        AddStudentDialog addStudentDialog = new AddStudentDialog(this, rootPaneCheckingEnabled, students);
+        AddStudentDialog addStudentDialog
+                = new AddStudentDialog(this, rootPaneCheckingEnabled, students);
         addStudentDialog.setVisible(true);
+    }
+
+    private void showStudent(Student student) {
+        var format = "dd/MM/yyyy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        Object[] row = new Object[]{
+            student.getStudentId(), student.getFullName(),
+            dateFormat.format(student.getDob()), student.getAddress(),
+            student.getEmail(), student.getPhoneNumber(),
+            student.getStudentClass(), student.getMajor(), student.getSchoolYear()
+        };
+        tableModelStudent.addRow(row);
+    }
+
+    private void showStudents() {
+        tableModelStudent.setRowCount(0); //clear data
+        for (Student student : students) {
+            showStudent(student);
+        }
     }
 }

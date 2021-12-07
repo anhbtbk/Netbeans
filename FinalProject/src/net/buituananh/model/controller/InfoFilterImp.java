@@ -22,7 +22,7 @@ public class InfoFilterImp implements InfoFilter {
     @Override
     public boolean isStudentIdValid(String id)
             throws InvalidStudentIdException {
-        var regex = "^[a-z]\\d{2}[a-z]\\d{3}$";
+        var regex = "^[a-z]\\d{2}[a-z]{4}\\d{3}$";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(id);
         if (matcher.matches()) {

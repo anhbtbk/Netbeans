@@ -7,9 +7,17 @@ package net.buituananh.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
+import net.buituananh.model.exception.InvalidDateOfBirthException;
+import net.buituananh.model.exception.InvalidEmailException;
+import net.buituananh.model.exception.InvalidNameException;
+import net.buituananh.model.exception.InvalidPersionIdException;
+import net.buituananh.model.exception.InvalidPhoneNumberException;
+import net.buituananh.model.exception.InvalidStudentIdException;
 
 /**
  *
@@ -30,14 +38,14 @@ public class AddStudentDialog extends javax.swing.JDialog implements ActionListe
         setLocationRelativeTo(null);
         addActionListener();
         subject = new Subject();
-        txtPersonId.setText(subject.getId() + "");
         homeFrm = (HomeFrm) parent;
     }
-    
-     public AddStudentDialog(java.awt.Frame parent, boolean modal, List<Student> students) {
-         this(parent,modal);
-         this.students = students;
-     }
+
+    public AddStudentDialog(java.awt.Frame parent, boolean modal, 
+            List<Student> students) {
+        this(parent, modal);
+        this.students = students;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -344,7 +352,8 @@ public class AddStudentDialog extends javax.swing.JDialog implements ActionListe
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddStudentDialog dialog = new AddStudentDialog(new javax.swing.JFrame(), true);
+                AddStudentDialog dialog = 
+                        new AddStudentDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -393,8 +402,8 @@ public class AddStudentDialog extends javax.swing.JDialog implements ActionListe
         } else if (obj.equals(btnClear)) {
             clearInputData();
         } else if (obj.equals(btnAddNew)) {
-            addNewSubject();
-               
+            addNewStudent();
+
         }
     }
 
@@ -408,9 +417,70 @@ public class AddStudentDialog extends javax.swing.JDialog implements ActionListe
         var emptyText = "";
         txtPersonName.setText(emptyText);
         txtPersonDod.setText(emptyText);
+        txtPersonAddress.setText(emptyText);
+        txtPersonId.setText(emptyText);
+        txtPersonEmail.setText(emptyText);
+        txtPersonPhoneNumber.setText(emptyText);
+        txtStudentId.setText(emptyText);
+        txtStudentClass.setText(emptyText);
+        comboMajor.setSelectedIndex(0);
+        txtSchoolYear.setText(emptyText);
     }
 
-    private void addNewSubject() {
-        
+    private void addNewStudent() {
+        var pId = txtPersonId.getText();
+        var fullName = txtPersonName.getText();
+        var dobStr = txtPersonDod.getText();
+        var address = txtPersonAddress.getText();
+        var email = txtPersonEmail.getText();
+        var phoneNumber = txtPersonPhoneNumber.getText();
+        var studentId = txtStudentId.getText();
+        var studentClass = txtStudentClass.getText();
+        var major = comboMajor.getSelectedItem().toString();
+        var schoolYear = txtSchoolYear.getText();
+        if (pId.isEmpty() || fullName.isEmpty() || dobStr.isEmpty()
+                || address.isEmpty() || email.isEmpty() || phoneNumber.isEmpty()
+                || studentId.isEmpty() || studentClass.isEmpty()
+                || major.isEmpty() || schoolYear.isEmpty()) {
+            var msg = "Vui lòng điền đầy đủ thông tin sinh viên";
+            showMessage(msg);
+        } else {
+            try {
+                Student student = new Student(studentId, studentClass, major,
+                        schoolYear, pId, address, email, phoneNumber, fullName,
+                        dobStr);
+                if (students.contains(student)) {
+                    var msg = "Sinh viên mã \"" + studentId + "\" đã tồn tại!";
+                    showMessage(msg);
+                } else {
+                    homeFrm.addStudentCallback(student);
+                    var msg = "Thêm mới sinh viên thành công!";
+                    showMessage(msg);
+                }
+            } catch (InvalidStudentIdException ex) {
+                var msg = "Ví dụ mã hợp lệ: B25DCCN125";
+                showMessage(ex.getMessage() + "\n" + msg);
+            } catch (InvalidPersionIdException ex) {
+                var msg = "Ví dụ mã hợp lệ: A2021123123";
+                showMessage(ex.getMessage() + "\n" + msg);
+            } catch (InvalidEmailException ex) {
+                var msg = "Ví dụ email hợp lệ: example@gmail.com";
+                showMessage(ex.getMessage() + "\n" + msg);
+            } catch (InvalidPhoneNumberException ex) {
+                var msg = "Ví dụ SĐT hợp lệ: 0988123123";
+                showMessage(ex.getMessage() + "\n" + msg);
+            } catch (InvalidDateOfBirthException ex) {
+                var msg = "Ví dụ ngày sinh hợp lệ: 22/11/2005";
+                showMessage(ex.getMessage() + "\n" + msg);
+            } catch (InvalidNameException ex) {
+                var msg = "Họ tên chỉ chứa chữ cái và dấu cách.";
+                showMessage(ex.getMessage() + "\n" + msg);
+            }
+        }
     }
+
+    private void showMessage(String msg) {
+        JOptionPane.showMessageDialog(rootPane, msg);
+    }
+
 }
