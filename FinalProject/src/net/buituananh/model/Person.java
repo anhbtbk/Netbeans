@@ -115,12 +115,12 @@ public class Person implements Serializable {
                 var words = fullName.split("\\s+");
                 this.fullName.first = words[words.length - 1];
                 this.fullName.last = words[0];
-                for (int i = 0; i < words.length; i++) {
-                    this.fullName.mid += words[i] + " "; //Đối với những người
+                var mid = "";
+                for (int i = 1; i < words.length - 1; i++) {
+                    mid += words[i] + " "; //Đối với những người
                     //có 2 từ đệm trở lên, dấu cách " " ở đây sẽ dùng để phân tách
-
                 }
-
+                this.fullName.mid = mid;
             }
         } catch (InvalidNameException ex) {
             throw ex;
