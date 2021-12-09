@@ -835,6 +835,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         rbSortSubjectNameASC.addActionListener(this);
         rbSortSubjectNameDESC.addActionListener(this);
 
+        rbSortStudentNameASC.addActionListener(this);
+        rbSortStudentNameDESC.addActionListener(this);
+        rbSortStudentIdASC.addActionListener(this);
+
     }
 
     public void addSubjectCallback(Subject subject) {
@@ -894,6 +898,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             removeStudent();
         } else if (obj.equals(btnRefreshStudent)) {
             refreshStudents();
+        } else if (obj.equals(rbSortStudentIdASC)
+                || obj.equals(rbSortStudentNameASC)
+                || obj.equals(rbSortStudentNameDESC)) {
+            sortStudents();
         }
 
     }
@@ -1151,5 +1159,16 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         students.clear();
         students.addAll(dataController.
                 <Student>readDataFromFile(DataController.STUDENT_FILE));
+    }
+
+    private void sortStudents() {
+        if (rbSortStudentIdASC.isSelected()) {
+            dataController.sortStudentByStudentIdASC(students);
+        } else if (rbSortStudentNameASC.isSelected()) {
+            dataController.sortStudentByNameASC(students);
+        } else if (rbSortStudentNameDESC.isSelected()) {
+            dataController.sortStudentByNameDESC(students);
+        }
+        showStudents();
     }
 }

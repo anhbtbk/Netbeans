@@ -18,7 +18,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
+import net.buituananh.model.controller.sort.SortStudentByIdASC;
+import net.buituananh.model.controller.sort.SortStudentByNameASC;
+import net.buituananh.model.controller.sort.SortStudentByNameDESC;
 import net.buituananh.model.controller.sort.SortSubjectByNameASC;
 import net.buituananh.model.controller.sort.SortSubjectByNameDESC;
 import net.buituananh.model.controller.sort.SortSubjectByNumOfLessonASC;
@@ -106,6 +110,23 @@ public class DataControllerImp implements DataController {
             }
         }
         return resultList;
+
+    }
+
+    @Override
+    public void sortStudentByNameASC(List<Student> students) {
+        students.sort(new SortStudentByNameASC());
+    }
+
+    @Override
+    public void sortStudentByNameDESC(List<Student> students) {
+        students.sort(new SortStudentByNameDESC());
+
+    }
+
+    @Override
+    public void sortStudentByStudentIdASC(List<Student> students) {
+        students.sort(new SortStudentByIdASC());
 
     }
 }

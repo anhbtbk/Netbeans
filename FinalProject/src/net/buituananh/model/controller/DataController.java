@@ -5,6 +5,7 @@
 package net.buituananh.model.controller;
 
 import java.util.List;
+import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
 
 /**
@@ -34,7 +35,13 @@ public interface DataController {
 
     List<Subject> searchSubjectByName(List<Subject> subjects, String key);
 
-    List<Subject> searchSubjectByLessonRange(List<Subject> subjects, 
+    List<Subject> searchSubjectByLessonRange(List<Subject> subjects,
             int fromVal, int toVal);
+
+    void sortStudentByNameASC(List<Student> students);
+
+    void sortStudentByNameDESC(List<Student> students);
+
+    void sortStudentByStudentIdASC(List<Student> students);
 
 }

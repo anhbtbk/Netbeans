@@ -13,6 +13,10 @@ import net.buituananh.model.Subject;
  */
 public class SortSubjectByNameASC implements Comparator<Subject> {
 
+    public SortSubjectByNameASC() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     public int compare(Subject o1, Subject o2) {
         return o1.getName().compareTo(o2.getName());
