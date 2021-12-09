@@ -6,6 +6,10 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupSearchSubject">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupSearchStudent">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupSortStudent">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -646,7 +650,7 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="rbSearchSubjectByName1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbSearchStudentByName" min="-2" max="-2" attributes="0"/>
                                           <Component id="rbSearchStudentId" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -672,7 +676,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="rbSearchSubjectByName1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbSearchStudentByName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtSearchStudentName" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -692,7 +696,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rbSearchSubjectByName1">
+                    <Component class="javax.swing.JRadioButton" name="rbSearchStudentByName">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -700,7 +704,7 @@
                         <Property name="text" type="java.lang.String" value="Theo t&#xea;n g&#x1ea7;n &#x111;&#xfa;ng"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbSearchSubjectByName1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbSearchStudentByNameActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rbSearchStudentId">
