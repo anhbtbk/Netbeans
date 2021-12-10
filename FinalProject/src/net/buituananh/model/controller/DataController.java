@@ -44,4 +44,10 @@ public interface DataController {
 
     void sortStudentByStudentIdASC(List<Student> students);
 
+    List<Student> searchStudentByName(List<Student> students, String name);
+
+    List<Student> searchStudentById(List<Student> students, String id);
+
+    List<Student> searchStudentByMajor(List<Student> students, String major);
+
 }

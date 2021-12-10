@@ -666,7 +666,7 @@
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnSearchSubject1" min="-2" pref="73" max="-2" attributes="0"/>
+                              <Component id="btnSearchStudent" min="-2" pref="73" max="-2" attributes="0"/>
                               <EmptySpace pref="13" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -683,7 +683,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtSearchSubjectStudentById" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="rbSearchStudentId" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSearchSubject1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnSearchStudent" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -725,7 +725,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="btnSearchSubject1">
+                    <Component class="javax.swing.JButton" name="btnSearchStudent">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>

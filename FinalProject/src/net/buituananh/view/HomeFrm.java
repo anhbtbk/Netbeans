@@ -99,7 +99,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         rbSearchStudentByName = new javax.swing.JRadioButton();
         rbSearchStudentId = new javax.swing.JRadioButton();
         txtSearchStudentName = new javax.swing.JTextField();
-        btnSearchSubject1 = new javax.swing.JButton();
+        btnSearchStudent = new javax.swing.JButton();
         txtSearchSubjectStudentById = new javax.swing.JTextField();
         rbSearchStudentByMajor = new javax.swing.JRadioButton();
         comboMajor = new javax.swing.JComboBox<>();
@@ -413,8 +413,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         txtSearchStudentName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        btnSearchSubject1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnSearchSubject1.setText("Tìm");
+        btnSearchStudent.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchStudent.setText("Tìm");
 
         txtSearchSubjectStudentById.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSearchSubjectStudentById.addActionListener(new java.awt.event.ActionListener() {
@@ -453,7 +453,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(comboMajor, 0, 232, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(btnSearchSubject1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSearchStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -467,7 +467,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearchSubjectStudentById, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbSearchStudentId)
-                    .addComponent(btnSearchSubject1))
+                    .addComponent(btnSearchStudent))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbSearchStudentByMajor)
@@ -750,8 +750,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnRefreshSubject;
     private javax.swing.JButton btnRemoveStudent;
     private javax.swing.JButton btnRemoveSubject;
+    private javax.swing.JButton btnSearchStudent;
     private javax.swing.JButton btnSearchSubject;
-    private javax.swing.JButton btnSearchSubject1;
     private javax.swing.ButtonGroup buttonGroupSearchStudent;
     private javax.swing.ButtonGroup buttonGroupSearchSubject;
     private javax.swing.ButtonGroup buttonGroupSortStudent;
@@ -839,6 +839,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         rbSortStudentNameDESC.addActionListener(this);
         rbSortStudentIdASC.addActionListener(this);
 
+        rbSearchStudentByName.addActionListener(this);
+        rbSearchStudentId.addActionListener(this);
+        rbSearchStudentByMajor.addActionListener(this);
+        btnSearchStudent.addActionListener(this);
+
     }
 
     public void addSubjectCallback(Subject subject) {
@@ -902,6 +907,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 || obj.equals(rbSortStudentNameASC)
                 || obj.equals(rbSortStudentNameDESC)) {
             sortStudents();
+        } else if (obj.equals(rbSearchStudentId)
+                || obj.equals(rbSearchStudentByName)
+                || obj.equals(rbSearchStudentByMajor)) {
+            checkSearchField();
+        } else if (obj.equals(btnSearchStudent)) {
+            searchStudents();
         }
 
     }
@@ -1145,6 +1156,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     private void refreshStudents() {
+        txtSearchSubjectStudentById.setEnabled(true);
+        txtSearchStudentName.setEnabled(true);
+        comboMajor.setEnabled(true);
         buttonGroupSortStudent.clearSelection();
         buttonGroupSearchStudent.clearSelection();
         txtSearchStudentName.setText("");
@@ -1170,5 +1184,79 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             dataController.sortStudentByNameDESC(students);
         }
         showStudents();
+    }
+
+    private void checkSearchField() {
+        if (rbSearchStudentId.isSelected()) {
+            txtSearchSubjectStudentById.setEnabled(true);
+            txtSearchStudentName.setEnabled(false);
+            comboMajor.setEnabled(false);
+        } else if (rbSearchStudentByName.isSelected()) {
+            txtSearchSubjectStudentById.setEnabled(false);
+            txtSearchStudentName.setEnabled(true);
+            comboMajor.setEnabled(false);
+        } else if (rbSearchStudentByMajor.isSelected()) {
+            txtSearchSubjectStudentById.setEnabled(false);
+            txtSearchStudentName.setEnabled(false);
+            comboMajor.setEnabled(true);
+        }
+    }
+
+    private void searchStudents() {
+        reloadStudent();
+        if (rbSearchStudentId.isSelected()) {
+            var key = txtSearchSubjectStudentById.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập mã sinh viên cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchStudentById(students, key);
+                students.clear();
+                students.addAll(result);
+                checkAndShowSearchStudentResult();
+            }
+        } else if (rbSearchStudentByName.isSelected()) {
+            var name = txtSearchStudentName.getText();
+            if (!name.isEmpty()) {
+                var result = dataController.searchStudentByName(students,
+                        name);
+                students.clear();
+                students.addAll(result);
+                checkAndShowSearchStudentResult();
+            } else {
+                var msg = "Vui lòng nhập tên sinh viên cần tìm kiếm!";
+                showDialogMessage(msg);
+            }
+        } else if (rbSearchStudentByMajor.isSelected()) {
+            var major = comboMajor.getSelectedItem().toString();
+            if (!major.isEmpty()) {
+                var result = dataController.searchStudentByMajor(students,
+                        major);
+                students.clear();
+                students.addAll(result);
+                checkAndShowSearchStudentResult();
+            } else {
+                var msg = "Vui lòng chọn chuyên ngành cần tìm kiếm!";
+                showDialogMessage(msg);
+            }
+
+        } else {
+            var msg = "Vui lòng chọn tiêu chí tìm kiếm trước!";
+            showDialogMessage(msg);
+        }
+
+    }
+
+    private void checkAndShowSearchStudentResult() {
+        if (students.size() > 0) {
+            showStudents();
+            var msg = "Tìm thấy " + students.size() + " kết quả";
+            showDialogMessage(msg);
+        } else {
+            students.clear();
+            showStudents();
+            var msg = "Không tìm thấy kết quả nào!";
+            showDialogMessage(msg);
+        }
     }
 }
