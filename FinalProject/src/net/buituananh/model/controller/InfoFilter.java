@@ -4,6 +4,8 @@
  */
 package net.buituananh.model.controller;
 
+import java.util.List;
+import net.buituananh.model.Registering;
 import net.buituananh.model.exception.InvalidDateOfBirthException;
 import net.buituananh.model.exception.InvalidEmailException;
 import net.buituananh.model.exception.InvalidNameException;
@@ -30,4 +32,8 @@ public interface InfoFilter {
 
     boolean isDateOfBirthValid(String dobString) 
             throws InvalidDateOfBirthException;
+
+    boolean isRecordExist(List<Registering> registerings, Registering r);
+    
+   
 }

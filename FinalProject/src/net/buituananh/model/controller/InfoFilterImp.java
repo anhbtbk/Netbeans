@@ -4,8 +4,10 @@
  */
 package net.buituananh.model.controller;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.buituananh.model.Registering;
 import net.buituananh.model.exception.InvalidDateOfBirthException;
 import net.buituananh.model.exception.InvalidEmailException;
 import net.buituananh.model.exception.InvalidNameException;
@@ -98,6 +100,11 @@ public class InfoFilterImp implements InfoFilter {
             var msg = "Ngày sinh không hợp lệ: " + dobString;
             throw new InvalidDateOfBirthException(dobString, msg);
         }
+    }
+
+    @Override
+    public boolean isRecordExist(List<Registering> registerings, Registering r) {
+        return registerings.contains(r);
     }
 
 }
