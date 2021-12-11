@@ -26,18 +26,18 @@ import net.buituananh.model.controller.DataControllerImp;
  * @author Tuan Anh
  */
 public class HomeFrm extends javax.swing.JFrame implements ActionListener {
-    
+
     private List<Subject> subjects;
     private List<Student> students;
     private List<Registering> registerings;
-    
+
     private DefaultTableModel tableModelSubject;
     private DefaultTableModel tableModelStudent;
     private DefaultTableModel tableModelRegistering;
-    
+
     private DataController dataController;
     private SimpleDateFormat simpleDateFormat;
-    
+
     private int selectedIndex;
 
     /**
@@ -1048,74 +1048,74 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private void addButtonGroup() {
         buttonGroupSearchSubject.add(rbSearchSubjectByName);
         buttonGroupSearchSubject.add(rbSearchSubjectByNumOfLesson);
-        
+
         buttonGroupSortSubject.add(rbSortSubjectLessonASC);
         buttonGroupSortSubject.add(rbSortSubjectLessonDESC);
         buttonGroupSortSubject.add(rbSortSubjectNameASC);
         buttonGroupSortSubject.add(rbSortSubjectNameDESC);
-        
+
         buttonGroupSearchStudent.add(rbSearchStudentId);
         buttonGroupSearchStudent.add(rbSearchStudentByMajor);
         buttonGroupSearchStudent.add(rbSearchStudentByName);
-        
+
         buttonGroupSortStudent.add(rbSortStudentNameASC);
         buttonGroupSortStudent.add(rbSortStudentNameDESC);
         buttonGroupSortStudent.add(rbSortStudentIdASC);
-        
+
     }
-    
+
     private void addActionListener() {
         btnAddNewSubject.addActionListener(this);
         btnEditSubject.addActionListener(this);
         btnRefreshSubject.addActionListener(this);
         btnRemoveSubject.addActionListener(this);
         btnSearchSubject.addActionListener(this);
-        
+
         btnAddNewStudent.addActionListener(this);
         btnEditStudent.addActionListener(this);
         btnRefreshStudent.addActionListener(this);
         btnRemoveStudent.addActionListener(this);
-        
+
         rbSearchSubjectByName.addActionListener(this);
         rbSearchSubjectByNumOfLesson.addActionListener(this);
         rbSortSubjectLessonASC.addActionListener(this);
         rbSortSubjectLessonDESC.addActionListener(this);
         rbSortSubjectNameASC.addActionListener(this);
         rbSortSubjectNameDESC.addActionListener(this);
-        
+
         rbSortStudentNameASC.addActionListener(this);
         rbSortStudentNameDESC.addActionListener(this);
         rbSortStudentIdASC.addActionListener(this);
-        
+
         rbSearchStudentByName.addActionListener(this);
         rbSearchStudentId.addActionListener(this);
         rbSearchStudentByMajor.addActionListener(this);
         btnSearchStudent.addActionListener(this);
-        
+
         btnAddNewRegistering.addActionListener(this);
         btnRefreshRegistering.addActionListener(this);
         btnRemoveRegistering.addActionListener(this);
-        
+
     }
-    
+
     public void addSubjectCallback(Subject subject) {
         subjects.add(subject);
         showSubject(subject);
         saveData(DataController.SUBJECT);
     }
-    
+
     public void addRegisteringCallback(Registering registering) {
         registerings.add(registering);
         showRegistering(registering);
         saveData(DataController.REGISTERING);
     }
-    
+
     public void addStudentCallback(Student student) {
         students.add(student);
         showStudent(student);
         saveData(DataController.STUDENT);
     }
-    
+
     public void editStudentCallback(Student student) {
         tableModelStudent.removeRow(selectedIndex);
         var format = "dd/MM/yyyy";
@@ -1131,7 +1131,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         saveData(DataController.STUDENT);
         selectedIndex = -1;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // thực hiện các hành động
@@ -1173,10 +1173,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             searchStudents();
         } else if (obj.equals(btnAddNewRegistering)) {
             addNewRegistering();
+        } else if (obj.equals(btnRemoveRegistering)) {
+            removeRegistering();
         }
-        
     }
-    
+
     private void showSubject(Subject subject) {
         Object[] row = new Object[]{
             subject.getId(), subject.getName(),
@@ -1184,7 +1185,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         };
         tableModelSubject.addRow(row);
     }
-    
+
     private void loadData() {
         // đọc danh sách môn học
         subjects = dataController
@@ -1197,20 +1198,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 <Registering>readDataFromFile(DataController.REGISTERING_FILE);
         editSubjectId();
     }
-    
+
     private void showData() {
         showSubjects();
         showStudents();
         showRegisterings();
     }
-    
+
     private void showSubjects() {
         tableModelSubject.setRowCount(0); //clear data
         for (Subject subject : subjects) {
             showSubject(subject);
         }
     }
-    
+
     private void saveData(int choice) {
         switch (choice) {
             case DataController.SUBJECT:
@@ -1227,19 +1228,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 break;
         }
     }
-    
+
     private void editSubjectId() {
         int maxId = Subject.getsId();
         for (Subject subject : subjects) {
             if (subject.getId() > maxId) {
                 maxId = subject.getId();
             }
-            
+
         }
         Subject.setsId(maxId + 1);
-        
+
     }
-    
+
     private void removeSubject() {
         int selectedIdex = tblSubject.getSelectedRow();
         if (selectedIdex > -1) {
@@ -1258,11 +1259,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void showDialogMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
     }
-    
+
     private void editSubject() {
         int selectedIdex = tblSubject.getSelectedRow();
         if (selectedIdex > -1) {
@@ -1275,9 +1276,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             var msg = "Vui lòng chọn một bản ghi để xóa!";
             showDialogMessage(msg);
         }
-        
+
     }
-    
+
     public void editSubjectCallback(Subject subject) {
         int selectedIdex = tblSubject.getSelectedRow();
         subjects.set(selectedIdex, subject);
@@ -1289,7 +1290,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelSubject.insertRow(selectedIdex, row);
         saveData(DataController.SUBJECT);
     }
-    
+
     private void sortSubjects(Object obj) {
         if (obj.equals(rbSortSubjectLessonASC)) {
             dataController.sortSubjectByNunOfLessonASC(subjects);
@@ -1302,7 +1303,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
         showSubjects();
     }
-    
+
     private void searchSubjects() {
         if (rbSearchSubjectByName.isSelected()) {
             var key = txtSearchSubjectByName.getText();
@@ -1335,7 +1336,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void checkAndShowSearchResult() {
         if (subjects.size() > 0) {
             showSubjects();
@@ -1348,7 +1349,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void refreshSubjects() {
         var text = "";
         txtSearchSubjectByName.setText(text);
@@ -1361,13 +1362,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 <Subject>readDataFromFile(DataController.SUBJECT_FILE));
         showSubjects();
     }
-    
+
     private void addNewStudent() {
         AddStudentDialog addStudentDialog
                 = new AddStudentDialog(this, rootPaneCheckingEnabled, students);
         addStudentDialog.setVisible(true);
     }
-    
+
     private void showStudent(Student student) {
         var format = "dd/MM/yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(format);
@@ -1379,14 +1380,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         };
         tableModelStudent.addRow(row);
     }
-    
+
     private void showStudents() {
         tableModelStudent.setRowCount(0); //clear data
         for (Student student : students) {
             showStudent(student);
         }
     }
-    
+
     private void editStudent() {
         selectedIndex = tblStudent.getSelectedRow();
         if (selectedIndex > -1) {
@@ -1398,7 +1399,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void removeStudent() {
         int removeIndex = tblStudent.getSelectedRow();
         if (removeIndex >= 0) {
@@ -1415,7 +1416,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void refreshStudents() {
         txtSearchSubjectStudentById.setEnabled(true);
         txtSearchStudentName.setEnabled(true);
@@ -1429,13 +1430,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         reloadStudent();
         showStudents();
     }
-    
+
     private void reloadStudent() {
         students.clear();
         students.addAll(dataController.
                 <Student>readDataFromFile(DataController.STUDENT_FILE));
     }
-    
+
     private void sortStudents() {
         if (rbSortStudentIdASC.isSelected()) {
             dataController.sortStudentByStudentIdASC(students);
@@ -1446,7 +1447,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
         showStudents();
     }
-    
+
     private void checkSearchField() {
         if (rbSearchStudentId.isSelected()) {
             txtSearchSubjectStudentById.setEnabled(true);
@@ -1462,7 +1463,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             comboMajor.setEnabled(true);
         }
     }
-    
+
     private void searchStudents() {
         reloadStudent();
         if (rbSearchStudentId.isSelected()) {
@@ -1500,14 +1501,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 var msg = "Vui lòng chọn chuyên ngành cần tìm kiếm!";
                 showDialogMessage(msg);
             }
-            
+
         } else {
             var msg = "Vui lòng chọn tiêu chí tìm kiếm trước!";
             showDialogMessage(msg);
         }
-        
+
     }
-    
+
     private void checkAndShowSearchStudentResult() {
         if (students.size() > 0) {
             showStudents();
@@ -1520,26 +1521,45 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void addNewRegistering() {
         AddRegisterDialog registerDialog = new AddRegisterDialog(this, true,
                 students, subjects, registerings);
         registerDialog.setVisible(true);
     }
-    
+
     private void showRegistering(Registering r) {
         Object[] row = new Object[]{
             r.getStudent().getStudentId(), r.getStudent().getFullName(),
             r.getStudent().getMajor(), r.getSubject().getId(),
-            r.getSubject().getName(), simpleDateFormat.format(r.getRegisterDate())       
+            r.getSubject().getName(), simpleDateFormat.format(r.getRegisterDate())
         };
-        tableModelRegistering.addRow(row);        
+        tableModelRegistering.addRow(row);
     }
-    
+
     private void showRegisterings() {
         tableModelRegistering.setRowCount(0); //clear data
         for (Registering r : registerings) {
             showRegistering(r);
+        }
+    }
+
+    private void removeRegistering() {
+        var index = tblRegistering.getSelectedRow();
+        if (index > -1) {
+            int retVal = JOptionPane.showConfirmDialog(rootPane,
+                    "Bạn có chắc muốn xóa bản ghi này không!");
+            if (retVal == JOptionPane.YES_OPTION) {
+                tableModelRegistering.removeRow(index);
+                registerings.remove(index);
+//                dataController.writeToFile(registerings, DataController.REGISTERING_FILE); // có thể dùng cách dưới
+                saveData(DataController.REGISTERING); // Tái sử dụng phương thức saveData
+                var msg = "Xóa bản ghi thành công!";
+                showDialogMessage(msg);
+            }
+        } else {
+            var msg = "Vui lòng chọn một bản đăng ký để xóa!";
+            showDialogMessage(msg);
         }
     }
 }
