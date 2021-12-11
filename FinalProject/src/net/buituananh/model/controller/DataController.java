@@ -5,6 +5,7 @@
 package net.buituananh.model.controller;
 
 import java.util.List;
+import net.buituananh.model.Registering;
 import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
 
@@ -49,5 +50,13 @@ public interface DataController {
     List<Student> searchStudentById(List<Student> students, String id);
 
     List<Student> searchStudentByMajor(List<Student> students, String major);
+
+    void sortRegisteringByStudentNameAZ(List<Registering> rs);
+
+    void sortRegisteringByStudentNameZA(List<Registering> rs);
+
+    void sortRegisteringByRegisterTimeEL(List<Registering> rs);
+
+    void sortRegisteringByRegisterTimeLE(List<Registering> rs);
 
 }

@@ -1096,6 +1096,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnRefreshRegistering.addActionListener(this);
         btnRemoveRegistering.addActionListener(this);
 
+        comboSortRegistering.addActionListener(this);
     }
 
     public void addSubjectCallback(Subject subject) {
@@ -1175,6 +1176,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             addNewRegistering();
         } else if (obj.equals(btnRemoveRegistering)) {
             removeRegistering();
+        } else if (obj.equals(comboSortRegistering)) {
+            sortRegistering();
         }
     }
 
@@ -1561,5 +1564,24 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             var msg = "Vui lòng chọn một bản đăng ký để xóa!";
             showDialogMessage(msg);
         }
+    }
+
+    private void sortRegistering() {
+        int option = comboSortRegistering.getSelectedIndex();
+        switch (option) {
+            case 0:
+                dataController.sortRegisteringByStudentNameAZ(registerings);
+                break;
+            case 1:
+                dataController.sortRegisteringByStudentNameZA(registerings);
+                break;
+            case 2:
+                dataController.sortRegisteringByRegisterTimeEL(registerings);
+                break;
+            case 3:
+                dataController.sortRegisteringByRegisterTimeLE(registerings);
+                break;
+        }
+        showRegisterings();
     }
 }

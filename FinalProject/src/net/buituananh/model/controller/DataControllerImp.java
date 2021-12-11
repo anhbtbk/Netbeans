@@ -18,8 +18,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.buituananh.model.Registering;
 import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
+import net.buituananh.model.controller.sort.SortRegisteringByRegisterTimeEL;
+import net.buituananh.model.controller.sort.SortRegisteringByRegisterTimeLE;
+import net.buituananh.model.controller.sort.SortRegisteringByStudentNameAZ;
+import net.buituananh.model.controller.sort.SortRegisteringByStudentNameZA;
 import net.buituananh.model.controller.sort.SortStudentByIdASC;
 import net.buituananh.model.controller.sort.SortStudentByNameASC;
 import net.buituananh.model.controller.sort.SortStudentByNameDESC;
@@ -172,5 +177,25 @@ public class DataControllerImp implements DataController {
             }
         }
         return result;
+    }
+
+    @Override
+    public void sortRegisteringByStudentNameAZ(List<Registering> rs) {
+        rs.sort(new SortRegisteringByStudentNameAZ());
+    }
+
+    @Override
+    public void sortRegisteringByStudentNameZA(List<Registering> rs) {
+        rs.sort(new SortRegisteringByStudentNameZA());
+    }
+
+    @Override
+    public void sortRegisteringByRegisterTimeEL(List<Registering> rs) {
+        rs.sort(new SortRegisteringByRegisterTimeEL());
+    }
+
+    @Override
+    public void sortRegisteringByRegisterTimeLE(List<Registering> rs) {
+        rs.sort(new SortRegisteringByRegisterTimeLE());
     }
 }
