@@ -4,6 +4,7 @@
  */
 package net.buituananh.model.controller;
 
+import java.util.Date;
 import java.util.List;
 import net.buituananh.model.Registering;
 import net.buituananh.model.Student;
@@ -58,5 +59,10 @@ public interface DataController {
     void sortRegisteringByRegisterTimeEL(List<Registering> rs);
 
     void sortRegisteringByRegisterTimeLE(List<Registering> rs);
+
+    List<Registering> searchReByStudentName(List<Registering> rs, String name);
+
+    List<Registering> searchReByRegisterTime(List<Registering> rs, 
+            Date fromDate, Date toDate);
 
 }

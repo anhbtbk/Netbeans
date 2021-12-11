@@ -4,6 +4,7 @@
  */
 package net.buituananh.model.controller;
 
+import com.sun.source.doctree.ReturnTree;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -197,5 +199,35 @@ public class DataControllerImp implements DataController {
     @Override
     public void sortRegisteringByRegisterTimeLE(List<Registering> rs) {
         rs.sort(new SortRegisteringByRegisterTimeLE());
+    }
+
+    @Override
+    public List<Registering> searchReByStudentName(
+            List<Registering> rs, String name) {
+        List<Registering> result = new ArrayList<>();
+        Pattern pattern = Pattern.compile(
+                ".*" + name + ".*", Pattern.CASE_INSENSITIVE);
+        for (var r : rs) {
+            Matcher matcher = pattern.matcher(r.getStudent().getFullName());
+            if (matcher.matches()) {
+                result.add(r);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<Registering> searchReByRegisterTime(
+            List<Registering> rs, Date fromDate, Date toDate) {
+        List<Registering> result = new ArrayList<>();
+        long deltaTime = 24 * 60 * 60 * 1000 - 1; // đơn vị (ms)
+        for (var r : rs) {
+            if (fromDate.getTime() <= r.getRegisterDate().getTime()
+                    && (toDate.getTime() + deltaTime
+                    >= r.getRegisterDate().getTime())) {
+                result.add(r);
+            }
+        }
+        return result;
     }
 }

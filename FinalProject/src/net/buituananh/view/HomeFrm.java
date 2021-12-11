@@ -72,6 +72,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSearchSubject = new javax.swing.ButtonGroup();
         buttonGroupSearchStudent = new javax.swing.ButtonGroup();
         buttonGroupSortStudent = new javax.swing.ButtonGroup();
+        buttonGroupSearchRegistering = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -118,9 +119,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblRegistering = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
-        rbSearchRegisterByStudentName = new javax.swing.JRadioButton();
-        rbSearchRegisterByTime = new javax.swing.JRadioButton();
-        txtSearchRegisteringByStudentName = new javax.swing.JTextField();
+        rbSearchReByStudentName = new javax.swing.JRadioButton();
+        rbSearchReByRegisterTime = new javax.swing.JRadioButton();
+        txtSearchReByStudentName = new javax.swing.JTextField();
         btnSearchRegistering = new javax.swing.JButton();
         txtSearchReByRegisterTimeFrom = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -624,23 +625,23 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm và sắp xếp bảng đăng kí", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
-        rbSearchRegisterByStudentName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbSearchRegisterByStudentName.setText("Tìm kiếm theo tên sinh viên");
-        rbSearchRegisterByStudentName.addActionListener(new java.awt.event.ActionListener() {
+        rbSearchReByStudentName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchReByStudentName.setText("Tìm kiếm theo tên sinh viên");
+        rbSearchReByStudentName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbSearchRegisterByStudentNameActionPerformed(evt);
+                rbSearchReByStudentNameActionPerformed(evt);
             }
         });
 
-        rbSearchRegisterByTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbSearchRegisterByTime.setText("Tìm kiếm theo thời gian đăng ký");
-        rbSearchRegisterByTime.addActionListener(new java.awt.event.ActionListener() {
+        rbSearchReByRegisterTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchReByRegisterTime.setText("Tìm kiếm theo thời gian đăng ký");
+        rbSearchReByRegisterTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbSearchRegisterByTimeActionPerformed(evt);
+                rbSearchReByRegisterTimeActionPerformed(evt);
             }
         });
 
-        txtSearchRegisteringByStudentName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchReByStudentName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnSearchRegistering.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSearchRegistering.setText("Tìm");
@@ -691,8 +692,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createSequentialGroup()
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(rbSearchRegisterByStudentName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rbSearchRegisterByTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(rbSearchReByStudentName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rbSearchReByRegisterTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(67, 67, 67)
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel12Layout.createSequentialGroup()
@@ -706,7 +707,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                                     .addGroup(jPanel12Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtSearchRegisteringByStudentName)))
+                                        .addComponent(txtSearchReByStudentName)))
                                 .addGap(49, 49, 49)
                                 .addComponent(btnSearchRegistering, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)))
@@ -723,13 +724,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSearchRegisterByStudentName)
+                    .addComponent(rbSearchReByStudentName)
                     .addComponent(jLabel4)
-                    .addComponent(txtSearchRegisteringByStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSearchReByStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rbSearchRegisterByTime)
+                        .addComponent(rbSearchReByRegisterTime)
                         .addComponent(jLabel5))
                     .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSearchRegistering)
@@ -916,13 +917,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboMajorActionPerformed
 
-    private void rbSearchRegisterByStudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchRegisterByStudentNameActionPerformed
+    private void rbSearchReByStudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchReByStudentNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchRegisterByStudentNameActionPerformed
+    }//GEN-LAST:event_rbSearchReByStudentNameActionPerformed
 
-    private void rbSearchRegisterByTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchRegisterByTimeActionPerformed
+    private void rbSearchReByRegisterTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchReByRegisterTimeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchRegisterByTimeActionPerformed
+    }//GEN-LAST:event_rbSearchReByRegisterTimeActionPerformed
 
     private void txtSearchReByRegisterTimeFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchReByRegisterTimeFromActionPerformed
         // TODO add your handling code here:
@@ -986,6 +987,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnSearchRegistering;
     private javax.swing.JButton btnSearchStudent;
     private javax.swing.JButton btnSearchSubject;
+    private javax.swing.ButtonGroup buttonGroupSearchRegistering;
     private javax.swing.ButtonGroup buttonGroupSearchStudent;
     private javax.swing.ButtonGroup buttonGroupSearchSubject;
     private javax.swing.ButtonGroup buttonGroupSortStudent;
@@ -1018,8 +1020,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JRadioButton rbSearchRegisterByStudentName;
-    private javax.swing.JRadioButton rbSearchRegisterByTime;
+    private javax.swing.JRadioButton rbSearchReByRegisterTime;
+    private javax.swing.JRadioButton rbSearchReByStudentName;
     private javax.swing.JRadioButton rbSearchStudentByMajor;
     private javax.swing.JRadioButton rbSearchStudentByName;
     private javax.swing.JRadioButton rbSearchStudentId;
@@ -1037,7 +1039,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JTable tblSubject;
     private javax.swing.JTextField txtSearchReByRegisterTimeFrom;
     private javax.swing.JTextField txtSearchReByRegisterTimeTo;
-    private javax.swing.JTextField txtSearchRegisteringByStudentName;
+    private javax.swing.JTextField txtSearchReByStudentName;
     private javax.swing.JTextField txtSearchStudentName;
     private javax.swing.JTextField txtSearchSubjectByName;
     private javax.swing.JTextField txtSearchSubjectLessonFrom;
@@ -1061,6 +1063,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSortStudent.add(rbSortStudentNameASC);
         buttonGroupSortStudent.add(rbSortStudentNameDESC);
         buttonGroupSortStudent.add(rbSortStudentIdASC);
+
+        buttonGroupSearchRegistering.add(rbSearchReByStudentName);
+        buttonGroupSearchRegistering.add(rbSearchReByRegisterTime);
 
     }
 
@@ -1097,6 +1102,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnRemoveRegistering.addActionListener(this);
 
         comboSortRegistering.addActionListener(this);
+
+        btnSearchRegistering.addActionListener(this);
+        rbSearchReByStudentName.addActionListener(this);
+        rbSearchReByRegisterTime.addActionListener(this);
     }
 
     public void addSubjectCallback(Subject subject) {
@@ -1178,6 +1187,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             removeRegistering();
         } else if (obj.equals(comboSortRegistering)) {
             sortRegistering();
+        } else if (obj.equals(btnSearchRegistering)) {
+            seachRegistering();
         }
     }
 
@@ -1583,5 +1594,44 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 break;
         }
         showRegisterings();
+    }
+
+    private void seachRegistering() {
+        reloadRegistering();
+        List<Registering> copyList = new ArrayList<>(registerings);
+        if (rbSearchReByRegisterTime.isSelected()) {
+            var fromStr = txtSearchReByRegisterTimeFrom.getText().trim();
+            var toStr = txtSearchReByRegisterTimeTo.getText().trim();
+            if (fromStr.isEmpty() || toStr.isEmpty()) {
+                var msg = "Vui lòng nhập đầy đủ ngày đăng ký cần tìm"
+                        + "\nĐịnh dạng dd/MM/yyyy.";
+                showDialogMessage(msg);
+            } else {
+                var format = "dd/MM/yyyy";
+                var dateFormat = new SimpleDateFormat(format);
+                Date fromDate = dateFormat.parse(fromStr);
+            }
+        } else if (rbSearchReByStudentName.isSelected()) {
+            var name = txtSearchReByStudentName.getText().trim();
+            if (name.isEmpty()) {
+                var msg = "Vui lòng nhập tên sinh viên để tìm kiếm.";
+                showDialogMessage(msg);
+            } else {
+                registerings.clear();
+                registerings.addAll(dataController.searchReByStudentName(copyList, name));
+                showRegisterings();
+                var msg = "Tìm thấy " + registerings.size() + " kết quả";
+                showDialogMessage(msg);
+            }
+        } else {
+            var msg = "Vui lòng chọn phương thức tìm kiếm trước.";
+            showDialogMessage(msg);
+        }
+    }
+
+    private void reloadRegistering() {
+        registerings.clear();
+        registerings.addAll(dataController.
+                <Registering>readDataFromFile(DataController.REGISTERING_FILE));
     }
 }
