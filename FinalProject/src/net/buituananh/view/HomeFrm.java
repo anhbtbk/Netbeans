@@ -110,6 +110,24 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnRemoveStudent = new javax.swing.JButton();
         btnEditStudent = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblRegistering = new javax.swing.JTable();
+        jPanel12 = new javax.swing.JPanel();
+        rbSearchRegisterByStudentName = new javax.swing.JRadioButton();
+        rbSearchRegisterByTime = new javax.swing.JRadioButton();
+        txtSearchRegisteringByStudentName = new javax.swing.JTextField();
+        btnSearchRegistering = new javax.swing.JButton();
+        txtSearchReByRegisterTimeFrom = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        comboSortRegistering = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        txtSearchReByRegisterTimeTo = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnRefreshRegistering = new javax.swing.JButton();
+        btnAddNewRegistering = new javax.swing.JButton();
+        btnRemoveRegistering = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -492,6 +510,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             }
         });
         jScrollPane2.setViewportView(tblStudent);
+        if (tblStudent.getColumnModel().getColumnCount() > 0) {
+            tblStudent.getColumnModel().getColumn(2).setResizable(false);
+            tblStudent.getColumnModel().getColumn(2).setHeaderValue("Ngày sinh");
+            tblStudent.getColumnModel().getColumn(3).setHeaderValue("Địa chỉ");
+            tblStudent.getColumnModel().getColumn(4).setHeaderValue("Email");
+            tblStudent.getColumnModel().getColumn(5).setHeaderValue("Số điện thoại");
+        }
 
         btnAddNewStudent.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAddNewStudent.setText("Thêm sinh viên");
@@ -555,12 +580,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 972, Short.MAX_VALUE)
+            .addGap(0, 1053, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(0, 13, Short.MAX_VALUE)
+                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 13, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,15 +599,195 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         jTabbedPane1.addTab("QUẢN LÝ SINH VIÊN", jPanel4);
 
+        tblRegistering.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã sinh viên", "Họ tên sinh viên", "Lớp", "Mã môn", "Tên môn", "Thời gian đăng ký"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblRegistering);
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm và sắp xếp bảng đăng kí", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSearchRegisterByStudentName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchRegisterByStudentName.setText("Tìm kiếm theo tên sinh viên");
+        rbSearchRegisterByStudentName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchRegisterByStudentNameActionPerformed(evt);
+            }
+        });
+
+        rbSearchRegisterByTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchRegisterByTime.setText("Tìm kiếm theo thời gian đăng ký");
+        rbSearchRegisterByTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchRegisterByTimeActionPerformed(evt);
+            }
+        });
+
+        txtSearchRegisteringByStudentName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        btnSearchRegistering.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchRegistering.setText("Tìm");
+
+        txtSearchReByRegisterTimeFrom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchReByRegisterTimeFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchReByRegisterTimeFromActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Sắp xếp theo:");
+
+        comboSortRegistering.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboSortRegistering.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tên tăng dần từ a-z", "Tên giảm dần từ z-a", "Thời gian đăng ký sớm-muộn", "Thời gian đăng ký muộn-sớm" }));
+
+        txtSearchReByRegisterTimeTo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchReByRegisterTimeTo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchReByRegisterTimeToActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Nhập tên sinh viên:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Từ ngày:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Đến ngày:");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboSortRegistering, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createSequentialGroup()
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(rbSearchRegisterByStudentName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rbSearchRegisterByTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(67, 67, 67)
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel12Layout.createSequentialGroup()
+                                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(66, 66, 66)
+                                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtSearchReByRegisterTimeFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                                            .addComponent(txtSearchReByRegisterTimeTo)))
+                                    .addGroup(jPanel12Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtSearchRegisteringByStudentName)))
+                                .addGap(49, 49, 49)
+                                .addComponent(btnSearchRegistering, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)))
+                        .addGap(24, 24, 24))))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(comboSortRegistering, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchRegisterByStudentName)
+                    .addComponent(jLabel4)
+                    .addComponent(txtSearchRegisteringByStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rbSearchRegisterByTime)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSearchRegistering)
+                        .addComponent(txtSearchReByRegisterTimeFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtSearchReByRegisterTimeTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnRefreshRegistering.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRefreshRegistering.setText("Làm mới");
+
+        btnAddNewRegistering.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddNewRegistering.setText("Thêm đăng kí");
+        btnAddNewRegistering.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewRegisteringActionPerformed(evt);
+            }
+        });
+
+        btnRemoveRegistering.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRemoveRegistering.setText("Xóa đăng kí");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 972, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(btnRefreshRegistering, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(150, 150, 150)
+                .addComponent(btnAddNewRegistering, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(150, 150, 150)
+                .addComponent(btnRemoveRegistering, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(150, 150, 150))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 581, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(249, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRemoveRegistering)
+                    .addComponent(btnAddNewRegistering)
+                    .addComponent(btnRefreshRegistering))
+                .addGap(26, 26, 26))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(338, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("QUẢN LÝ ĐĂNG KÝ", jPanel1);
@@ -605,7 +810,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(615, Short.MAX_VALUE))
+                .addContainerGap(696, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,6 +911,26 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboMajorActionPerformed
 
+    private void rbSearchRegisterByStudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchRegisterByStudentNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchRegisterByStudentNameActionPerformed
+
+    private void rbSearchRegisterByTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchRegisterByTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchRegisterByTimeActionPerformed
+
+    private void txtSearchReByRegisterTimeFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchReByRegisterTimeFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchReByRegisterTimeFromActionPerformed
+
+    private void btnAddNewRegisteringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewRegisteringActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddNewRegisteringActionPerformed
+
+    private void txtSearchReByRegisterTimeToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchReByRegisterTimeToActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchReByRegisterTimeToActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -742,14 +967,18 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddNewRegistering;
     private javax.swing.JButton btnAddNewStudent;
     private javax.swing.JButton btnAddNewSubject;
     private javax.swing.JButton btnEditStudent;
     private javax.swing.JButton btnEditSubject;
+    private javax.swing.JButton btnRefreshRegistering;
     private javax.swing.JButton btnRefreshStudent;
     private javax.swing.JButton btnRefreshSubject;
+    private javax.swing.JButton btnRemoveRegistering;
     private javax.swing.JButton btnRemoveStudent;
     private javax.swing.JButton btnRemoveSubject;
+    private javax.swing.JButton btnSearchRegistering;
     private javax.swing.JButton btnSearchStudent;
     private javax.swing.JButton btnSearchSubject;
     private javax.swing.ButtonGroup buttonGroupSearchStudent;
@@ -757,14 +986,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.ButtonGroup buttonGroupSortStudent;
     private javax.swing.ButtonGroup buttonGroupSortSubject;
     private javax.swing.JComboBox<String> comboMajor;
+    private javax.swing.JComboBox<String> comboSortRegistering;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -775,7 +1010,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton rbSearchRegisterByStudentName;
+    private javax.swing.JRadioButton rbSearchRegisterByTime;
     private javax.swing.JRadioButton rbSearchStudentByMajor;
     private javax.swing.JRadioButton rbSearchStudentByName;
     private javax.swing.JRadioButton rbSearchStudentId;
@@ -788,8 +1027,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortSubjectLessonDESC;
     private javax.swing.JRadioButton rbSortSubjectNameASC;
     private javax.swing.JRadioButton rbSortSubjectNameDESC;
+    private javax.swing.JTable tblRegistering;
     private javax.swing.JTable tblStudent;
     private javax.swing.JTable tblSubject;
+    private javax.swing.JTextField txtSearchReByRegisterTimeFrom;
+    private javax.swing.JTextField txtSearchReByRegisterTimeTo;
+    private javax.swing.JTextField txtSearchRegisteringByStudentName;
     private javax.swing.JTextField txtSearchStudentName;
     private javax.swing.JTextField txtSearchSubjectByName;
     private javax.swing.JTextField txtSearchSubjectLessonFrom;
