@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.buituananh.model.Course;
 import net.buituananh.model.Registering;
 import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
@@ -229,5 +230,29 @@ public class DataControllerImp implements DataController {
             }
         }
         return result;
+    }
+
+    @Override
+    public List<Course> createCourse(List<Registering> rs, List<Subject> subjects) {
+        var letters = "ABCDEFGHIJKLMNOPQRSTXYZ";
+        var startIndex = 0;
+        List<Course> courses = new ArrayList<>();
+        for (var s : subjects) {
+            Course course = new Course();
+            course.setName(s.getName() + "_" + letters.charAt(startIndex));
+            courses.add(course);
+            for (var r : rs) {
+                if (r.getSubject().getName().compareTo(s.getName()) == 0) {
+                    if (course.getRegisterings().size() >= 50) {
+                        course = new Course();
+                        course.setName(s.getName() + "_" + letters.charAt(startIndex++));
+                        courses.add(course);
+                    }
+                    course.addToCourse(r);
+                }
+            }
+            startIndex = 0;
+        }
+        return courses;
     }
 }

@@ -6,6 +6,7 @@ package net.buituananh.model.controller;
 
 import java.util.Date;
 import java.util.List;
+import net.buituananh.model.Course;
 import net.buituananh.model.Registering;
 import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
@@ -19,9 +20,12 @@ public interface DataController {
     int SUBJECT = 1;
     int STUDENT = 2;
     int REGISTERING = 3;
+    int COURSE = 4;
+    
     String SUBJECT_FILE = "SUBJECT.DAT";
     String STUDENT_FILE = "STUDENT.DAT";
     String REGISTERING_FILE = "STU_REGISTER.DAT";
+    String COURSE_FILE = "COURSE.DAT";
 
     <T> void writeToFile(List<T> data, String fileName);
 
@@ -64,5 +68,7 @@ public interface DataController {
 
     List<Registering> searchReByRegisterTime(List<Registering> rs, 
             Date fromDate, Date toDate);
+    
+    List<Course> createCourse(List<Registering> rs, List<Subject> subjects);
 
 }

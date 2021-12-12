@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.buituananh.model.Course;
 import net.buituananh.model.Registering;
 import net.buituananh.model.Student;
 import net.buituananh.model.Subject;
@@ -34,10 +35,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private List<Subject> subjects;
     private List<Student> students;
     private List<Registering> registerings;
+    private List<Course> courses;
 
     private DefaultTableModel tableModelSubject;
     private DefaultTableModel tableModelStudent;
     private DefaultTableModel tableModelRegistering;
+    private DefaultTableModel tableModelCourse;
 
     private DataController dataController;
     private SimpleDateFormat simpleDateFormat;
@@ -56,6 +59,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelSubject = (DefaultTableModel) tblSubject.getModel();
         tableModelStudent = (DefaultTableModel) tblStudent.getModel();
         tableModelRegistering = (DefaultTableModel) tblRegistering.getModel();
+        tableModelCourse = (DefaultTableModel) tblCourse.getModel();
         dataController = new DataControllerImp();
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         selectedIndex = -1;
@@ -140,6 +144,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnRemoveRegistering = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        btnCreateCourse = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblCourse = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -590,7 +597,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1053, Short.MAX_VALUE)
+            .addGap(0, 1050, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -706,7 +713,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(66, 66, 66)
                                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtSearchReByRegisterTimeFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                                            .addComponent(txtSearchReByRegisterTimeFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                                             .addComponent(txtSearchReByRegisterTimeTo)))
                                     .addGroup(jPanel12Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
@@ -802,15 +809,49 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         jTabbedPane1.addTab("QUẢN LÝ ĐĂNG KÝ", jPanel1);
 
+        btnCreateCourse.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCreateCourse.setText("Tạo lớp học phần");
+
+        tblCourse.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tên lớp học phần", "Mã sinh viên", "Họ tên sinh viên", "Lớp", "Mã môn", "Tên môn", "Thời gian đăng ký"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblCourse);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 347, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCreateCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(btnCreateCourse)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -819,15 +860,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(696, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(470, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("PHÂN LỚP HỌC", jPanel2);
@@ -865,53 +906,29 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddNewSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewSubjectActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddNewSubjectActionPerformed
-
-    private void rbSortSubjectNameASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortSubjectNameASCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbSortSubjectNameASCActionPerformed
-
-    private void rbSortSubjectNameDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortSubjectNameDESCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbSortSubjectNameDESCActionPerformed
-
-    private void rbSearchSubjectByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchSubjectByNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchSubjectByNameActionPerformed
-
-    private void rbSearchSubjectByNumOfLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchSubjectByNumOfLessonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchSubjectByNumOfLessonActionPerformed
-
-    private void txtSearchSubjectLessonFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchSubjectLessonFromActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchSubjectLessonFromActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void rbSortStudentNameASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortStudentNameASCActionPerformed
+    private void btnAddNewRegisteringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewRegisteringActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbSortStudentNameASCActionPerformed
+    }//GEN-LAST:event_btnAddNewRegisteringActionPerformed
 
-    private void rbSortStudentNameDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortStudentNameDESCActionPerformed
+    private void txtSearchReByRegisterTimeToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchReByRegisterTimeToActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbSortStudentNameDESCActionPerformed
+    }//GEN-LAST:event_txtSearchReByRegisterTimeToActionPerformed
 
-    private void rbSearchStudentByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchStudentByNameActionPerformed
+    private void txtSearchReByRegisterTimeFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchReByRegisterTimeFromActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchStudentByNameActionPerformed
+    }//GEN-LAST:event_txtSearchReByRegisterTimeFromActionPerformed
 
-    private void rbSearchStudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchStudentIdActionPerformed
+    private void rbSearchReByRegisterTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchReByRegisterTimeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchStudentIdActionPerformed
+    }//GEN-LAST:event_rbSearchReByRegisterTimeActionPerformed
 
-    private void txtSearchSubjectStudentByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchSubjectStudentByIdActionPerformed
+    private void rbSearchReByStudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchReByStudentNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchSubjectStudentByIdActionPerformed
+    }//GEN-LAST:event_rbSearchReByStudentNameActionPerformed
 
     private void btnAddNewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewStudentActionPerformed
         // TODO add your handling code here:
@@ -921,25 +938,49 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboMajorActionPerformed
 
-    private void rbSearchReByStudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchReByStudentNameActionPerformed
+    private void txtSearchSubjectStudentByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchSubjectStudentByIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchReByStudentNameActionPerformed
+    }//GEN-LAST:event_txtSearchSubjectStudentByIdActionPerformed
 
-    private void rbSearchReByRegisterTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchReByRegisterTimeActionPerformed
+    private void rbSearchStudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchStudentIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchReByRegisterTimeActionPerformed
+    }//GEN-LAST:event_rbSearchStudentIdActionPerformed
 
-    private void txtSearchReByRegisterTimeFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchReByRegisterTimeFromActionPerformed
+    private void rbSearchStudentByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchStudentByNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchReByRegisterTimeFromActionPerformed
+    }//GEN-LAST:event_rbSearchStudentByNameActionPerformed
 
-    private void btnAddNewRegisteringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewRegisteringActionPerformed
+    private void rbSortStudentNameDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortStudentNameDESCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddNewRegisteringActionPerformed
+    }//GEN-LAST:event_rbSortStudentNameDESCActionPerformed
 
-    private void txtSearchReByRegisterTimeToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchReByRegisterTimeToActionPerformed
+    private void rbSortStudentNameASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortStudentNameASCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchReByRegisterTimeToActionPerformed
+    }//GEN-LAST:event_rbSortStudentNameASCActionPerformed
+
+    private void btnAddNewSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewSubjectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddNewSubjectActionPerformed
+
+    private void txtSearchSubjectLessonFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchSubjectLessonFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchSubjectLessonFromActionPerformed
+
+    private void rbSearchSubjectByNumOfLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchSubjectByNumOfLessonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchSubjectByNumOfLessonActionPerformed
+
+    private void rbSearchSubjectByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchSubjectByNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchSubjectByNameActionPerformed
+
+    private void rbSortSubjectNameDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortSubjectNameDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortSubjectNameDESCActionPerformed
+
+    private void rbSortSubjectNameASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortSubjectNameASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortSubjectNameASCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -980,6 +1021,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnAddNewRegistering;
     private javax.swing.JButton btnAddNewStudent;
     private javax.swing.JButton btnAddNewSubject;
+    private javax.swing.JButton btnCreateCourse;
     private javax.swing.JButton btnEditStudent;
     private javax.swing.JButton btnEditSubject;
     private javax.swing.JButton btnRefreshRegistering;
@@ -1022,6 +1064,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton rbSearchReByRegisterTime;
@@ -1038,6 +1081,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortSubjectLessonDESC;
     private javax.swing.JRadioButton rbSortSubjectNameASC;
     private javax.swing.JRadioButton rbSortSubjectNameDESC;
+    private javax.swing.JTable tblCourse;
     private javax.swing.JTable tblRegistering;
     private javax.swing.JTable tblStudent;
     private javax.swing.JTable tblSubject;
@@ -1104,12 +1148,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnAddNewRegistering.addActionListener(this);
         btnRefreshRegistering.addActionListener(this);
         btnRemoveRegistering.addActionListener(this);
-
         comboSortRegistering.addActionListener(this);
-
         btnSearchRegistering.addActionListener(this);
         rbSearchReByStudentName.addActionListener(this);
         rbSearchReByRegisterTime.addActionListener(this);
+
+        btnCreateCourse.addActionListener(this);
     }
 
     public void addSubjectCallback(Subject subject) {
@@ -1130,6 +1174,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         saveData(DataController.STUDENT);
     }
 
+        public void createCourseCallback(Course course) {
+        courses.add(course);
+        showCourse();
+        saveData(DataController.COURSE);
+    }
     public void editStudentCallback(Student student) {
         tableModelStudent.removeRow(selectedIndex);
         var format = "dd/MM/yyyy";
@@ -1198,6 +1247,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             switchInputState();
         } else if (obj.equals(btnRefreshRegistering)) {
             refreshRegistering();
+        } else if (obj.equals(btnCreateCourse)) {
+            createCourse();
         }
     }
 
@@ -1220,12 +1271,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         registerings = dataController.
                 <Registering>readDataFromFile(DataController.REGISTERING_FILE);
         editSubjectId();
+        courses = dataController
+                .<Course>readDataFromFile(DataController.COURSE_FILE);
     }
 
     private void showData() {
         showSubjects();
         showStudents();
         showRegisterings();
+        showCourse();
     }
 
     private void showSubjects() {
@@ -1248,6 +1302,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             case DataController.REGISTERING:
                 dataController.<Registering>writeToFile(registerings,
                         DataController.REGISTERING_FILE);
+                break;
+            case DataController.COURSE:
+                dataController.<Course>writeToFile(courses,
+                        DataController.COURSE_FILE);
                 break;
         }
     }
@@ -1676,14 +1734,40 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         txtSearchReByStudentName.setEnabled(true);
         txtSearchReByRegisterTimeFrom.setEnabled(true);
         txtSearchReByRegisterTimeTo.setEnabled(true);
-        
+
         txtSearchReByStudentName.setText(emptyText);
         txtSearchReByRegisterTimeFrom.setText(emptyText);
         txtSearchReByRegisterTimeTo.setText(emptyText);
-        
+
         comboSortRegistering.setSelectedIndex(0);
         buttonGroupSearchRegistering.clearSelection();
-        
+
         reloadRegisterings();
+    }
+
+    private void createCourse() {
+        dataController.sortRegisteringByRegisterTimeEL(registerings);
+        courses = new ArrayList<>(dataController.createCourse(registerings, subjects));
+        showCourse();
+    }
+
+    private void showCourse() {
+        var emptyStr = "_";
+        tableModelCourse.setRowCount(0);
+        for (var course : courses) {
+            for (var r : course.getRegisterings()) {
+                Object[] row = new Object[]{
+                    course.getName(), r.getStudent().getStudentId(),
+                    r.getStudent().getFullName(),
+                    r.getStudent().getMajor(), r.getSubject().getId(),
+                    r.getSubject().getName(),
+                    simpleDateFormat.format(r.getRegisterDate())
+                };
+                tableModelCourse.addRow(row);
+            }
+            var row = new Object[]{emptyStr, emptyStr, emptyStr,
+                emptyStr, emptyStr, emptyStr, emptyStr};
+            tableModelCourse.addRow(row);
+        }
     }
 }
