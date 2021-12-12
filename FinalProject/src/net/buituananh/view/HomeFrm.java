@@ -6,11 +6,15 @@ package net.buituananh.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -1189,6 +1193,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             sortRegistering();
         } else if (obj.equals(btnSearchRegistering)) {
             seachRegistering();
+        } else if (obj.equals(rbSearchReByStudentName)
+                || obj.equals(rbSearchReByRegisterTime)) {
+            switchInputState();
+        } else if (obj.equals(btnRefreshRegistering)) {
+            refreshRegistering();
         }
     }
 
@@ -1390,7 +1399,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             student.getStudentId(), student.getFullName(),
             dateFormat.format(student.getDob()), student.getAddress(),
             student.getEmail(), student.getPhoneNumber(),
-            student.getStudentClass(), student.getMajor(), student.getSchoolYear()
+            student.getStudentClass(), student.getMajor(),
+            student.getSchoolYear()
         };
         tableModelStudent.addRow(row);
     }
@@ -1597,7 +1607,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     private void seachRegistering() {
-        reloadRegistering();
+        reloadRegisterings();
         List<Registering> copyList = new ArrayList<>(registerings);
         if (rbSearchReByRegisterTime.isSelected()) {
             var fromStr = txtSearchReByRegisterTimeFrom.getText().trim();
@@ -1609,7 +1619,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             } else {
                 var format = "dd/MM/yyyy";
                 var dateFormat = new SimpleDateFormat(format);
-                Date fromDate = dateFormat.parse(fromStr);
+                try {
+                    Date fromDate = dateFormat.parse(fromStr);
+                    Date toDate = dateFormat.parse(toStr);
+                    registerings.clear();
+                    registerings.addAll(dataController.searchReByRegisterTime(
+                            copyList, fromDate, toDate));
+                    showRegisterings();
+                    var msg = "Tìm thấy " + registerings.size() + " kết quả";
+                    showDialogMessage(msg);
+                } catch (ParseException ex) {
+                    var msg = "Vui lòng nhập đúng định dạng dd/MM/yyyy.\n"
+                            + "Ví dụ 25/11/2025";
+                    showDialogMessage(msg);
+                }
             }
         } else if (rbSearchReByStudentName.isSelected()) {
             var name = txtSearchReByStudentName.getText().trim();
@@ -1618,7 +1641,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 showDialogMessage(msg);
             } else {
                 registerings.clear();
-                registerings.addAll(dataController.searchReByStudentName(copyList, name));
+                registerings.addAll(dataController.
+                        searchReByStudentName(copyList, name));
                 showRegisterings();
                 var msg = "Tìm thấy " + registerings.size() + " kết quả";
                 showDialogMessage(msg);
@@ -1629,9 +1653,37 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    private void reloadRegistering() {
+    private void reloadRegisterings() {
         registerings.clear();
         registerings.addAll(dataController.
                 <Registering>readDataFromFile(DataController.REGISTERING_FILE));
+    }
+
+    private void switchInputState() {
+        if (rbSearchReByStudentName.isSelected()) {
+            txtSearchReByStudentName.setEnabled(true);
+            txtSearchReByRegisterTimeFrom.setEnabled(false);
+            txtSearchReByRegisterTimeTo.setEnabled(false);
+        } else if (rbSearchReByRegisterTime.isSelected()) {
+            txtSearchReByStudentName.setEnabled(false);
+            txtSearchReByRegisterTimeFrom.setEnabled(true);
+            txtSearchReByRegisterTimeTo.setEnabled(true);
+        }
+    }
+
+    private void refreshRegistering() {
+        var emptyText = "";
+        txtSearchReByStudentName.setEnabled(true);
+        txtSearchReByRegisterTimeFrom.setEnabled(true);
+        txtSearchReByRegisterTimeTo.setEnabled(true);
+        
+        txtSearchReByStudentName.setText(emptyText);
+        txtSearchReByRegisterTimeFrom.setText(emptyText);
+        txtSearchReByRegisterTimeTo.setText(emptyText);
+        
+        comboSortRegistering.setSelectedIndex(0);
+        buttonGroupSearchRegistering.clearSelection();
+        
+        reloadRegisterings();
     }
 }
