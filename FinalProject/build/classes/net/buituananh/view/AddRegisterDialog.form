@@ -77,7 +77,7 @@
           <Font name="Tahoma" size="24" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Th&#xea;m m&#x1edb;i sinh vi&#xea;n"/>
+        <Property name="text" type="java.lang.String" value="Th&#xea;m m&#x1edb;i &#x111;&#x103;ng k&#xfd;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnRegister">

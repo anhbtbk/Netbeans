@@ -93,7 +93,7 @@ public class AddRegisterDialog extends javax.swing.JDialog implements ActionList
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Thêm mới sinh viên");
+        jLabel1.setText("Thêm mới đăng ký");
 
         btnRegister.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRegister.setText("Đăng ký");
@@ -466,7 +466,7 @@ public class AddRegisterDialog extends javax.swing.JDialog implements ActionList
                 homeFrm.addRegisteringCallback(r);
                 var msg = "Đăng ký môn học thành công!";
                 showMessage(msg);
-                dispose();
+//                dispose();
             }
         }
     }
