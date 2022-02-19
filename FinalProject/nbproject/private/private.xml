@@ -5,15 +5,17 @@
         <group>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/view/HomeFrm.java</file>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/view/EditStudentDialog.java</file>
+            <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/Student.java</file>
+            <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/Registering.java</file>
+            <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/view/AddRegisterDialog.java</file>
+            <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/view/AddStudentDialog.java</file>
+            <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/Subject.java</file>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/Person.java</file>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/controller/DataController.java</file>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/controller/sort/SortSubjectByNameDESC.java</file>
-            <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/Registering.java</file>
-            <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/view/AddRegisterDialog.java</file>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/controller/sort/SortSubjectByNameASC.java</file>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/controller/DataControllerImp.java</file>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/view/EditSubjectDialog.java</file>
-            <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/view/AddStudentDialog.java</file>
             <file>file:/D:/Git/Netbeans/FinalProject/src/net/buituananh/model/Course.java</file>
         </group>
     </open-files>
