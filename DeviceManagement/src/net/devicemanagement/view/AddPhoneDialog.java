@@ -6,12 +6,17 @@ package net.devicemanagement.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import net.devicemanagement.view.model.Phone;
 
 /**
  *
  * @author Tuan Anh
  */
 public class AddPhoneDialog extends javax.swing.JDialog implements ActionListener {
+
+    private HomeFrm homeFrm;
+    private Phone phone;
 
     /**
      * Creates new form AddPhoneDialog
@@ -233,23 +238,31 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
         var obj = e.getSource();
         if (obj.equals(btnCancel)) {
             dispose();
-        } else if(obj.equals(btnClear)) {
+        } else if (obj.equals(btnClear)) {
             clearInputData();
+        } else if (obj.equals(btnAddNew)) {
+            addNewPhone();
         }
     }
 
-    private void clearInputData() { 
+    private void clearInputData() {
         var emptyText = "";
         txtPhoneImei.setText(emptyText);
         txtPhoneName.setText(emptyText);
-//        comboPhonePhase.getSelectedIndex();
+        comboPhonePhase.setSelectedIndex(0);
     }
 
-} 
+    private void addNewPhone() {
+        var imei = txtPhoneImei.getText();
+        var name = txtPhoneName.getText();
+        var phase = comboPhonePhase.getSelectedItem().toString();
+        if (!imei.isEmpty() && !name.isEmpty()) {   
+            phone.setImei(imei);
+            phone.setName(name);                        
+        } else {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Các ô nhập liệu không được để trống");
+        }
+    }
 
-
-
- 
-   
-
-
+}
