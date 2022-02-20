@@ -244,7 +244,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtSearchPhoneByImei" max="32767" attributes="0"/>
                               <Component id="txtSearchPhoneByName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="cbSearchPhoneByPhase" alignment="0" pref="256" max="32767" attributes="0"/>
+                              <Component id="comboSearchPhoneByPhase" alignment="0" pref="256" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="43" max="32767" attributes="0"/>
                           <Component id="btnSearchPhone" min="-2" pref="73" max="-2" attributes="0"/>
@@ -269,7 +269,7 @@
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="rbSearchPhoneByPhase" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbSearchPhoneByPhase" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="comboSearchPhoneByPhase" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="14" max="32767" attributes="0"/>
                       </Group>
@@ -324,7 +324,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbSearchPhoneByPhaseActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cbSearchPhoneByPhase">
+                <Component class="javax.swing.JComboBox" name="comboSearchPhoneByPhase">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>

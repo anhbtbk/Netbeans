@@ -4,11 +4,14 @@
  */
 package net.devicemanagement.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Tuan Anh
  */
-public class HomeFrm extends javax.swing.JFrame {
+public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form HomeFrm
@@ -16,7 +19,8 @@ public class HomeFrm extends javax.swing.JFrame {
     public HomeFrm() {
         initComponents();
         setLocationRelativeTo(null);
-        addButtonGroup();
+        addButtonGroup(); //Phương thức chỉ chọn 1 radio button trong 1 nhóm
+        addActionListener(); //Đăng kí sự kiện cho từng nút
     }
 
     /**
@@ -43,7 +47,7 @@ public class HomeFrm extends javax.swing.JFrame {
         txtSearchPhoneByImei = new javax.swing.JTextField();
         txtSearchPhoneByName = new javax.swing.JTextField();
         rbSearchPhoneByPhase = new javax.swing.JRadioButton();
-        cbSearchPhoneByPhase = new javax.swing.JComboBox<>();
+        comboSearchPhoneByPhase = new javax.swing.JComboBox<>();
         btnSearchPhone = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -152,8 +156,8 @@ public class HomeFrm extends javax.swing.JFrame {
             }
         });
 
-        cbSearchPhoneByPhase.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbSearchPhoneByPhase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EVT", "DVT", "PVT" }));
+        comboSearchPhoneByPhase.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboSearchPhoneByPhase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EVT", "DVT", "PVT" }));
 
         btnSearchPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSearchPhone.setText("Tìm");
@@ -172,7 +176,7 @@ public class HomeFrm extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtSearchPhoneByImei)
                     .addComponent(txtSearchPhoneByName)
-                    .addComponent(cbSearchPhoneByPhase, 0, 256, Short.MAX_VALUE))
+                    .addComponent(comboSearchPhoneByPhase, 0, 256, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnSearchPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -192,7 +196,7 @@ public class HomeFrm extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbSearchPhoneByPhase)
-                    .addComponent(cbSearchPhoneByPhase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboSearchPhoneByPhase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -448,7 +452,7 @@ public class HomeFrm extends javax.swing.JFrame {
     private javax.swing.JButton btnSearchPhone;
     private javax.swing.ButtonGroup buttonGroupSearchPhone;
     private javax.swing.ButtonGroup buttonGroupSortPhone;
-    private javax.swing.JComboBox<String> cbSearchPhoneByPhase;
+    private javax.swing.JComboBox<String> comboSearchPhoneByPhase;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -482,5 +486,35 @@ public class HomeFrm extends javax.swing.JFrame {
         buttonGroupSortPhone.add(rbSortPhoneNameDESC);
         buttonGroupSortPhone.add(rbSortPhonePhaseASC);
         buttonGroupSortPhone.add(rbSortPhonePhaseDESC);              
+    }
+
+    private void addActionListener() {
+        //đăng ký sự kiện cho từng nút
+        btnAddPhone.addActionListener(this);
+        btnEditPhone.addActionListener(this);
+        btnRefreshPhone.addActionListener(this);
+        btnRemovePhone.addActionListener(this);
+        btnSearchPhone.addActionListener(this);
+        
+        rbSearchPhoneByImei.addActionListener(this);
+        rbSearchPhoneByName.addActionListener(this);
+        rbSearchPhoneByPhase.addActionListener(this);
+        
+        rbSortPhoneNameASC.addActionListener(this);
+        rbSortPhoneNameDESC.addActionListener(this);
+        rbSortPhonePhaseASC.addActionListener(this);
+        rbSortPhonePhaseDESC.addActionListener(this);
+                     
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //thực hiện các hành động
+        var obj = e.getSource();
+        if (obj.equals(btnAddPhone)) {
+            AddPhoneDialog addPhoneDialog = new AddPhoneDialog(this, rootPaneCheckingEnabled);
+            addPhoneDialog.setVisible(true);
+        }
+        
     }
 }
