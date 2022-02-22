@@ -13,30 +13,43 @@ import java.util.Objects;
  */
 public class Phone implements Serializable {
 
-    private String imei;
+    private long imei;
     private String name;
     private String phase;
 
     //insert code constructor
     public Phone() {
+        
     }
 
-    public Phone(String imei) {
-        setImei(imei);
+//    public Phone(long imei) {
+//        setImei(imei);
+//    }
+
+    public Phone(long imei) {
+        this.imei = imei;
     }
 
-    public Phone(String imei, String name, String phase) {
+//    public Phone(String name, String phase) {
+//        this();
+//        this.name = name;
+//        this.phase = phase;
+//    }
+//    
+    
+
+    public Phone(long imei, String name, String phase) {
         this.imei = imei;
         this.name = name;
         this.phase = phase;
     }
 
     //insert code getter and setter
-    public String getImei() {
+    public long getImei() {
         return imei;
     }
 
-    public void setImei(String imei) {
+    public void setImei(long imei) {
         this.imei = imei;
     }
 
@@ -89,7 +102,8 @@ public class Phone implements Serializable {
 
     @Override
     public String toString() {
-        return "Phone{" + "imei=" + imei + ", name=" + name + ", phase=" + phase + '}';
+        return "Phone{" + "imei=" + imei + ", "
+                + "name=" + name + ", phase=" + phase + '}';
     }
     
 }

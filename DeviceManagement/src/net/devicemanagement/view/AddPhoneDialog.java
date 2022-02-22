@@ -14,7 +14,7 @@ import net.devicemanagement.view.model.Phone;
  * @author Tuan Anh
  */
 public class AddPhoneDialog extends javax.swing.JDialog implements ActionListener {
-
+    
     private HomeFrm homeFrm;
     private Phone phone;
 
@@ -26,6 +26,9 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
         initComponents();
         setLocationRelativeTo(null);
         addActionListener();
+        phone = new Phone(); //khi click vào add new sẽ mặc định tạo mới 1 đối tượng phone, 
+        //không khai báo sẽ bị lỗi không gọi được this.phone
+        homeFrm = (HomeFrm) parent;
     }
 
     /**
@@ -230,9 +233,9 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
         btnAddNew.addActionListener(this);
         btnClear.addActionListener(this);
         btnCancel.addActionListener(this);
-
+        
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         var obj = e.getSource();
@@ -244,25 +247,30 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
             addNewPhone();
         }
     }
-
+    
     private void clearInputData() {
         var emptyText = "";
         txtPhoneImei.setText(emptyText);
         txtPhoneName.setText(emptyText);
         comboPhonePhase.setSelectedIndex(0);
     }
-
+    
     private void addNewPhone() {
-        var imei = txtPhoneImei.getText();
+        var imeiString = txtPhoneImei.getText(); //get imei nhưng ở dạng String
         var name = txtPhoneName.getText();
         var phase = comboPhonePhase.getSelectedItem().toString();
-        if (!imei.isEmpty() && !name.isEmpty()) {   
-            phone.setImei(imei);
-            phone.setName(name);                        
+        if (!imeiString.isEmpty() && !name.isEmpty()) {            
+            phone.setImei(Long.parseLong(imeiString)); //cẩn phải ép ngược lại 
+            //kiểu long mới có thể truyền vào pt setImei bên Phone.java
+            phone.setName(name);            
+            phone.setPhase(phase);
+            homeFrm.addPhoneCallback(phone);
+            JOptionPane.showMessageDialog(rootPane, "Thêm điện thoại thành công");
+            dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane,
                     "Các ô nhập liệu không được để trống");
         }
     }
-
+    
 }

@@ -6,12 +6,19 @@ package net.devicemanagement.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import net.devicemanagement.view.model.Phone;
 
 /**
  *
  * @author Tuan Anh
  */
 public class HomeFrm extends javax.swing.JFrame implements ActionListener {
+
+    private List<Phone> phones; //tạo list các điện thoại
+    private DefaultTableModel tableModelPhone;
 
     /**
      * Creates new form HomeFrm
@@ -21,6 +28,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         setLocationRelativeTo(null);
         addButtonGroup(); //Phương thức chỉ chọn 1 radio button trong 1 nhóm
         addActionListener(); //Đăng kí sự kiện cho từng nút
+        phones = new ArrayList<>();
+        tableModelPhone = (DefaultTableModel) tblPhone.getModel();
     }
 
     /**
@@ -50,7 +59,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         comboSearchPhoneByPhase = new javax.swing.JComboBox<>();
         btnSearchPhone = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPhone = new javax.swing.JTable();
         btnAddPhone = new javax.swing.JButton();
         btnEditPhone = new javax.swing.JButton();
         btnRemovePhone = new javax.swing.JButton();
@@ -200,7 +209,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPhone.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -216,7 +225,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblPhone);
 
         btnAddPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAddPhone.setText("Thêm điện thoại");
@@ -466,7 +475,6 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JRadioButton rbSearchPhoneByImei;
     private javax.swing.JRadioButton rbSearchPhoneByName;
     private javax.swing.JRadioButton rbSearchPhoneByPhase;
@@ -474,6 +482,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortPhoneNameDESC;
     private javax.swing.JRadioButton rbSortPhonePhaseASC;
     private javax.swing.JRadioButton rbSortPhonePhaseDESC;
+    private javax.swing.JTable tblPhone;
     private javax.swing.JTextField txtSearchPhoneByImei;
     private javax.swing.JTextField txtSearchPhoneByName;
     // End of variables declaration//GEN-END:variables
@@ -485,7 +494,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSortPhone.add(rbSortPhoneNameASC);
         buttonGroupSortPhone.add(rbSortPhoneNameDESC);
         buttonGroupSortPhone.add(rbSortPhonePhaseASC);
-        buttonGroupSortPhone.add(rbSortPhonePhaseDESC);              
+        buttonGroupSortPhone.add(rbSortPhonePhaseDESC);
     }
 
     private void addActionListener() {
@@ -495,16 +504,22 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnRefreshPhone.addActionListener(this);
         btnRemovePhone.addActionListener(this);
         btnSearchPhone.addActionListener(this);
-        
+
         rbSearchPhoneByImei.addActionListener(this);
         rbSearchPhoneByName.addActionListener(this);
         rbSearchPhoneByPhase.addActionListener(this);
-        
+
         rbSortPhoneNameASC.addActionListener(this);
         rbSortPhoneNameDESC.addActionListener(this);
         rbSortPhonePhaseASC.addActionListener(this);
         rbSortPhonePhaseDESC.addActionListener(this);
-                     
+
+    }
+
+    public void addPhoneCallback(Phone phone) {  //ở cái table sẽ gọi đến phương 
+        //thức vào và truyền đến list phone nhận dược
+        phones.add(phone);
+        showPhone(phone);
     }
 
     @Override
@@ -512,9 +527,18 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         //thực hiện các hành động
         var obj = e.getSource();
         if (obj.equals(btnAddPhone)) {
-            AddPhoneDialog addPhoneDialog = new AddPhoneDialog(this, rootPaneCheckingEnabled);
+            AddPhoneDialog addPhoneDialog
+                    = new AddPhoneDialog(this, rootPaneCheckingEnabled);
             addPhoneDialog.setVisible(true);
         }
-        
+
+    }
+
+    //pt hiển thị thông tin ra bảng
+    private void showPhone(Phone phone) {
+        Object[] row = new Object[]{
+            phone.getImei(), phone.getName(), phone.getPhase()
+        };
+        tableModelPhone.addRow(row); //thêm các thông số bên trên vào bảng
     }
 }
