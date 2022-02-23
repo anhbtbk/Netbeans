@@ -544,6 +544,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         } else if (obj.equals(btnEditPhone)) {
             editPhone();
 
+        }
     }
 
     //pt hiển thị thông tin ra bảng
@@ -556,7 +557,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
     private void LoadData() {
         phones = dataController.<Phone>readDataFromFile(DataController.PHONE_FILE);
-        
+
     }
 
     private void ShowData() {
@@ -570,36 +571,59 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     private void saveData(int choice) {
-        switch(choice) {
+        switch (choice) {
             case DataController.PHONE:
-                dataController.<Phone>writeToFile(phones, 
+                dataController.<Phone>writeToFile(phones,
                         DataController.PHONE_FILE);
                 break;
         }
     }
 
     private void removePhone() {
-       int selectedIndex = tblPhone.getSelectedRow();//chọn dòng cần xóa
-       //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
-       if(selectedIndex > -1) {         
-           var msg = "Bạn có chắc chắn muốn xóa bản ghi này không?";
-           int confirm = JOptionPane.showConfirmDialog(rootPane, msg);
-           if(confirm == JOptionPane.OK_OPTION) {
-               phones.remove(selectedIndex); //xóa khỏi danh sách
-               tableModelPhone.removeRow(selectedIndex); //xóa khỏi bảng
-               dataController.<Phone>writeToFile(phones, 
-                       DataController.PHONE_FILE);
-           }
-       } else {
-           var msg = "Vui lòng chọn 1 bản ghi để xóa!";
-           showDialogMessage(msg);
-       }
+        int selectedIndex = tblPhone.getSelectedRow();//chọn dòng cần xóa
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            var msg = "Bạn có chắc chắn muốn xóa bản ghi này không?";
+            int confirm = JOptionPane.showConfirmDialog(rootPane, msg);
+            if (confirm == JOptionPane.OK_OPTION) {
+                phones.remove(selectedIndex); //xóa khỏi danh sách
+                tableModelPhone.removeRow(selectedIndex); //xóa khỏi bảng
+                dataController.<Phone>writeToFile(phones,
+                        DataController.PHONE_FILE);
+            }
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để xóa!";
+            showDialogMessage(msg);
+        }
     }
+
     private void showDialogMessage(String msg) {
-       JOptionPane.showMessageDialog(rootPane, msg);
+        JOptionPane.showMessageDialog(rootPane, msg);
     }
-    
+
     private void editPhone() {
-        
+        int selectedIndex = tblPhone.getSelectedRow();//chọn dòng cần edit
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            Phone phone = phones.get(selectedIndex);
+            EditPhoneDialog editPhoneDialog
+                    = new EditPhoneDialog(this, rootPaneCheckingEnabled, phone);
+            editPhoneDialog.setVisible(true);
+
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để xóa!";
+            showDialogMessage(msg);
+        }
+    }
+
+    public void editPhoneCallback(Phone phone) {
+        int selectedIndex = tblPhone.getSelectedRow();
+        phones.set(selectedIndex, phone);
+        tableModelPhone.removeRow(selectedIndex);//xóa dòng tại vị trí đã chọn
+        Object[] row = new Object[]{
+            phone.getImei(), phone.getName(), phone.getPhase()
+        };
+        tableModelPhone.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
+        saveData(DataController.PHONE);//lưu dữ liệu vào file PHONE
     }
 }
