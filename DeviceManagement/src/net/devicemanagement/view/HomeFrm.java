@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import net.devicemanagement.controller.DataController;
+import net.devicemanagement.controller.DataControllerImp;
 import net.devicemanagement.view.model.Phone;
 
 /**
@@ -19,6 +21,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
     private List<Phone> phones; //tạo list các điện thoại
     private DefaultTableModel tableModelPhone;
+    private DataController dataController;
 
     /**
      * Creates new form HomeFrm
@@ -30,6 +33,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         addActionListener(); //Đăng kí sự kiện cho từng nút
         phones = new ArrayList<>();
         tableModelPhone = (DefaultTableModel) tblPhone.getModel();
+        //khi ứng dụng được kích hoạt, dữ liệu tự load và hiển thị lên
+        dataController = new DataControllerImp();
+        LoadData();
+        ShowData();
     }
 
     /**
@@ -520,6 +527,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         //thức vào và truyền đến list phone nhận dược
         phones.add(phone);
         showPhone(phone);
+        saveData(DataController.PHONE);//đang muốn lưu cái gì
     }
 
     @Override
@@ -540,5 +548,28 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             phone.getImei(), phone.getName(), phone.getPhase()
         };
         tableModelPhone.addRow(row); //thêm các thông số bên trên vào bảng
+    }
+
+    private void LoadData() {
+        phones = dataController.<Phone>readDataFromFile(DataController.PHONE_FILE);
+        
+    }
+
+    private void ShowData() {
+        showPhones();
+    }
+
+    private void showPhones() {
+        for (Phone phone : phones) {
+            showPhone(phone);
+        }
+    }
+
+    private void saveData(int choice) {
+        switch(choice) {
+            case DataController.PHONE:
+                dataController.<Phone>writeToFile(phones, DataController.PHONE_FILE);
+                break;
+        }
     }
 }
