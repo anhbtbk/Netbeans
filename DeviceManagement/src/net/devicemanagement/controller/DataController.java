@@ -34,5 +34,11 @@ public interface DataController {
     void sortPhoneByPhaseASC(List<Phone> phones);
 
     void sortPhoneByPhaseDESC(List<Phone> phones);
+    
+    List<Phone> searchPhoneByImei(List<Phone> phones, String key);
+    
+    List<Phone> searchPhoneByName(List<Phone> phones, String key);
+    
+    List<Phone> searchPhoneByPhase(List<Phone> phones, String key);
 
 }

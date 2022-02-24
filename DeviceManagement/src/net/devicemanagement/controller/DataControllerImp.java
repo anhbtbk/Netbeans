@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import net.devicemanagement.controller.sort.SortPhoneByNameASC;
 import net.devicemanagement.controller.sort.SortPhoneByNameDESC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseASC;
@@ -79,6 +81,51 @@ public class DataControllerImp implements DataController {
     @Override
     public void sortPhoneByPhaseDESC(List<Phone> phones) {
         Collections.sort(phones, new SortPhoneByPhaseDESC());
+    }
+
+    @Override
+    public List<Phone> searchPhoneByImei(List<Phone> phones, String key) {
+        List<Phone> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Phone phone : phones) {
+            matcher = pattern.matcher(phone.getName());
+            if (matcher.matches()) {
+                resultList.add(phone);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Phone> searchPhoneByName(List<Phone> phones, String key) {
+        List<Phone> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Phone phone : phones) {
+            matcher = pattern.matcher(phone.getName());
+            if (matcher.matches()) {
+                resultList.add(phone);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Phone> searchPhoneByPhase(List<Phone> phones, String key) {
+        List<Phone> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Phone phone : phones) {
+            matcher = pattern.matcher(phone.getName());
+            if (matcher.matches()) {
+                resultList.add(phone);
+            }
+        }
+        return resultList;
     }
 
 }
