@@ -5,6 +5,7 @@
 package net.devicemanagement.controller;
 
 import java.util.List;
+import net.devicemanagement.view.model.Phone;
 
 /**
  *
@@ -15,7 +16,7 @@ lớp interface để nêu ra các hành động cần được thực hiện, n
 không nói hành động được thực hiện ntn
 việc thực hiện chi tiết do các lớp thực thi interface đảm nhiệm
 vd: DataControllerImp
-*/
+ */
 public interface DataController {
 
     int PHONE = 1;
@@ -25,5 +26,13 @@ public interface DataController {
     <T> void writeToFile(List<T> data, String fileName);
 
     <T> List<T> readDataFromFile(String fileName);
+
+    void sortPhoneByNameASC(List<Phone> phones);
+
+    void sortPhoneByNameDESC(List<Phone> phones);
+
+    void sortPhoneByPhaseASC(List<Phone> phones);
+
+    void sortPhoneByPhaseDESC(List<Phone> phones);
 
 }

@@ -12,9 +12,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.devicemanagement.controller.sort.SortPhoneByNameASC;
+import net.devicemanagement.controller.sort.SortPhoneByNameDESC;
+import net.devicemanagement.controller.sort.SortPhoneByPhaseASC;
+import net.devicemanagement.controller.sort.SortPhoneByPhaseDESC;
+import net.devicemanagement.view.model.Phone;
 
 /**
  *
@@ -50,9 +56,29 @@ public class DataControllerImp implements DataController {
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
-            
+
         }
         return data;
+    }
+
+    @Override
+    public void sortPhoneByNameASC(List<Phone> phones) {
+        Collections.sort(phones, new SortPhoneByNameASC());
+    }
+
+    @Override
+    public void sortPhoneByNameDESC(List<Phone> phones) {
+        Collections.sort(phones, new SortPhoneByNameDESC());
+    }
+
+    @Override
+    public void sortPhoneByPhaseASC(List<Phone> phones) {
+        Collections.sort(phones, new SortPhoneByPhaseASC());
+    }
+
+    @Override
+    public void sortPhoneByPhaseDESC(List<Phone> phones) {
+        Collections.sort(phones, new SortPhoneByPhaseDESC());
     }
 
 }
