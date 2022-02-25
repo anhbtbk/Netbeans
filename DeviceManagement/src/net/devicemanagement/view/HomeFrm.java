@@ -19,7 +19,7 @@ import net.devicemanagement.view.model.Phone;
  * @author Tuan Anh
  */
 public class HomeFrm extends javax.swing.JFrame implements ActionListener {
-    
+
     private List<Phone> phones; //tạo list các điện thoại
     private DefaultTableModel tableModelPhone;
     private DataController dataController;
@@ -402,10 +402,6 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRefreshPhoneActionPerformed
 
-    private void rbSearchPhoneByPhaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchPhoneByPhaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbSearchPhoneByPhaseActionPerformed
-
     private void rbSortPhoneNameASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortPhoneNameASCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbSortPhoneNameASCActionPerformed
@@ -425,6 +421,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private void txtSearchPhoneByImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchPhoneByImeiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchPhoneByImeiActionPerformed
+
+    private void rbSearchPhoneByPhaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchPhoneByPhaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchPhoneByPhaseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -499,13 +499,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSearchPhone.add(rbSearchPhoneByImei);
         buttonGroupSearchPhone.add(rbSearchPhoneByName);
         buttonGroupSearchPhone.add(rbSearchPhoneByPhase);
-        
+
         buttonGroupSortPhone.add(rbSortPhoneNameASC);
         buttonGroupSortPhone.add(rbSortPhoneNameDESC);
         buttonGroupSortPhone.add(rbSortPhonePhaseASC);
         buttonGroupSortPhone.add(rbSortPhonePhaseDESC);
     }
-    
+
     private void addActionListener() {
         //đăng ký sự kiện cho từng nút
         btnAddPhone.addActionListener(this);
@@ -513,25 +513,25 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnRefreshPhone.addActionListener(this);
         btnRemovePhone.addActionListener(this);
         btnSearchPhone.addActionListener(this);
-        
+
         rbSearchPhoneByImei.addActionListener(this);
         rbSearchPhoneByName.addActionListener(this);
         rbSearchPhoneByPhase.addActionListener(this);
-        
+
         rbSortPhoneNameASC.addActionListener(this);
         rbSortPhoneNameDESC.addActionListener(this);
         rbSortPhonePhaseASC.addActionListener(this);
         rbSortPhonePhaseDESC.addActionListener(this);
-        
+
     }
-    
+
     public void addPhoneCallback(Phone phone) {  //ở cái table sẽ gọi đến phương 
         //thức vào và truyền đến list phone nhận dược
         phones.add(phone);
         showPhone(phone);
         saveData(DataController.PHONE);//đang muốn lưu cái gì
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //thực hiện các hành động
@@ -549,6 +549,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 || obj.equals(rbSortPhonePhaseASC)
                 || obj.equals(rbSortPhonePhaseDESC)) {
             sortPhones(obj);
+        } else if (obj.equals(btnSearchPhone)) {
+            searchPhones();
+        } else if (obj.equals(btnRefreshPhone)) {
+            refreshPhones();
         }
     }
 
@@ -559,23 +563,24 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         };
         tableModelPhone.addRow(row); //thêm các thông số bên trên vào bảng
     }
-    
+
     private void LoadData() {
         phones = dataController.<Phone>readDataFromFile(DataController.PHONE_FILE);
-        
+        //đọc danh sách điện thoại
+        //đọc danh sách các bảng đăng kí
     }
-    
+
     private void ShowData() {
         showPhones();
     }
-    
+
     private void showPhones() {
         tableModelPhone.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
         for (Phone phone : phones) {
             showPhone(phone);
         }
     }
-    
+
     private void saveData(int choice) {
         switch (choice) {
             case DataController.PHONE:
@@ -584,7 +589,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 break;
         }
     }
-    
+
     private void removePhone() {
         int selectedIndex = tblPhone.getSelectedRow();//chọn dòng cần xóa
         //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
@@ -602,11 +607,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void showDialogMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
     }
-    
+
     private void editPhone() {
         int selectedIndex = tblPhone.getSelectedRow();//chọn dòng cần edit
         //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
@@ -615,13 +620,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             EditPhoneDialog editPhoneDialog
                     = new EditPhoneDialog(this, rootPaneCheckingEnabled, phone);
             editPhoneDialog.setVisible(true);
-            
+
         } else {
             var msg = "Vui lòng chọn 1 bản ghi để xóa!";
             showDialogMessage(msg);
         }
     }
-    
+
     public void editPhoneCallback(Phone phone) {
         int selectedIndex = tblPhone.getSelectedRow();
         phones.set(selectedIndex, phone);
@@ -632,7 +637,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelPhone.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
         saveData(DataController.PHONE);//lưu dữ liệu vào file PHONE
     }
-    
+
     private void sortPhones(Object obj) {
         if (obj.equals(rbSortPhoneNameASC)) {
             dataController.sortPhoneByNameASC(phones);
@@ -644,5 +649,68 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             dataController.sortPhoneByPhaseDESC(phones);
         }
         showPhones();
+    }
+
+    private void searchPhones() {
+        if (rbSearchPhoneByImei.isSelected()) {
+            var key = txtSearchPhoneByImei.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập số IMEI cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchPhoneByImei(phones, key);
+                phones.clear();
+                phones.addAll(result);
+                checkAndShowSearchResult();
+            }
+        } else if (rbSearchPhoneByName.isSelected()) {
+            var key = txtSearchPhoneByName.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập tên điện thoại cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchPhoneByName(phones, key);
+                phones.clear();
+                phones.addAll(result);
+                checkAndShowSearchResult();
+            }
+        } else if (rbSearchPhoneByPhase.isSelected()) {
+            var key = comboSearchPhoneByPhase.getSelectedItem().toString();
+            var result = dataController.searchPhoneByPhase(phones, key);
+            phones.clear();
+            phones.addAll(result);
+            checkAndShowSearchResult();
+
+        } else {
+            var msg = "Vui lòng chọn tiêu chí tìm kiếm trước!";
+            showDialogMessage(msg);
+        }
+    }
+
+    private void checkAndShowSearchResult() {
+        if (phones.size() > 0) {
+            showPhones();
+            var msg = "Tìm thấy " + phones.size() + " kết quả";
+            showDialogMessage(msg);
+        } else {
+            phones.clear();
+            showPhones();
+            var msg = "Không tìm thấy kết quả nào";
+            showDialogMessage(msg);
+        }
+    }
+
+    private void refreshPhones() {
+        var text = "";
+        txtSearchPhoneByImei.setText(text);
+        txtSearchPhoneByName.setText(text);
+        comboSearchPhoneByPhase.setSelectedIndex(0);
+        buttonGroupSearchPhone.clearSelection();
+        buttonGroupSortPhone.clearSelection();
+        
+        phones.clear();
+        phones.addAll(dataController.<Phone>readDataFromFile(DataController.PHONE_FILE));
+        showPhones();
+        
     }
 }

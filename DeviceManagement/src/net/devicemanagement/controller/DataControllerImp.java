@@ -90,7 +90,8 @@ public class DataControllerImp implements DataController {
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher;
         for (Phone phone : phones) {
-            matcher = pattern.matcher(phone.getName());
+            var imeiStr = Long.toString(phone.getImei());
+            matcher = pattern.matcher(imeiStr);
             if (matcher.matches()) {
                 resultList.add(phone);
             }
@@ -120,7 +121,7 @@ public class DataControllerImp implements DataController {
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher;
         for (Phone phone : phones) {
-            matcher = pattern.matcher(phone.getName());
+            matcher = pattern.matcher(phone.getPhase());
             if (matcher.matches()) {
                 resultList.add(phone);
             }
