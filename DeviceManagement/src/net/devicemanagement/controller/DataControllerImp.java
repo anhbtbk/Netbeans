@@ -12,9 +12,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import net.devicemanagement.controller.sort.SortPhoneByNameASC;
+import net.devicemanagement.controller.sort.SortPhoneByNameDESC;
+import net.devicemanagement.controller.sort.SortPhoneByPhaseASC;
+import net.devicemanagement.controller.sort.SortPhoneByPhaseDESC;
+import net.devicemanagement.view.model.Phone;
 
 /**
  *
@@ -50,9 +58,75 @@ public class DataControllerImp implements DataController {
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
-            
+
         }
         return data;
+    }
+
+    @Override
+    public void sortPhoneByNameASC(List<Phone> phones) {
+        Collections.sort(phones, new SortPhoneByNameASC());
+    }
+
+    @Override
+    public void sortPhoneByNameDESC(List<Phone> phones) {
+        Collections.sort(phones, new SortPhoneByNameDESC());
+    }
+
+    @Override
+    public void sortPhoneByPhaseASC(List<Phone> phones) {
+        Collections.sort(phones, new SortPhoneByPhaseASC());
+    }
+
+    @Override
+    public void sortPhoneByPhaseDESC(List<Phone> phones) {
+        Collections.sort(phones, new SortPhoneByPhaseDESC());
+    }
+
+    @Override
+    public List<Phone> searchPhoneByImei(List<Phone> phones, String key) {
+        List<Phone> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Phone phone : phones) {
+            var imeiStr = Long.toString(phone.getImei());
+            matcher = pattern.matcher(imeiStr);
+            if (matcher.matches()) {
+                resultList.add(phone);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Phone> searchPhoneByName(List<Phone> phones, String key) {
+        List<Phone> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Phone phone : phones) {
+            matcher = pattern.matcher(phone.getName());
+            if (matcher.matches()) {
+                resultList.add(phone);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Phone> searchPhoneByPhase(List<Phone> phones, String key) {
+        List<Phone> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Phone phone : phones) {
+            matcher = pattern.matcher(phone.getPhase());
+            if (matcher.matches()) {
+                resultList.add(phone);
+            }
+        }
+        return resultList;
     }
 
 }
