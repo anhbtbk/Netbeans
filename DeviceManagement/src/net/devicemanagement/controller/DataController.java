@@ -20,8 +20,11 @@ vd: DataControllerImp
 public interface DataController {
 
     int PHONE = 1;
+    int PC = 2;
 
     String PHONE_FILE = "PHONE.DAT";
+    
+    String PC_FILE = "PC.DAT";
 
     <T> void writeToFile(List<T> data, String fileName);
 

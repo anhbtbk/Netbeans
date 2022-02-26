@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.devicemanagement.controller.DataController;
 import net.devicemanagement.controller.DataControllerImp;
+import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
 /**
@@ -23,6 +24,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private List<Phone> phones; //tạo list các điện thoại
     private DefaultTableModel tableModelPhone;
     private DataController dataController;
+    private List<Pc> pcs; //tạo list các PC
+    private DefaultTableModel tableModelPc;
+    
 
     /**
      * Creates new form HomeFrm
@@ -51,6 +55,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         buttonGroupSortPhone = new javax.swing.ButtonGroup();
         buttonGroupSearchPhone = new javax.swing.ButtonGroup();
+        buttonGroupSortPc = new javax.swing.ButtonGroup();
+        buttonGroupSearchPc = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -73,6 +79,25 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnRemovePhone = new javax.swing.JButton();
         btnRefreshPhone = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        rbSortChipPcASC = new javax.swing.JRadioButton();
+        rbSortChipPcDESC = new javax.swing.JRadioButton();
+        rbSortRamPcASC = new javax.swing.JRadioButton();
+        rbSortRamPcDESC = new javax.swing.JRadioButton();
+        jPanel10 = new javax.swing.JPanel();
+        rbSearchPcBySerial = new javax.swing.JRadioButton();
+        rbSearchPcByName = new javax.swing.JRadioButton();
+        txtSearchPhoneByImei1 = new javax.swing.JTextField();
+        txtSearchPhoneByName1 = new javax.swing.JTextField();
+        rbSearchPcByRam = new javax.swing.JRadioButton();
+        btnSearchPc = new javax.swing.JButton();
+        txtSearchPhoneByName2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPC = new javax.swing.JTable();
+        btnRefreshPc = new javax.swing.JButton();
+        btnAddPc = new javax.swing.JButton();
+        btnEditPc = new javax.swing.JButton();
+        btnRemovePc = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -195,7 +220,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                     .addComponent(txtSearchPhoneByImei)
                     .addComponent(txtSearchPhoneByName)
                     .addComponent(comboSearchPhoneByPhase, 0, 256, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(btnSearchPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -302,15 +327,222 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         jTabbedPane1.addTab("QUẢN LÝ ĐIỆN THOẠI", jPanel1);
 
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sắp xếp PC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSortChipPcASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortChipPcASC.setText("Theo chip tăng dần");
+        rbSortChipPcASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortChipPcASCActionPerformed(evt);
+            }
+        });
+
+        rbSortChipPcDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortChipPcDESC.setText("Theo chip giảm dần");
+        rbSortChipPcDESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortChipPcDESCActionPerformed(evt);
+            }
+        });
+
+        rbSortRamPcASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortRamPcASC.setText("Theo RAM tăng dần");
+        rbSortRamPcASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortRamPcASCActionPerformed(evt);
+            }
+        });
+
+        rbSortRamPcDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortRamPcDESC.setText("Theo RAM giảm dần");
+        rbSortRamPcDESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortRamPcDESCActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortChipPcASC)
+                    .addComponent(rbSortChipPcDESC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortRamPcASC)
+                    .addComponent(rbSortRamPcDESC))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortChipPcASC)
+                    .addComponent(rbSortRamPcASC))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortChipPcDESC)
+                    .addComponent(rbSortRamPcDESC))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm PC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSearchPcBySerial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchPcBySerial.setText("Theo số serial");
+
+        rbSearchPcByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchPcByName.setText("Theo tên");
+        rbSearchPcByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchPcByNameActionPerformed(evt);
+            }
+        });
+
+        txtSearchPhoneByImei1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchPhoneByImei1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchPhoneByImei1ActionPerformed(evt);
+            }
+        });
+
+        txtSearchPhoneByName1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        rbSearchPcByRam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchPcByRam.setText("Theo RAM");
+        rbSearchPcByRam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchPcByRamActionPerformed(evt);
+            }
+        });
+
+        btnSearchPc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchPc.setText("Tìm");
+
+        txtSearchPhoneByName2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSearchPcByName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchPcByRam)
+                    .addComponent(rbSearchPcBySerial))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtSearchPhoneByImei1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(txtSearchPhoneByName1)
+                    .addComponent(txtSearchPhoneByName2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(btnSearchPc, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchPcBySerial)
+                    .addComponent(txtSearchPhoneByImei1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchPcByName)
+                    .addComponent(txtSearchPhoneByName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchPc))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchPcByRam)
+                    .addComponent(txtSearchPhoneByName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        tblPC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Số serial", "Tên PC", "PC CPU", "PC RAM", "PC ổ cứng", "PC VGA"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblPC);
+
+        btnRefreshPc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRefreshPc.setText("Làm mới");
+        btnRefreshPc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshPcActionPerformed(evt);
+            }
+        });
+
+        btnAddPc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddPc.setText("Thêm PC");
+        btnAddPc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPcActionPerformed(evt);
+            }
+        });
+
+        btnEditPc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEditPc.setText("Sửa PC");
+
+        btnRemovePc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRemovePc.setText("Xóa PC");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 955, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btnRefreshPc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddPc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditPc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemovePc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRefreshPc)
+                    .addComponent(btnAddPc)
+                    .addComponent(btnEditPc)
+                    .addComponent(btnRemovePc))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("QUẢN LÝ PC", jPanel2);
@@ -319,7 +551,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 955, Short.MAX_VALUE)
+            .addGap(0, 978, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +564,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 955, Short.MAX_VALUE)
+            .addGap(0, 978, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,7 +577,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 955, Short.MAX_VALUE)
+            .addGap(0, 978, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +590,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 955, Short.MAX_VALUE)
+            .addGap(0, 978, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,6 +674,42 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void rbSortChipPcASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortChipPcASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortChipPcASCActionPerformed
+
+    private void rbSortRamPcASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortRamPcASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortRamPcASCActionPerformed
+
+    private void rbSortRamPcDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortRamPcDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortRamPcDESCActionPerformed
+
+    private void rbSearchPcByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchPcByNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchPcByNameActionPerformed
+
+    private void txtSearchPhoneByImei1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchPhoneByImei1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchPhoneByImei1ActionPerformed
+
+    private void rbSearchPcByRamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchPcByRamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchPcByRamActionPerformed
+
+    private void btnRefreshPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshPcActionPerformed
+
+    private void btnAddPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddPcActionPerformed
+
+    private void rbSortChipPcDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortChipPcDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortChipPcDESCActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -478,12 +746,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddPc;
     private javax.swing.JButton btnAddPhone;
+    private javax.swing.JButton btnEditPc;
     private javax.swing.JButton btnEditPhone;
+    private javax.swing.JButton btnRefreshPc;
     private javax.swing.JButton btnRefreshPhone;
+    private javax.swing.JButton btnRemovePc;
     private javax.swing.JButton btnRemovePhone;
+    private javax.swing.JButton btnSearchPc;
     private javax.swing.JButton btnSearchPhone;
+    private javax.swing.ButtonGroup buttonGroupSearchPc;
     private javax.swing.ButtonGroup buttonGroupSearchPhone;
+    private javax.swing.ButtonGroup buttonGroupSortPc;
     private javax.swing.ButtonGroup buttonGroupSortPhone;
     private javax.swing.JComboBox<String> comboSearchPhoneByPhase;
     private javax.swing.JMenu jMenu1;
@@ -491,6 +766,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -498,18 +774,31 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton rbSearchPcByName;
+    private javax.swing.JRadioButton rbSearchPcByRam;
+    private javax.swing.JRadioButton rbSearchPcBySerial;
     private javax.swing.JRadioButton rbSearchPhoneByImei;
     private javax.swing.JRadioButton rbSearchPhoneByName;
     private javax.swing.JRadioButton rbSearchPhoneByPhase;
+    private javax.swing.JRadioButton rbSortChipPcASC;
+    private javax.swing.JRadioButton rbSortChipPcDESC;
     private javax.swing.JRadioButton rbSortPhoneNameASC;
     private javax.swing.JRadioButton rbSortPhoneNameDESC;
     private javax.swing.JRadioButton rbSortPhonePhaseASC;
     private javax.swing.JRadioButton rbSortPhonePhaseDESC;
+    private javax.swing.JRadioButton rbSortRamPcASC;
+    private javax.swing.JRadioButton rbSortRamPcDESC;
+    private javax.swing.JTable tblPC;
     private javax.swing.JTable tblPhone;
     private javax.swing.JTextField txtSearchPhoneByImei;
+    private javax.swing.JTextField txtSearchPhoneByImei1;
     private javax.swing.JTextField txtSearchPhoneByName;
+    private javax.swing.JTextField txtSearchPhoneByName1;
+    private javax.swing.JTextField txtSearchPhoneByName2;
     // End of variables declaration//GEN-END:variables
 
     private void addButtonGroup() {
@@ -521,10 +810,21 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSortPhone.add(rbSortPhoneNameDESC);
         buttonGroupSortPhone.add(rbSortPhonePhaseASC);
         buttonGroupSortPhone.add(rbSortPhonePhaseDESC);
+
+        buttonGroupSearchPc.add(rbSearchPcBySerial);
+        buttonGroupSearchPc.add(rbSearchPcByName);
+        buttonGroupSearchPc.add(rbSearchPcByRam);
+
+        buttonGroupSortPc.add(rbSortChipPcASC);
+        buttonGroupSortPc.add(rbSortChipPcDESC);
+        buttonGroupSortPc.add(rbSortRamPcASC);
+        buttonGroupSortPc.add(rbSortRamPcDESC);
+
     }
 
     private void addActionListener() {
         //đăng ký sự kiện cho từng nút
+        //tab quản lý điện thoại
         btnAddPhone.addActionListener(this);
         btnEditPhone.addActionListener(this);
         btnRefreshPhone.addActionListener(this);
@@ -540,6 +840,22 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         rbSortPhonePhaseASC.addActionListener(this);
         rbSortPhonePhaseDESC.addActionListener(this);
 
+        //tab quản lý pc
+        btnAddPc.addActionListener(this);
+        btnEditPc.addActionListener(this);
+        btnRefreshPc.addActionListener(this);
+        btnRemovePc.addActionListener(this);
+        btnSearchPc.addActionListener(this);
+
+        rbSearchPcBySerial.addActionListener(this);
+        rbSearchPcByName.addActionListener(this);
+        rbSearchPcByRam.addActionListener(this);
+
+        rbSortChipPcASC.addActionListener(this);
+        rbSortChipPcDESC.addActionListener(this);
+        rbSortRamPcASC.addActionListener(this);
+        rbSortRamPcDESC.addActionListener(this);
+
     }
 
     public void addPhoneCallback(Phone phone) {  //ở cái table sẽ gọi đến phương 
@@ -547,6 +863,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         phones.add(phone);
         showPhone(phone);
         saveData(DataController.PHONE);//đang muốn lưu cái gì
+    }
+
+    public void addPcCallback(Pc pc) { 
+//ở cái table sẽ gọi đến phương 
+        //thức vào và truyền đến list phone nhận dược
+        pcs.add(pc);
+        showPc(pc);
+        saveData(DataController.PC);//đang muốn lưu cái gì
     }
 
     @Override
@@ -570,6 +894,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             searchPhones();
         } else if (obj.equals(btnRefreshPhone)) {
             refreshPhones();
+        } else if (obj.equals(btnAddPc)) {
+            AddPcDialog addPcDialog
+                    = new AddPcDialog(this, rootPaneCheckingEnabled);
+            addPcDialog.setVisible(true);
         }
     }
 
@@ -724,10 +1052,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         comboSearchPhoneByPhase.setSelectedIndex(0);
         buttonGroupSearchPhone.clearSelection();
         buttonGroupSortPhone.clearSelection();
-        
+
         phones.clear();
         phones.addAll(dataController.<Phone>readDataFromFile(DataController.PHONE_FILE));
         showPhones();
-        
+
+    }
+
+    private void showPc(Pc pc) {
+
     }
 }

@@ -7,26 +7,26 @@ package net.devicemanagement.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import net.devicemanagement.view.model.Phone;
+import net.devicemanagement.view.model.Pc;
 
 /**
  *
  * @author Tuan Anh
  */
-public class AddPhoneDialog extends javax.swing.JDialog implements ActionListener {
-    
+public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
+
     private HomeFrm homeFrm;
-    private Phone phone;
+    private Pc pc;
 
     /**
      * Creates new form AddPhoneDialog
      */
-    public AddPhoneDialog(java.awt.Frame parent, boolean modal) {
+    public AddPcDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null); //hiển thị ra chính giữa màn hình
         addActionListener();
-        phone = new Phone(); //khi click vào add new sẽ mặc định tạo mới 1 đối tượng phone, 
+        pc = new Pc(); //khi click vào add new sẽ mặc định tạo mới 1 đối tượng phone, 
         //không khai báo sẽ bị lỗi không gọi được this.phone
         homeFrm = (HomeFrm) parent;
     }
@@ -44,40 +44,43 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtPhoneImei = new javax.swing.JTextField();
-        txtPhoneName = new javax.swing.JTextField();
-        comboPhonePhase = new javax.swing.JComboBox<>();
+        txtPcSerial = new javax.swing.JTextField();
+        txtPcName = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnAddNew = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtPcRam = new javax.swing.JTextField();
+        txtPcVga = new javax.swing.JTextField();
+        txtPcCpu = new javax.swing.JTextField();
+        txtPcDisk = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("THÊM MỚI ĐIỆN THOẠI");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Thêm mới điện thoại");
+        jLabel1.setText("Thêm mới PC");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Số IMEI");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Tên model");
+        jLabel3.setText("Tên PC");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Giai đoạn");
+        jLabel4.setText("CPU");
 
-        txtPhoneImei.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPhoneImei.addActionListener(new java.awt.event.ActionListener() {
+        txtPcSerial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPcSerial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPhoneImeiActionPerformed(evt);
+                txtPcSerialActionPerformed(evt);
             }
         });
 
-        txtPhoneName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        comboPhonePhase.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboPhonePhase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EVT", "DVT", "PVT" }));
+        txtPcName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnClear.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnClear.setText("Xóa dữ liệu");
@@ -103,11 +106,27 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("RAM");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Ổ cứng");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("VGA");
+
+        txtPcRam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtPcVga.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtPcCpu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtPcDisk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -115,12 +134,19 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPhoneImei)
-                            .addComponent(txtPhoneName)
-                            .addComponent(comboPhonePhase, 0, 289, Short.MAX_VALUE)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtPcSerial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                                .addComponent(txtPcName, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtPcRam, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                                .addComponent(txtPcDisk))
+                            .addComponent(txtPcCpu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPcVga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(65, Short.MAX_VALUE)
                         .addComponent(btnAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,6 +155,7 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(69, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,16 +165,31 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPhoneImei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPcSerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtPhoneName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(txtPcName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtPcCpu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPcRam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(comboPhonePhase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtPcDisk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtPcVga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClear)
                     .addComponent(btnCancel)
@@ -158,9 +200,9 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPhoneImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneImeiActionPerformed
+    private void txtPcSerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPcSerialActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPhoneImeiActionPerformed
+    }//GEN-LAST:event_txtPcSerialActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
@@ -191,20 +233,21 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddPhoneDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddPhoneDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddPhoneDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddPhoneDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddPhoneDialog dialog = new AddPhoneDialog(new javax.swing.JFrame(), true);
+                AddPcDialog dialog = new AddPcDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -220,22 +263,28 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
     private javax.swing.JButton btnAddNew;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnClear;
-    private javax.swing.JComboBox<String> comboPhonePhase;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtPhoneImei;
-    private javax.swing.JTextField txtPhoneName;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField txtPcCpu;
+    private javax.swing.JTextField txtPcDisk;
+    private javax.swing.JTextField txtPcName;
+    private javax.swing.JTextField txtPcRam;
+    private javax.swing.JTextField txtPcSerial;
+    private javax.swing.JTextField txtPcVga;
     // End of variables declaration//GEN-END:variables
 
     private void addActionListener() {
         btnAddNew.addActionListener(this);
         btnClear.addActionListener(this);
         btnCancel.addActionListener(this);
-        
+
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         var obj = e.getSource();
@@ -244,33 +293,47 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
         } else if (obj.equals(btnClear)) {
             clearInputData();
         } else if (obj.equals(btnAddNew)) {
-            addNewPhone();
+            addNewPc();
         }
     }
-    
+
     private void clearInputData() {
         var emptyText = "";
-        txtPhoneImei.setText(emptyText);
-        txtPhoneName.setText(emptyText);
-        comboPhonePhase.setSelectedIndex(0);
+        txtPcSerial.setText(emptyText);
+        txtPcName.setText(emptyText);
+        txtPcCpu.setText(emptyText);
+        txtPcDisk.setText(emptyText);
+        txtPcRam.setText(emptyText);
+        txtPcVga.setText(emptyText);
+
     }
-    
-    private void addNewPhone() {
-        var imeiString = txtPhoneImei.getText(); //get imei nhưng ở dạng String
-        var name = txtPhoneName.getText();
-        var phase = comboPhonePhase.getSelectedItem().toString();
-        if (!imeiString.isEmpty() && !name.isEmpty()) {            
-            phone.setImei(Long.parseLong(imeiString)); //cẩn phải ép ngược lại 
-            //kiểu long mới có thể truyền vào pt setImei bên Phone.java
-            phone.setName(name);            
-            phone.setPhase(phase);
-            homeFrm.addPhoneCallback(phone);
-            JOptionPane.showMessageDialog(rootPane, "Thêm điện thoại thành công");
+
+    private void addNewPc() {
+        var serial = txtPcSerial.getText();
+        var name = txtPcName.getText();
+        var cpu = txtPcCpu.getText();
+        var ram = txtPcRam.getText();
+        var disk = txtPcDisk.getText();
+        var vga = txtPcVga.getText();
+
+        if (!ram.isEmpty() && !serial.isEmpty() && !name.isEmpty()
+                && !cpu.isEmpty() && !disk.isEmpty() && !vga.isEmpty()) {
+
+            pc.setSerial(serial);
+            pc.setName(name);
+            pc.setCpu(cpu);
+            pc.setRam(ram);
+            pc.setDisk(disk);
+            pc.setVga(vga);
+
+            homeFrm.addPcCallback(pc);
+            JOptionPane.showMessageDialog(rootPane, "Thêm PC thành công");
             dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane,
                     "Các ô nhập liệu không được để trống");
         }
+
     }
-    
+
 }
