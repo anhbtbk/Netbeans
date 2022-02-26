@@ -23,7 +23,7 @@ public interface DataController {
     int PC = 2;
 
     String PHONE_FILE = "PHONE.DAT";
-    
+
     String PC_FILE = "PC.DAT";
 
     <T> void writeToFile(List<T> data, String fileName);
@@ -37,11 +37,11 @@ public interface DataController {
     void sortPhoneByPhaseASC(List<Phone> phones);
 
     void sortPhoneByPhaseDESC(List<Phone> phones);
-    
+
     List<Phone> searchPhoneByImei(List<Phone> phones, String key);
-    
+
     List<Phone> searchPhoneByName(List<Phone> phones, String key);
-    
+
     List<Phone> searchPhoneByPhase(List<Phone> phones, String key);
 
 }

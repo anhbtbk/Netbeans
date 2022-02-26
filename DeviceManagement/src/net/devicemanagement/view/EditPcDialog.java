@@ -8,12 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import net.devicemanagement.view.model.Pc;
+import net.devicemanagement.view.model.Phone;
 
 /**
  *
  * @author Tuan Anh
  */
-public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
+public class EditPcDialog extends javax.swing.JDialog implements ActionListener {
 
     private HomeFrm homeFrm;
     private Pc pc;
@@ -21,7 +22,7 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
     /**
      * Creates new form AddPhoneDialog
      */
-    public AddPcDialog(java.awt.Frame parent, boolean modal) {
+    public EditPcDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null); //hiển thị ra chính giữa màn hình
@@ -29,6 +30,12 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
         pc = new Pc(); //khi click vào add new sẽ mặc định tạo mới 1 đối tượng phone, 
         //không khai báo sẽ bị lỗi không gọi được this.phone
         homeFrm = (HomeFrm) parent;
+    }
+
+    public EditPcDialog(java.awt.Frame parent, boolean modal, Pc pc) {
+        this(parent, modal);
+        this.pc = pc;
+        showData(); //pt hiển thị dữ liệu ra trước khi chỉnh sửa
     }
 
     /**
@@ -46,9 +53,8 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
         jLabel4 = new javax.swing.JLabel();
         txtPcSerial = new javax.swing.JTextField();
         txtPcName = new javax.swing.JTextField();
-        btnClear = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        btnAddNew = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -62,7 +68,7 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Thêm mới PC");
+        jLabel1.setText("Sửa thông tin PC");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Số serial");
@@ -82,14 +88,6 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
 
         txtPcName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        btnClear.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnClear.setText("Xóa dữ liệu");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-
         btnCancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCancel.setText("Hủy bỏ");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -98,11 +96,11 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
             }
         });
 
-        btnAddNew.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAddNew.setText("Thêm mới");
-        btnAddNew.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEdit.setText("Cập nhật");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddNewActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
@@ -138,7 +136,7 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtPcSerial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
@@ -148,13 +146,12 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
                             .addComponent(txtPcCpu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPcVga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(65, Short.MAX_VALUE)
-                        .addComponent(btnAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)))
+                .addContainerGap(34, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -191,9 +188,8 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
                     .addComponent(txtPcVga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClear)
                     .addComponent(btnCancel)
-                    .addComponent(btnAddNew))
+                    .addComponent(btnEdit))
                 .addGap(55, 55, 55))
         );
 
@@ -204,17 +200,13 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPcSerialActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnClearActionPerformed
-
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddNewActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,21 +225,23 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditPcDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddPcDialog dialog = new AddPcDialog(new javax.swing.JFrame(), true);
+                EditPcDialog dialog = new EditPcDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -260,9 +254,8 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddNew;
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -279,8 +272,7 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
     // End of variables declaration//GEN-END:variables
 
     private void addActionListener() {
-        btnAddNew.addActionListener(this);
-        btnClear.addActionListener(this);
+        btnEdit.addActionListener(this);
         btnCancel.addActionListener(this);
 
     }
@@ -290,25 +282,12 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
         var obj = e.getSource();
         if (obj.equals(btnCancel)) {
             dispose();
-        } else if (obj.equals(btnClear)) {
-            clearInputData();
-        } else if (obj.equals(btnAddNew)) {
-            addNewPc();
+        } else if (obj.equals(btnEdit)) {
+            editPc();
         }
     }
 
-    private void clearInputData() {
-        var emptyText = "";
-        txtPcSerial.setText(emptyText);
-        txtPcName.setText(emptyText);
-        txtPcCpu.setText(emptyText);
-        txtPcDisk.setText(emptyText);
-        txtPcRam.setText(emptyText);
-        txtPcVga.setText(emptyText);
-
-    }
-
-    private void addNewPc() {
+    private void editPc() {
         var serial = txtPcSerial.getText();
         var name = txtPcName.getText();
         var cpu = txtPcCpu.getText();
@@ -316,9 +295,8 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
         var disk = txtPcDisk.getText();
         var vga = txtPcVga.getText();
 
-        if (!ram.isEmpty() && !serial.isEmpty() && !name.isEmpty()
-                && !cpu.isEmpty() && !disk.isEmpty() && !vga.isEmpty()) {
-
+        if (!serial.isEmpty() && !name.isEmpty() && !cpu.isEmpty()
+                && !ram.isEmpty() && !disk.isEmpty() && !vga.isEmpty()) {
             pc.setSerial(serial);
             pc.setName(name);
             pc.setCpu(cpu);
@@ -326,14 +304,22 @@ public class AddPcDialog extends javax.swing.JDialog implements ActionListener {
             pc.setDisk(disk);
             pc.setVga(vga);
 
-            homeFrm.addPcCallback(pc);//đẩy thông tin vào bảng
-//            JOptionPane.showMessageDialog(rootPane, "Thêm PC thành công");
-//            dispose();
+            homeFrm.editPcCallback(pc);
+            JOptionPane.showMessageDialog(rootPane, "Cập nhật PC thành công");
+            dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane,
                     "Các ô nhập liệu không được để trống");
         }
+    }
 
+    private void showData() {
+        txtPcSerial.setText(pc.getSerial());
+        txtPcName.setText(pc.getName());
+        txtPcCpu.setText(pc.getCpu());
+        txtPcRam.setText(pc.getRam());
+        txtPcDisk.setText(pc.getDisk());
+        txtPcVga.setText(pc.getVga());
     }
 
 }

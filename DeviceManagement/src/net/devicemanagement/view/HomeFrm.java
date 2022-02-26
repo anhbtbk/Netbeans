@@ -26,7 +26,6 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private DataController dataController;
     private List<Pc> pcs; //tạo list các PC
     private DefaultTableModel tableModelPc;
-    
 
     /**
      * Creates new form HomeFrm
@@ -38,6 +37,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         addActionListener(); //Đăng kí sự kiện cho từng nút
         phones = new ArrayList<>();
         tableModelPhone = (DefaultTableModel) tblPhone.getModel();
+        pcs = new ArrayList<>();
+        tableModelPc = (DefaultTableModel) tblPc.getModel();
         //khi ứng dụng được kích hoạt, dữ liệu tự load và hiển thị lên
         dataController = new DataControllerImp();
         LoadData();
@@ -93,7 +94,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnSearchPc = new javax.swing.JButton();
         txtSearchPhoneByName2 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblPC = new javax.swing.JTable();
+        tblPc = new javax.swing.JTable();
         btnRefreshPc = new javax.swing.JButton();
         btnAddPc = new javax.swing.JButton();
         btnEditPc = new javax.swing.JButton();
@@ -463,12 +464,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        tblPC.setModel(new javax.swing.table.DefaultTableModel(
+        tblPc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Số serial", "Tên PC", "PC CPU", "PC RAM", "PC ổ cứng", "PC VGA"
+                "Số serial", "Tên PC", "CPU", "Dung lượng RAM", "Dung lượng ổ cứng", "Card đồ họa"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -479,7 +480,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblPC);
+        jScrollPane2.setViewportView(tblPc);
 
         btnRefreshPc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRefreshPc.setText("Làm mới");
@@ -792,7 +793,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortPhonePhaseDESC;
     private javax.swing.JRadioButton rbSortRamPcASC;
     private javax.swing.JRadioButton rbSortRamPcDESC;
-    private javax.swing.JTable tblPC;
+    private javax.swing.JTable tblPc;
     private javax.swing.JTable tblPhone;
     private javax.swing.JTextField txtSearchPhoneByImei;
     private javax.swing.JTextField txtSearchPhoneByImei1;
@@ -862,15 +863,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         //thức vào và truyền đến list phone nhận dược
         phones.add(phone);
         showPhone(phone);
-        saveData(DataController.PHONE);//đang muốn lưu cái gì
+        saveData(DataController.PHONE);//lưu phone
     }
 
-    public void addPcCallback(Pc pc) { 
-//ở cái table sẽ gọi đến phương 
-        //thức vào và truyền đến list phone nhận dược
+    public void addPcCallback(Pc pc) {
+        //ở cái table sẽ gọi đến phương 
+        //thức vào và truyền đến list pcnhận được
         pcs.add(pc);
         showPc(pc);
-        saveData(DataController.PC);//đang muốn lưu cái gì
+        saveData(DataController.PC);//lưu pc
     }
 
     @Override
@@ -898,6 +899,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             AddPcDialog addPcDialog
                     = new AddPcDialog(this, rootPaneCheckingEnabled);
             addPcDialog.setVisible(true);
+        } else if (obj.equals(btnRemovePc)) {
+            removePc();
+        } else if (obj.equals(btnEditPc)) {
+            editPc();
         }
     }
 
@@ -909,14 +914,26 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelPhone.addRow(row); //thêm các thông số bên trên vào bảng
     }
 
+    private void showPc(Pc pc) {
+        Object[] row = new Object[]{
+            pc.getSerial(), pc.getName(), pc.getCpu(),
+            pc.getRam(), pc.getDisk(), pc.getVga()
+        };
+        tableModelPc.addRow(row); //thêm các thông số bên trên vào bảng
+    }
+
     private void LoadData() {
+        //đọc danh sách các điện thoại
         phones = dataController.<Phone>readDataFromFile(DataController.PHONE_FILE);
-        //đọc danh sách điện thoại
-        //đọc danh sách các bảng đăng kí
+        //đọc danh sách các PC
+        pcs = dataController.<Pc>readDataFromFile(DataController.PC_FILE);
+        //đọc danh sách các 
     }
 
     private void ShowData() {
         showPhones();
+        showPcs();
+
     }
 
     private void showPhones() {
@@ -926,12 +943,24 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void showPcs() {
+        tableModelPc.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
+        for (Pc pc : pcs) {
+            showPc(pc);
+        }
+    }
+
     private void saveData(int choice) {
         switch (choice) {
             case DataController.PHONE:
                 dataController.<Phone>writeToFile(phones,
                         DataController.PHONE_FILE);
                 break;
+            case DataController.PC:
+                dataController.<Pc>writeToFile(pcs,
+                        DataController.PC_FILE);
+                break;
+
         }
     }
 
@@ -946,6 +975,23 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 tableModelPhone.removeRow(selectedIndex); //xóa khỏi bảng
                 dataController.<Phone>writeToFile(phones,
                         DataController.PHONE_FILE);
+            }
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để xóa!";
+            showDialogMessage(msg);
+        }
+    }
+    private void removePc() {
+        int selectedIndex = tblPc.getSelectedRow();//chọn dòng cần xóa
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            var msg = "Bạn có chắc chắn muốn xóa bản ghi này không?";
+            int confirm = JOptionPane.showConfirmDialog(rootPane, msg);
+            if (confirm == JOptionPane.OK_OPTION) {
+                pcs.remove(selectedIndex); //xóa khỏi danh sách
+                tableModelPc.removeRow(selectedIndex); //xóa khỏi bảng
+                dataController.<Pc>writeToFile(pcs,
+                        DataController.PC_FILE);
             }
         } else {
             var msg = "Vui lòng chọn 1 bản ghi để xóa!";
@@ -967,7 +1013,22 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             editPhoneDialog.setVisible(true);
 
         } else {
-            var msg = "Vui lòng chọn 1 bản ghi để xóa!";
+            var msg = "Vui lòng chọn 1 bản ghi để sửa!";
+            showDialogMessage(msg);
+        }
+    }
+    
+    private void editPc() {
+        int selectedIndex = tblPc.getSelectedRow();//chọn dòng cần edit
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            Pc pc = pcs.get(selectedIndex);
+            EditPcDialog editPcDialog
+                    = new EditPcDialog(this, rootPaneCheckingEnabled, pc);
+            editPcDialog.setVisible(true);
+
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để sửa!";
             showDialogMessage(msg);
         }
     }
@@ -981,6 +1042,18 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         };
         tableModelPhone.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
         saveData(DataController.PHONE);//lưu dữ liệu vào file PHONE
+    }
+    
+        public void editPcCallback(Pc pc) {
+        int selectedIndex = tblPc.getSelectedRow();
+        pcs.set(selectedIndex, pc);
+        tableModelPc.removeRow(selectedIndex);//xóa dòng tại vị trí đã chọn
+        Object[] row = new Object[]{
+            pc.getSerial(), pc.getName(), pc.getCpu(), 
+            pc.getRam(), pc.getDisk(), pc.getVga()
+        };
+        tableModelPc.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
+        saveData(DataController.PC);//lưu dữ liệu vào file PHONE
     }
 
     private void sortPhones(Object obj) {
@@ -1059,7 +1132,4 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
     }
 
-    private void showPc(Pc pc) {
-
-    }
 }

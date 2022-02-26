@@ -59,7 +59,7 @@ public class EditPhoneDialog extends javax.swing.JDialog implements ActionListen
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Thêm mới điện thoại");
+        jLabel1.setText("Sửa thông tin điện thoại");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Số IMEI");

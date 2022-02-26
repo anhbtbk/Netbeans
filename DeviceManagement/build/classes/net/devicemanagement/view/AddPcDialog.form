@@ -129,7 +129,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="S&#x1ed1; IMEI"/>
+        <Property name="text" type="java.lang.String" value="S&#x1ed1; serial"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -203,7 +203,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="RAM"/>
+        <Property name="text" type="java.lang.String" value="Dung l&#x1b0;&#x1ee3;ng RAM"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -211,7 +211,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x1ed4; c&#x1ee9;ng"/>
+        <Property name="text" type="java.lang.String" value="Dung l&#x1b0;&#x1ee3;ng &#x1ed5; c&#x1ee9;ng"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -219,7 +219,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="VGA"/>
+        <Property name="text" type="java.lang.String" value="Card &#x111;&#x1ed3; h&#x1ecd;a"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPcRam">

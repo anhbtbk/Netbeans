@@ -736,16 +736,16 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblPC">
+                <Component class="javax.swing.JTable" name="tblPc">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="0">
                         <Column editable="false" title="S&#x1ed1; serial" type="java.lang.Object"/>
                         <Column editable="false" title="T&#xea;n PC" type="java.lang.Object"/>
-                        <Column editable="false" title="PC CPU" type="java.lang.Object"/>
-                        <Column editable="false" title="PC RAM" type="java.lang.Object"/>
-                        <Column editable="false" title="PC &#x1ed5; c&#x1ee9;ng" type="java.lang.Object"/>
-                        <Column editable="false" title="PC VGA" type="java.lang.Object"/>
+                        <Column editable="false" title="CPU" type="java.lang.Object"/>
+                        <Column editable="false" title="Dung l&#x1b0;&#x1ee3;ng RAM" type="java.lang.Object"/>
+                        <Column editable="false" title="Dung l&#x1b0;&#x1ee3;ng &#x1ed5; c&#x1ee9;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="Card &#x111;&#x1ed3; h&#x1ecd;a" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

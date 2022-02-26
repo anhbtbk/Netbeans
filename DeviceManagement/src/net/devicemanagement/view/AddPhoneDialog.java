@@ -264,7 +264,7 @@ public class AddPhoneDialog extends javax.swing.JDialog implements ActionListene
             //kiểu long mới có thể truyền vào pt setImei bên Phone.java
             phone.setName(name);            
             phone.setPhase(phase);
-            homeFrm.addPhoneCallback(phone);
+            homeFrm.addPhoneCallback(phone);//đẩy thông tin vào bảng
             JOptionPane.showMessageDialog(rootPane, "Thêm điện thoại thành công");
             dispose();
         } else {
