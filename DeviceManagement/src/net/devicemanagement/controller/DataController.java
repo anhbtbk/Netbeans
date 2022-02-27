@@ -44,7 +44,7 @@ public interface DataController {
     List<Phone> searchPhoneByName(List<Phone> phones, String key);
 
     List<Phone> searchPhoneByPhase(List<Phone> phones, String key);
-    
+
     void sortPcByChipASC(List<Pc> pcs);
 
     void sortPcByChipDESC(List<Pc> pcs);
@@ -52,5 +52,13 @@ public interface DataController {
     void sortPcByRamASC(List<Pc> pcs);
 
     void sortPcByRamDESC(List<Pc> pcs);
+
+    List<Pc> searchPcBySerial(List<Pc> pcs, String key);
+
+    List<Pc> searchPcByName(List<Pc> pcs, String key);
+
+    List<Pc> searchPcByRam(List<Pc> pcs, String key);
+
+
 
 }

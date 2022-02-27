@@ -154,4 +154,49 @@ public class DataControllerImp implements DataController {
         Collections.sort(pcs, new SortPcByRamDESC());
     }
 
+    @Override
+    public List<Pc> searchPcBySerial(List<Pc> pcs, String key) {
+        List<Pc> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Pc pc : pcs) {
+            matcher = pattern.matcher(pc.getSerial());
+            if (matcher.matches()) {
+                resultList.add(pc);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Pc> searchPcByName(List<Pc> pcs, String key) {
+        List<Pc> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Pc pc : pcs) {
+            matcher = pattern.matcher(pc.getName());
+            if (matcher.matches()) {
+                resultList.add(pc);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Pc> searchPcByRam(List<Pc> pcs, String key) {
+        List<Pc> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Pc pc : pcs) {
+            matcher = pattern.matcher(pc.getRam());
+            if (matcher.matches()) {
+                resultList.add(pc);
+            }
+        }
+        return resultList;
+    }
+
 }

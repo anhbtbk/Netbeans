@@ -88,11 +88,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel10 = new javax.swing.JPanel();
         rbSearchPcBySerial = new javax.swing.JRadioButton();
         rbSearchPcByName = new javax.swing.JRadioButton();
-        txtSearchPhoneByImei1 = new javax.swing.JTextField();
-        txtSearchPhoneByName1 = new javax.swing.JTextField();
+        txtSearchPcBySerial = new javax.swing.JTextField();
+        txtSearchPcByName = new javax.swing.JTextField();
         rbSearchPcByRam = new javax.swing.JRadioButton();
         btnSearchPc = new javax.swing.JButton();
-        txtSearchPhoneByName2 = new javax.swing.JTextField();
+        txtSearchPcByRam = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPc = new javax.swing.JTable();
         btnRefreshPc = new javax.swing.JButton();
@@ -404,14 +404,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        txtSearchPhoneByImei1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtSearchPhoneByImei1.addActionListener(new java.awt.event.ActionListener() {
+        txtSearchPcBySerial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchPcBySerial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchPhoneByImei1ActionPerformed(evt);
+                txtSearchPcBySerialActionPerformed(evt);
             }
         });
 
-        txtSearchPhoneByName1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchPcByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         rbSearchPcByRam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbSearchPcByRam.setText("Theo RAM");
@@ -424,7 +424,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnSearchPc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSearchPc.setText("Tìm");
 
-        txtSearchPhoneByName2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchPcByRam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -436,32 +436,33 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                     .addComponent(rbSearchPcByName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbSearchPcByRam)
                     .addComponent(rbSearchPcBySerial))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtSearchPhoneByImei1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addComponent(txtSearchPhoneByName1)
-                    .addComponent(txtSearchPhoneByName2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSearchPcByName)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addComponent(txtSearchPcByRam, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtSearchPcBySerial))
+                .addGap(18, 18, 18)
                 .addComponent(btnSearchPc, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbSearchPcBySerial)
-                    .addComponent(txtSearchPhoneByImei1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtSearchPcBySerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSearchPcByName)
-                    .addComponent(txtSearchPhoneByName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchPc))
-                .addGap(6, 6, 6)
+                    .addComponent(btnSearchPc)
+                    .addComponent(txtSearchPcByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchPcByName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSearchPcByRam)
-                    .addComponent(txtSearchPhoneByName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(txtSearchPcByRam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchPcByRam))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         tblPc.setModel(new javax.swing.table.DefaultTableModel(
@@ -515,7 +516,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 531, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(btnRefreshPc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -537,13 +538,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefreshPc)
                     .addComponent(btnAddPc)
                     .addComponent(btnEditPc)
                     .addComponent(btnRemovePc))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("QUẢN LÝ PC", jPanel2);
@@ -691,9 +692,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbSearchPcByNameActionPerformed
 
-    private void txtSearchPhoneByImei1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchPhoneByImei1ActionPerformed
+    private void txtSearchPcBySerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchPcBySerialActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchPhoneByImei1ActionPerformed
+    }//GEN-LAST:event_txtSearchPcBySerialActionPerformed
 
     private void rbSearchPcByRamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchPcByRamActionPerformed
         // TODO add your handling code here:
@@ -795,11 +796,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortRamPcDESC;
     private javax.swing.JTable tblPc;
     private javax.swing.JTable tblPhone;
+    private javax.swing.JTextField txtSearchPcByName;
+    private javax.swing.JTextField txtSearchPcByRam;
+    private javax.swing.JTextField txtSearchPcBySerial;
     private javax.swing.JTextField txtSearchPhoneByImei;
-    private javax.swing.JTextField txtSearchPhoneByImei1;
     private javax.swing.JTextField txtSearchPhoneByName;
-    private javax.swing.JTextField txtSearchPhoneByName1;
-    private javax.swing.JTextField txtSearchPhoneByName2;
     // End of variables declaration//GEN-END:variables
 
     private void addButtonGroup() {
@@ -908,7 +909,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 || obj.equals(rbSortRamPcASC)
                 || obj.equals(rbSortRamPcDESC)) {
             sortPcs(obj);
-        } 
+        } else if (obj.equals(btnSearchPc)) {
+            searchPcs();
+        } else if (obj.equals(btnRefreshPc)) {
+            refreshPcs();
+        }
     }
 
     //pt hiển thị thông tin ra bảng
@@ -986,6 +991,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
+
     private void removePc() {
         int selectedIndex = tblPc.getSelectedRow();//chọn dòng cần xóa
         //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
@@ -1022,7 +1028,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void editPc() {
         int selectedIndex = tblPc.getSelectedRow();//chọn dòng cần edit
         //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
@@ -1048,13 +1054,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelPhone.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
         saveData(DataController.PHONE);//lưu dữ liệu vào file PHONE
     }
-    
-        public void editPcCallback(Pc pc) {
+
+    public void editPcCallback(Pc pc) {
         int selectedIndex = tblPc.getSelectedRow();
         pcs.set(selectedIndex, pc);
         tableModelPc.removeRow(selectedIndex);//xóa dòng tại vị trí đã chọn
         Object[] row = new Object[]{
-            pc.getSerial(), pc.getName(), pc.getCpu(), 
+            pc.getSerial(), pc.getName(), pc.getCpu(),
             pc.getRam(), pc.getDisk(), pc.getVga()
         };
         tableModelPc.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
@@ -1073,7 +1079,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
         showPhones();
     }
-    
+
     private void sortPcs(Object obj) {
         if (obj.equals(rbSortChipPcASC)) {
             dataController.sortPcByChipASC(pcs);
@@ -1123,6 +1129,46 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void searchPcs() {
+        if (rbSearchPcBySerial.isSelected()) {
+            var key = txtSearchPcBySerial.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập số serial cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchPcBySerial(pcs, key);
+                pcs.clear();
+                pcs.addAll(result);
+                checkAndShowSearchPcs();
+            }
+        } else if (rbSearchPcByName.isSelected()) {
+            var key = txtSearchPcByName.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập tên PC cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchPcByName(pcs, key);
+                pcs.clear();
+                pcs.addAll(result);
+                checkAndShowSearchPcs();
+            }
+        } else if (rbSearchPcByRam.isSelected()) {
+            var key = txtSearchPcByRam.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập dung lượng RAM cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchPcByRam(pcs, key);
+                pcs.clear();
+                pcs.addAll(result);
+                checkAndShowSearchPcs();
+            }
+        } else {
+            var msg = "Vui lòng chọn tiêu chí tìm kiếm trước!";
+            showDialogMessage(msg);
+        }
+    }
+
     private void checkAndShowSearchResult() {
         if (phones.size() > 0) {
             showPhones();
@@ -1131,6 +1177,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         } else {
             phones.clear();
             showPhones();
+            var msg = "Không tìm thấy kết quả nào";
+            showDialogMessage(msg);
+        }
+    }
+
+    private void checkAndShowSearchPcs() {
+        if (pcs.size() > 0) {
+            showPcs();
+            var msg = "Tìm thấy " + pcs.size() + " kết quả";
+            showDialogMessage(msg);
+        } else {
+            pcs.clear();
+            showPcs();
             var msg = "Không tìm thấy kết quả nào";
             showDialogMessage(msg);
         }
@@ -1147,6 +1206,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         phones.clear();
         phones.addAll(dataController.<Phone>readDataFromFile(DataController.PHONE_FILE));
         showPhones();
+
+    }
+
+    private void refreshPcs() {
+        var text = "";
+        txtSearchPcBySerial.setText(text);
+        txtSearchPcByName.setText(text);
+        txtSearchPcByRam.setText(text);
+        buttonGroupSortPc.clearSelection();
+        buttonGroupSearchPc.clearSelection();
+
+        pcs.clear();
+        pcs.addAll(dataController.<Pc>readDataFromFile(DataController.PC_FILE));
+        showPcs();
 
     }
 
