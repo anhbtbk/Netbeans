@@ -5,6 +5,7 @@
 package net.devicemanagement.controller;
 
 import java.util.List;
+import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
 /**
@@ -43,5 +44,13 @@ public interface DataController {
     List<Phone> searchPhoneByName(List<Phone> phones, String key);
 
     List<Phone> searchPhoneByPhase(List<Phone> phones, String key);
+    
+    void sortPcByChipASC(List<Pc> pcs);
+
+    void sortPcByChipDESC(List<Pc> pcs);
+
+    void sortPcByRamASC(List<Pc> pcs);
+
+    void sortPcByRamDESC(List<Pc> pcs);
 
 }

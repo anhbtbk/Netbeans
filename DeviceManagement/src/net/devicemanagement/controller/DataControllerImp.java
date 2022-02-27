@@ -18,10 +18,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.devicemanagement.controller.sort.SortPcByChipASC;
+import net.devicemanagement.controller.sort.SortPcByChipDESC;
+import net.devicemanagement.controller.sort.SortPcByRamASC;
+import net.devicemanagement.controller.sort.SortPcByRamDESC;
 import net.devicemanagement.controller.sort.SortPhoneByNameASC;
 import net.devicemanagement.controller.sort.SortPhoneByNameDESC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseASC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseDESC;
+import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
 /**
@@ -127,6 +132,26 @@ public class DataControllerImp implements DataController {
             }
         }
         return resultList;
+    }
+
+    @Override
+    public void sortPcByChipASC(List<Pc> pcs) {
+        Collections.sort(pcs, new SortPcByChipASC());
+    }
+
+    @Override
+    public void sortPcByChipDESC(List<Pc> pcs) {
+        Collections.sort(pcs, new SortPcByChipDESC());
+    }
+
+    @Override
+    public void sortPcByRamASC(List<Pc> pcs) {
+        Collections.sort(pcs, new SortPcByRamASC());
+    }
+
+    @Override
+    public void sortPcByRamDESC(List<Pc> pcs) {
+        Collections.sort(pcs, new SortPcByRamDESC());
     }
 
 }

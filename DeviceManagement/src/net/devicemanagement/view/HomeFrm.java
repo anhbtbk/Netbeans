@@ -903,7 +903,12 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             removePc();
         } else if (obj.equals(btnEditPc)) {
             editPc();
-        }
+        } else if (obj.equals(rbSortChipPcASC)
+                || obj.equals(rbSortChipPcDESC)
+                || obj.equals(rbSortRamPcASC)
+                || obj.equals(rbSortRamPcDESC)) {
+            sortPcs(obj);
+        } 
     }
 
     //pt hiển thị thông tin ra bảng
@@ -1067,6 +1072,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             dataController.sortPhoneByPhaseDESC(phones);
         }
         showPhones();
+    }
+    
+    private void sortPcs(Object obj) {
+        if (obj.equals(rbSortChipPcASC)) {
+            dataController.sortPcByChipASC(pcs);
+        } else if (obj.equals(rbSortChipPcDESC)) {
+            dataController.sortPcByChipDESC(pcs);
+        } else if (obj.equals(rbSortRamPcASC)) {
+            dataController.sortPcByRamASC(pcs);
+        } else if (obj.equals(rbSortRamPcDESC)) {
+            dataController.sortPcByRamDESC(pcs);
+        }
+        showPcs();
     }
 
     private void searchPhones() {
