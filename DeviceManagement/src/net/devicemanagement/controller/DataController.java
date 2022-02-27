@@ -22,10 +22,13 @@ public interface DataController {
 
     int PHONE = 1;
     int PC = 2;
+    int LAPTOP = 3;
 
     String PHONE_FILE = "PHONE.DAT";
 
     String PC_FILE = "PC.DAT";
+    
+    String LAPTOP_FILE = "LAPTOP.DAT";
 
     <T> void writeToFile(List<T> data, String fileName);
 

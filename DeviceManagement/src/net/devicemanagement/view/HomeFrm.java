@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.devicemanagement.controller.DataController;
 import net.devicemanagement.controller.DataControllerImp;
+import net.devicemanagement.view.model.Laptop;
 import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
@@ -26,6 +27,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private DataController dataController;
     private List<Pc> pcs; //tạo list các PC
     private DefaultTableModel tableModelPc;
+    private List<Laptop> laptops; //tạo list các laptop
+    private DefaultTableModel tableModelLaptop;
 
     /**
      * Creates new form HomeFrm
@@ -39,6 +42,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelPhone = (DefaultTableModel) tblPhone.getModel();
         pcs = new ArrayList<>();
         tableModelPc = (DefaultTableModel) tblPc.getModel();
+        laptops = new ArrayList<>();
+        tableModelLaptop = (DefaultTableModel) tblLaptop.getModel();
         //khi ứng dụng được kích hoạt, dữ liệu tự load và hiển thị lên
         dataController = new DataControllerImp();
         LoadData();
@@ -58,6 +63,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSearchPhone = new javax.swing.ButtonGroup();
         buttonGroupSortPc = new javax.swing.ButtonGroup();
         buttonGroupSearchPc = new javax.swing.ButtonGroup();
+        buttonGroupSortLaptop = new javax.swing.ButtonGroup();
+        buttonGroupSearchLaptop = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -100,6 +107,25 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnEditPc = new javax.swing.JButton();
         btnRemovePc = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        rbSortChipLaptopASC = new javax.swing.JRadioButton();
+        rbSortChipLaptopDESC = new javax.swing.JRadioButton();
+        rbSortRamLaptopASC = new javax.swing.JRadioButton();
+        rbSortRamLaptopDESC = new javax.swing.JRadioButton();
+        jPanel12 = new javax.swing.JPanel();
+        rbSearchLaptopBySerial = new javax.swing.JRadioButton();
+        rbSearchLaptopByName = new javax.swing.JRadioButton();
+        txtSearchLaptopBySerial = new javax.swing.JTextField();
+        txtSearchLaptopByName = new javax.swing.JTextField();
+        rbSearchLaptopByRam = new javax.swing.JRadioButton();
+        btnSearchLaptop = new javax.swing.JButton();
+        txtSearchLaptopByRam = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblLaptop = new javax.swing.JTable();
+        btnRefreshLaptop = new javax.swing.JButton();
+        btnAddLaptop = new javax.swing.JButton();
+        btnEditLaptop = new javax.swing.JButton();
+        btnRemoveLaptop = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -516,7 +542,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 531, Short.MAX_VALUE))
+                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(btnRefreshPc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,15 +575,223 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         jTabbedPane1.addTab("QUẢN LÝ PC", jPanel2);
 
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sắp xếp Laptop", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSortChipLaptopASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortChipLaptopASC.setText("Theo chip tăng dần");
+        rbSortChipLaptopASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortChipLaptopASCActionPerformed(evt);
+            }
+        });
+
+        rbSortChipLaptopDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortChipLaptopDESC.setText("Theo chip giảm dần");
+        rbSortChipLaptopDESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortChipLaptopDESCActionPerformed(evt);
+            }
+        });
+
+        rbSortRamLaptopASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortRamLaptopASC.setText("Theo RAM tăng dần");
+        rbSortRamLaptopASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortRamLaptopASCActionPerformed(evt);
+            }
+        });
+
+        rbSortRamLaptopDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortRamLaptopDESC.setText("Theo RAM giảm dần");
+        rbSortRamLaptopDESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortRamLaptopDESCActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortChipLaptopASC)
+                    .addComponent(rbSortChipLaptopDESC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortRamLaptopASC)
+                    .addComponent(rbSortRamLaptopDESC))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortChipLaptopASC)
+                    .addComponent(rbSortRamLaptopASC))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortChipLaptopDESC)
+                    .addComponent(rbSortRamLaptopDESC))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm Laptop", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSearchLaptopBySerial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchLaptopBySerial.setText("Theo số serial");
+
+        rbSearchLaptopByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchLaptopByName.setText("Theo tên");
+        rbSearchLaptopByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchLaptopByNameActionPerformed(evt);
+            }
+        });
+
+        txtSearchLaptopBySerial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchLaptopBySerial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchLaptopBySerialActionPerformed(evt);
+            }
+        });
+
+        txtSearchLaptopByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        rbSearchLaptopByRam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchLaptopByRam.setText("Theo RAM");
+        rbSearchLaptopByRam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchLaptopByRamActionPerformed(evt);
+            }
+        });
+
+        btnSearchLaptop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchLaptop.setText("Tìm");
+
+        txtSearchLaptopByRam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSearchLaptopByName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchLaptopByRam)
+                    .addComponent(rbSearchLaptopBySerial))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSearchLaptopByName)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addComponent(txtSearchLaptopByRam, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtSearchLaptopBySerial))
+                .addGap(18, 18, 18)
+                .addComponent(btnSearchLaptop, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchLaptopBySerial)
+                    .addComponent(txtSearchLaptopBySerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearchLaptop)
+                    .addComponent(txtSearchLaptopByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchLaptopByName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearchLaptopByRam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchLaptopByRam))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        tblLaptop.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Số serial", "Tên PC", "CPU", "Dung lượng RAM", "Dung lượng ổ cứng", "Card đồ họa", "Màn hình"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblLaptop);
+
+        btnRefreshLaptop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRefreshLaptop.setText("Làm mới");
+        btnRefreshLaptop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshLaptopActionPerformed(evt);
+            }
+        });
+
+        btnAddLaptop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddLaptop.setText("Thêm laptop");
+        btnAddLaptop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddLaptopActionPerformed(evt);
+            }
+        });
+
+        btnEditLaptop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEditLaptop.setText("Sửa laptop");
+
+        btnRemoveLaptop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRemoveLaptop.setText("Xóa laptop");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 978, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btnRefreshLaptop, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddLaptop, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditLaptop, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemoveLaptop, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRefreshLaptop)
+                    .addComponent(btnAddLaptop)
+                    .addComponent(btnEditLaptop)
+                    .addComponent(btnRemoveLaptop))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("QUẢN LÝ LAPTOP", jPanel3);
@@ -712,6 +946,42 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbSortChipPcDESCActionPerformed
 
+    private void rbSortChipLaptopASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortChipLaptopASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortChipLaptopASCActionPerformed
+
+    private void rbSortChipLaptopDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortChipLaptopDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortChipLaptopDESCActionPerformed
+
+    private void rbSortRamLaptopASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortRamLaptopASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortRamLaptopASCActionPerformed
+
+    private void rbSortRamLaptopDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortRamLaptopDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortRamLaptopDESCActionPerformed
+
+    private void rbSearchLaptopByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchLaptopByNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchLaptopByNameActionPerformed
+
+    private void txtSearchLaptopBySerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchLaptopBySerialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchLaptopBySerialActionPerformed
+
+    private void rbSearchLaptopByRamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchLaptopByRamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchLaptopByRamActionPerformed
+
+    private void btnRefreshLaptopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshLaptopActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshLaptopActionPerformed
+
+    private void btnAddLaptopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLaptopActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddLaptopActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -748,18 +1018,25 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddLaptop;
     private javax.swing.JButton btnAddPc;
     private javax.swing.JButton btnAddPhone;
+    private javax.swing.JButton btnEditLaptop;
     private javax.swing.JButton btnEditPc;
     private javax.swing.JButton btnEditPhone;
+    private javax.swing.JButton btnRefreshLaptop;
     private javax.swing.JButton btnRefreshPc;
     private javax.swing.JButton btnRefreshPhone;
+    private javax.swing.JButton btnRemoveLaptop;
     private javax.swing.JButton btnRemovePc;
     private javax.swing.JButton btnRemovePhone;
+    private javax.swing.JButton btnSearchLaptop;
     private javax.swing.JButton btnSearchPc;
     private javax.swing.JButton btnSearchPhone;
+    private javax.swing.ButtonGroup buttonGroupSearchLaptop;
     private javax.swing.ButtonGroup buttonGroupSearchPc;
     private javax.swing.ButtonGroup buttonGroupSearchPhone;
+    private javax.swing.ButtonGroup buttonGroupSortLaptop;
     private javax.swing.ButtonGroup buttonGroupSortPc;
     private javax.swing.ButtonGroup buttonGroupSortPhone;
     private javax.swing.JComboBox<String> comboSearchPhoneByPhase;
@@ -769,6 +1046,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -779,23 +1058,35 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton rbSearchLaptopByName;
+    private javax.swing.JRadioButton rbSearchLaptopByRam;
+    private javax.swing.JRadioButton rbSearchLaptopBySerial;
     private javax.swing.JRadioButton rbSearchPcByName;
     private javax.swing.JRadioButton rbSearchPcByRam;
     private javax.swing.JRadioButton rbSearchPcBySerial;
     private javax.swing.JRadioButton rbSearchPhoneByImei;
     private javax.swing.JRadioButton rbSearchPhoneByName;
     private javax.swing.JRadioButton rbSearchPhoneByPhase;
+    private javax.swing.JRadioButton rbSortChipLaptopASC;
+    private javax.swing.JRadioButton rbSortChipLaptopDESC;
     private javax.swing.JRadioButton rbSortChipPcASC;
     private javax.swing.JRadioButton rbSortChipPcDESC;
     private javax.swing.JRadioButton rbSortPhoneNameASC;
     private javax.swing.JRadioButton rbSortPhoneNameDESC;
     private javax.swing.JRadioButton rbSortPhonePhaseASC;
     private javax.swing.JRadioButton rbSortPhonePhaseDESC;
+    private javax.swing.JRadioButton rbSortRamLaptopASC;
+    private javax.swing.JRadioButton rbSortRamLaptopDESC;
     private javax.swing.JRadioButton rbSortRamPcASC;
     private javax.swing.JRadioButton rbSortRamPcDESC;
+    private javax.swing.JTable tblLaptop;
     private javax.swing.JTable tblPc;
     private javax.swing.JTable tblPhone;
+    private javax.swing.JTextField txtSearchLaptopByName;
+    private javax.swing.JTextField txtSearchLaptopByRam;
+    private javax.swing.JTextField txtSearchLaptopBySerial;
     private javax.swing.JTextField txtSearchPcByName;
     private javax.swing.JTextField txtSearchPcByRam;
     private javax.swing.JTextField txtSearchPcBySerial;
@@ -821,6 +1112,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSortPc.add(rbSortChipPcDESC);
         buttonGroupSortPc.add(rbSortRamPcASC);
         buttonGroupSortPc.add(rbSortRamPcDESC);
+
+        buttonGroupSearchLaptop.add(rbSearchLaptopBySerial);
+        buttonGroupSearchLaptop.add(rbSearchLaptopByName);
+        buttonGroupSearchLaptop.add(rbSearchLaptopByRam);
+
+        buttonGroupSortLaptop.add(rbSortChipLaptopASC);
+        buttonGroupSortLaptop.add(rbSortChipLaptopDESC);
+        buttonGroupSortLaptop.add(rbSortRamLaptopASC);
+        buttonGroupSortLaptop.add(rbSortRamLaptopDESC);
 
     }
 
@@ -858,6 +1158,22 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         rbSortRamPcASC.addActionListener(this);
         rbSortRamPcDESC.addActionListener(this);
 
+        //tab quản lý laptop
+        btnAddLaptop.addActionListener(this);
+        btnEditLaptop.addActionListener(this);
+        btnRefreshLaptop.addActionListener(this);
+        btnRemoveLaptop.addActionListener(this);
+        btnSearchLaptop.addActionListener(this);
+
+        rbSearchLaptopBySerial.addActionListener(this);
+        rbSearchLaptopByName.addActionListener(this);
+        rbSearchLaptopByRam.addActionListener(this);
+
+        rbSortChipLaptopASC.addActionListener(this);
+        rbSortChipLaptopDESC.addActionListener(this);
+        rbSortRamLaptopASC.addActionListener(this);
+        rbSortRamLaptopDESC.addActionListener(this);
+
     }
 
     public void addPhoneCallback(Phone phone) {  //ở cái table sẽ gọi đến phương 
@@ -869,10 +1185,18 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
     public void addPcCallback(Pc pc) {
         //ở cái table sẽ gọi đến phương 
-        //thức vào và truyền đến list pcnhận được
+        //thức vào và truyền đến list pc nhận được
         pcs.add(pc);
         showPc(pc);
         saveData(DataController.PC);//lưu pc
+    }
+
+    public void addLaptopCallback(Laptop laptop) {
+        //ở cái table sẽ gọi đến phương 
+        //thức vào và truyền đến list laptop nhận được
+        laptops.add(laptop);
+        showLaptop(laptop);
+        saveData(DataController.LAPTOP);//lưu laptop
     }
 
     @Override
@@ -913,6 +1237,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             searchPcs();
         } else if (obj.equals(btnRefreshPc)) {
             refreshPcs();
+        } else if (obj.equals(btnAddLaptop)) {
+            AddLaptopDialog addLaptopDialog
+                    = new AddLaptopDialog(this, rootPaneCheckingEnabled);
+            addLaptopDialog.setVisible(true);
+        } else if (obj.equals(btnRemoveLaptop)) {
+            removeLaptop();
+        } else if (obj.equals(btnEditLaptop)) {
+            editLaptop();
         }
     }
 
@@ -932,17 +1264,27 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelPc.addRow(row); //thêm các thông số bên trên vào bảng
     }
 
+    private void showLaptop(Laptop laptop) {
+        Object[] row = new Object[]{
+            laptop.getSerial(), laptop.getName(), laptop.getCpu(),
+            laptop.getRam(), laptop.getDisk(), laptop.getVga()
+        };
+        tableModelLaptop.addRow(row); //thêm các thông số bên trên vào bảng
+    }
+
     private void LoadData() {
         //đọc danh sách các điện thoại
         phones = dataController.<Phone>readDataFromFile(DataController.PHONE_FILE);
         //đọc danh sách các PC
         pcs = dataController.<Pc>readDataFromFile(DataController.PC_FILE);
-        //đọc danh sách các 
+        //đọc danh sách các laptop
+        laptops = dataController.<Laptop>readDataFromFile(DataController.LAPTOP_FILE);
     }
 
     private void ShowData() {
         showPhones();
         showPcs();
+        showLaptops();
 
     }
 
@@ -960,6 +1302,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void showLaptops() {
+        tableModelLaptop.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
+        for (Laptop laptop : laptops) {
+            showLaptop(laptop);
+        }
+    }
+
     private void saveData(int choice) {
         switch (choice) {
             case DataController.PHONE:
@@ -969,6 +1318,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             case DataController.PC:
                 dataController.<Pc>writeToFile(pcs,
                         DataController.PC_FILE);
+                break;
+            case DataController.LAPTOP:
+                dataController.<Laptop>writeToFile(laptops,
+                        DataController.LAPTOP_FILE);
                 break;
 
         }
@@ -1010,6 +1363,24 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void removeLaptop() {
+        int selectedIndex = tblLaptop.getSelectedRow();//chọn dòng cần xóa
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            var msg = "Bạn có chắc chắn muốn xóa bản ghi này không?";
+            int confirm = JOptionPane.showConfirmDialog(rootPane, msg);
+            if (confirm == JOptionPane.OK_OPTION) {
+                laptops.remove(selectedIndex); //xóa khỏi danh sách
+                tableModelLaptop.removeRow(selectedIndex); //xóa khỏi bảng
+                dataController.<Laptop>writeToFile(laptops,
+                        DataController.LAPTOP_FILE);
+            }
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để xóa!";
+            showDialogMessage(msg);
+        }
+    }
+
     private void showDialogMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
     }
@@ -1043,6 +1414,21 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
+    
+    private void editLaptop() {
+        int selectedIndex = tblLaptop.getSelectedRow();//chọn dòng cần edit
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            Laptop laptop = laptops.get(selectedIndex);
+            EditLaptopDialog editLaptopDialog
+                    = new EditLaptopDialog(this, rootPaneCheckingEnabled, laptop);
+            editLaptopDialog.setVisible(true);
+
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để sửa!";
+            showDialogMessage(msg);
+        }
+    }
 
     public void editPhoneCallback(Phone phone) {
         int selectedIndex = tblPhone.getSelectedRow();
@@ -1065,6 +1451,18 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         };
         tableModelPc.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
         saveData(DataController.PC);//lưu dữ liệu vào file PHONE
+    }
+    
+    public void editLaptopCallback(Laptop laptop) {
+        int selectedIndex = tblLaptop.getSelectedRow();
+        laptops.set(selectedIndex, laptop);
+        tableModelLaptop.removeRow(selectedIndex);//xóa dòng tại vị trí đã chọn
+        Object[] row = new Object[]{
+            laptop.getSerial(), laptop.getName(), laptop.getCpu(),
+            laptop.getRam(), laptop.getDisk(), laptop.getVga(), laptop.getSize()
+        };
+        tableModelLaptop.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
+        saveData(DataController.LAPTOP);//lưu dữ liệu vào file PHONE
     }
 
     private void sortPhones(Object obj) {
