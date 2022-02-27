@@ -242,8 +242,8 @@ public class EditPhoneDialog extends javax.swing.JDialog implements ActionListen
             phone.setName(name);
             phone.setPhase(phase);
             homeFrm.editPhoneCallback(phone);
-            JOptionPane.showMessageDialog(rootPane, "Cập nhật điện thoại thành công");
-            dispose();
+//            JOptionPane.showMessageDialog(rootPane, "Cập nhật điện thoại thành công");
+//            dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane,
                     "Các ô nhập liệu không được để trống");

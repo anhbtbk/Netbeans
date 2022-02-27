@@ -11,25 +11,25 @@ import java.util.Objects;
  *
  * @author Tuan Anh
  */
-public class Phone implements Serializable {
-
+public class Phone implements Serializable{
+    
     private long imei;
     private String name;
     private String phase;
-
+    
     //insert code constructor
     public Phone() {
-        
+    
     }
-
+    
 //    public Phone(long imei) {
 //        setImei(imei);
 //    }
-
+    
     public Phone(long imei) {
         this.imei = imei;
     }
-
+    
 //    public Phone(String name, String phase) {
 //        this();
 //        this.name = name;
@@ -42,7 +42,7 @@ public class Phone implements Serializable {
         this.imei = imei;
         this.name = name;
         this.phase = phase;
-    }
+}
 
     //insert code getter and setter
     public long getImei() {

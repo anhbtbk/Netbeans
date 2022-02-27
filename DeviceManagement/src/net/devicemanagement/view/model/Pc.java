@@ -25,7 +25,7 @@ public class Pc implements Serializable {
     }
     
     
-
+    
     public Pc(String serial) {
         this.serial = serial;
     }
