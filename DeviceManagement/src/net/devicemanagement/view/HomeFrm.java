@@ -1267,7 +1267,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private void showLaptop(Laptop laptop) {
         Object[] row = new Object[]{
             laptop.getSerial(), laptop.getName(), laptop.getCpu(),
-            laptop.getRam(), laptop.getDisk(), laptop.getVga()
+            laptop.getRam(), laptop.getDisk(), laptop.getVga(), laptop.getSize()
         };
         tableModelLaptop.addRow(row); //thêm các thông số bên trên vào bảng
     }
