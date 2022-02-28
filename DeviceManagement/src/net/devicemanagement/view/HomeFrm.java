@@ -717,7 +717,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
             },
             new String [] {
-                "Số serial", "Tên PC", "CPU", "Dung lượng RAM", "Dung lượng ổ cứng", "Card đồ họa", "Màn hình"
+                "Số serial", "Tên laptop", "CPU", "Dung lượng RAM", "Dung lượng ổ cứng", "Card đồ họa", "Màn hình"
             }
         ) {
             boolean[] canEdit = new boolean [] {
