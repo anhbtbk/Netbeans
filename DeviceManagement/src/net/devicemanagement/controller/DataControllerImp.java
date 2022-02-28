@@ -22,6 +22,10 @@ import net.devicemanagement.controller.sort.SortLaptopByChipASC;
 import net.devicemanagement.controller.sort.SortLaptopByChipDESC;
 import net.devicemanagement.controller.sort.SortLaptopByRamASC;
 import net.devicemanagement.controller.sort.SortLaptopByRamDESC;
+import net.devicemanagement.controller.sort.SortMonitorByNameASC;
+import net.devicemanagement.controller.sort.SortMonitorByNameDESC;
+import net.devicemanagement.controller.sort.SortMonitorBySizeASC;
+import net.devicemanagement.controller.sort.SortMonitorBySizeDESC;
 import net.devicemanagement.controller.sort.SortPcByChipASC;
 import net.devicemanagement.controller.sort.SortPcByChipDESC;
 import net.devicemanagement.controller.sort.SortPcByRamASC;
@@ -31,6 +35,7 @@ import net.devicemanagement.controller.sort.SortPhoneByNameDESC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseASC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseDESC;
 import net.devicemanagement.view.model.Laptop;
+import net.devicemanagement.view.model.Monitor;
 import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
@@ -43,7 +48,7 @@ public class DataControllerImp implements DataController {
 
     @Override
     public <T> void writeToFile(List<T> data, String fileName) {
-        try ( FileOutputStream fos = new FileOutputStream(fileName);  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        try (FileOutputStream fos = new FileOutputStream(fileName); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(data);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -57,7 +62,7 @@ public class DataControllerImp implements DataController {
         List<T> data = new ArrayList<>();
         File file = new File(fileName);
         if (file.length() > 0) {
-            try ( FileInputStream fis = new FileInputStream(file);  ObjectInputStream ois = new ObjectInputStream(fis)) {
+            try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
                 data = (List<T>) ois.readObject();
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
@@ -267,6 +272,26 @@ public class DataControllerImp implements DataController {
         }
         return resultList;
 
+    }
+
+    @Override
+    public void sortMonitorByNameASC(List<Monitor> monitors) {
+        Collections.sort(monitors, new SortMonitorByNameASC());
+    }
+
+    @Override
+    public void sortMonitorByNameDESC(List<Monitor> monitors) {
+        Collections.sort(monitors, new SortMonitorByNameDESC());
+    }
+
+    @Override
+    public void sortMonitorBySizeASC(List<Monitor> monitors) {
+        Collections.sort(monitors, new SortMonitorBySizeASC());
+    }
+
+    @Override
+    public void sortMonitorBySizeDESC(List<Monitor> monitors) {
+        Collections.sort(monitors, new SortMonitorBySizeDESC());
     }
 
 }

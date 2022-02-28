@@ -1599,6 +1599,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             removeMonitor();
         } else if (obj.equals(btnEditMonitor)) {
             editMonitor();
+        } else if (obj.equals(rbSortNameMonitorASC)
+                || obj.equals(rbSortNameMonitorDESC)
+                || obj.equals(rbSortSizeMonitorASC)
+                || obj.equals(rbSortSizeMonitorDESC)) {
+            sortMonitors(obj);
         }
     }
 
@@ -1922,6 +1927,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             dataController.sortLaptopByRamDESC(laptops);
         }
         showLaptops();
+    }
+    
+    private void sortMonitors(Object obj) {
+        if (obj.equals(rbSortNameMonitorASC)) {
+            dataController.sortMonitorByNameASC(monitors);
+        } else if (obj.equals(rbSortNameMonitorDESC)) {
+            dataController.sortMonitorByNameDESC(monitors);
+        } else if (obj.equals(rbSortSizeMonitorASC)) {
+            dataController.sortMonitorBySizeASC(monitors);
+        } else if (obj.equals(rbSortSizeMonitorDESC)) {
+            dataController.sortMonitorBySizeDESC(monitors);
+        }
+        showMonitors();
     }
 
     private void searchPhones() {
