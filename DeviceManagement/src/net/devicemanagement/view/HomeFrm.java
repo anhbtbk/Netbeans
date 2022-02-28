@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import net.devicemanagement.controller.DataController;
 import net.devicemanagement.controller.DataControllerImp;
 import net.devicemanagement.view.model.Laptop;
+import net.devicemanagement.view.model.Monitor;
 import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
@@ -29,6 +30,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private DefaultTableModel tableModelPc;
     private List<Laptop> laptops; //tạo list các laptop
     private DefaultTableModel tableModelLaptop;
+    private List<Monitor> monitors; //tạo list các màn hình
+    private DefaultTableModel tableModelMonitor;
 
     /**
      * Creates new form HomeFrm
@@ -44,6 +47,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelPc = (DefaultTableModel) tblPc.getModel();
         laptops = new ArrayList<>();
         tableModelLaptop = (DefaultTableModel) tblLaptop.getModel();
+        monitors = new ArrayList<>();
+        tableModelMonitor = (DefaultTableModel) tblMonitor.getModel();
         //khi ứng dụng được kích hoạt, dữ liệu tự load và hiển thị lên
         dataController = new DataControllerImp();
         LoadData();
@@ -65,6 +70,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSearchPc = new javax.swing.ButtonGroup();
         buttonGroupSortLaptop = new javax.swing.ButtonGroup();
         buttonGroupSearchLaptop = new javax.swing.ButtonGroup();
+        buttonGroupSortMonitor = new javax.swing.ButtonGroup();
+        buttonGroupSearchMonitor = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -1315,9 +1322,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnSearchPc;
     private javax.swing.JButton btnSearchPhone;
     private javax.swing.ButtonGroup buttonGroupSearchLaptop;
+    private javax.swing.ButtonGroup buttonGroupSearchMonitor;
     private javax.swing.ButtonGroup buttonGroupSearchPc;
     private javax.swing.ButtonGroup buttonGroupSearchPhone;
     private javax.swing.ButtonGroup buttonGroupSortLaptop;
+    private javax.swing.ButtonGroup buttonGroupSortMonitor;
     private javax.swing.ButtonGroup buttonGroupSortPc;
     private javax.swing.ButtonGroup buttonGroupSortPhone;
     private javax.swing.JComboBox<String> comboSearchPhoneByPhase;
@@ -1417,6 +1426,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSortLaptop.add(rbSortRamLaptopASC);
         buttonGroupSortLaptop.add(rbSortRamLaptopDESC);
 
+        buttonGroupSearchMonitor.add(rbSearchMonitorBySerial);
+        buttonGroupSearchMonitor.add(rbSearchMonitorByName);
+        buttonGroupSearchMonitor.add(rbSearchMonitorBySize);
+
+        buttonGroupSortMonitor.add(rbSortNameMonitorASC);
+        buttonGroupSortMonitor.add(rbSortNameMonitorDESC);
+        buttonGroupSortMonitor.add(rbSortSizeMonitorASC);
+        buttonGroupSortMonitor.add(rbSortSizeMonitorDESC);
+
     }
 
     private void addActionListener() {
@@ -1469,6 +1487,22 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         rbSortRamLaptopASC.addActionListener(this);
         rbSortRamLaptopDESC.addActionListener(this);
 
+        //tab quản lý màn hình
+        btnAddMonitor.addActionListener(this);
+        btnEditMonitor.addActionListener(this);
+        btnRefreshMonitor.addActionListener(this);
+        btnRemoveMonitor.addActionListener(this);
+        btnSearchMonitor.addActionListener(this);
+
+        rbSearchMonitorBySerial.addActionListener(this);
+        rbSearchMonitorByName.addActionListener(this);
+        rbSearchMonitorBySize.addActionListener(this);
+
+        rbSortNameMonitorASC.addActionListener(this);
+        rbSortNameMonitorDESC.addActionListener(this);
+        rbSortSizeMonitorASC.addActionListener(this);
+        rbSortSizeMonitorDESC.addActionListener(this);
+
     }
 
     public void addPhoneCallback(Phone phone) {  //ở cái table sẽ gọi đến phương 
@@ -1492,6 +1526,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         laptops.add(laptop);
         showLaptop(laptop);
         saveData(DataController.LAPTOP);//lưu laptop
+    }
+
+    public void addMonitorCallback(Monitor monitor) {
+        //ở cái table sẽ gọi đến phương 
+        //thức vào và truyền đến list màn hình nhận được
+        monitors.add(monitor);
+        showMonitor(monitor);
+        saveData(DataController.MONITOR);//lưu màn hình
     }
 
     @Override
@@ -1549,6 +1591,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             searchLaptops();
         } else if (obj.equals(btnRefreshLaptop)) {
             refreshLaptops();
+        } else if (obj.equals(btnAddMonitor)) {
+            AddMonitorDialog addMonitorDialog = 
+                    new AddMonitorDialog(this, rootPaneCheckingEnabled);
+            addMonitorDialog.setVisible(true);
         }
     }
 
@@ -1576,6 +1622,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelLaptop.addRow(row); //thêm các thông số bên trên vào bảng
     }
 
+    private void showMonitor(Monitor monitor) {
+        Object[] row = new Object[]{
+            monitor.getSerial(), monitor.getName(), monitor.getSize(),
+            monitor.getResolution()
+        };
+        tableModelMonitor.addRow(row); //thêm các thông số bên trên vào bảng
+    }
+
     private void LoadData() {
         //đọc danh sách các điện thoại
         phones = dataController.<Phone>readDataFromFile(DataController.PHONE_FILE);
@@ -1583,12 +1637,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         pcs = dataController.<Pc>readDataFromFile(DataController.PC_FILE);
         //đọc danh sách các laptop
         laptops = dataController.<Laptop>readDataFromFile(DataController.LAPTOP_FILE);
+        //đọc danh sách các màn hình
+        monitors = dataController.<Monitor>readDataFromFile(DataController.MONITOR_FILE);
     }
 
     private void ShowData() {
         showPhones();
         showPcs();
         showLaptops();
+        showMonitors();
 
     }
 
@@ -1612,6 +1669,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showLaptop(laptop);
         }
     }
+    
+    private void showMonitors() {
+        tableModelMonitor.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
+        for (Monitor monitor : monitors) {
+            showMonitor(monitor);
+        }
+    }
 
     private void saveData(int choice) {
         switch (choice) {
@@ -1627,7 +1691,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 dataController.<Laptop>writeToFile(laptops,
                         DataController.LAPTOP_FILE);
                 break;
-
+            case DataController.MONITOR:
+                dataController.<Monitor>writeToFile(monitors, 
+                        DataController.MONITOR_FILE);
+                break;
         }
     }
 
@@ -1718,7 +1785,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void editLaptop() {
         int selectedIndex = tblLaptop.getSelectedRow();//chọn dòng cần edit
         //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
@@ -1756,7 +1823,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelPc.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
         saveData(DataController.PC);//lưu dữ liệu vào file PHONE
     }
-    
+
     public void editLaptopCallback(Laptop laptop) {
         int selectedIndex = tblLaptop.getSelectedRow();
         laptops.set(selectedIndex, laptop);
@@ -1794,7 +1861,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
         showPcs();
     }
-    
+
     private void sortLaptops(Object obj) {
         if (obj.equals(rbSortChipLaptopASC)) {
             dataController.sortLaptopByChipASC(laptops);
@@ -1883,7 +1950,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void searchLaptops() {
         if (rbSearchLaptopBySerial.isSelected()) {
             var key = txtSearchLaptopBySerial.getText();
@@ -1923,7 +1990,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
+
     private void checkAndShowSearchResult() {
         if (phones.size() > 0) {
             showPhones();
@@ -1949,8 +2016,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-    
-        private void checkAndShowSearchLaptops() {
+
+    private void checkAndShowSearchLaptops() {
         if (laptops.size() > 0) {
             showLaptops();
             var msg = "Tìm thấy " + laptops.size() + " kết quả";
@@ -1990,8 +2057,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         showPcs();
 
     }
-    
-        private void refreshLaptops() {
+
+    private void refreshLaptops() {
         var text = "";
         txtSearchLaptopBySerial.setText(text);
         txtSearchLaptopByName.setText(text);

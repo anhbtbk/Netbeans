@@ -24,12 +24,15 @@ public interface DataController {
     int PHONE = 1;
     int PC = 2;
     int LAPTOP = 3;
+    int MONITOR = 4;
 
     String PHONE_FILE = "PHONE.DAT";
 
     String PC_FILE = "PC.DAT";
 
     String LAPTOP_FILE = "LAPTOP.DAT";
+    
+    String MONITOR_FILE = "MONITOR.DAT";
 
     <T> void writeToFile(List<T> data, String fileName);
 
