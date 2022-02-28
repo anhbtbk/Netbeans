@@ -18,6 +18,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.devicemanagement.controller.sort.SortLaptopByChipASC;
+import net.devicemanagement.controller.sort.SortLaptopByChipDESC;
+import net.devicemanagement.controller.sort.SortLaptopByRamASC;
+import net.devicemanagement.controller.sort.SortLaptopByRamDESC;
 import net.devicemanagement.controller.sort.SortPcByChipASC;
 import net.devicemanagement.controller.sort.SortPcByChipDESC;
 import net.devicemanagement.controller.sort.SortPcByRamASC;
@@ -26,6 +30,7 @@ import net.devicemanagement.controller.sort.SortPhoneByNameASC;
 import net.devicemanagement.controller.sort.SortPhoneByNameDESC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseASC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseDESC;
+import net.devicemanagement.view.model.Laptop;
 import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
@@ -38,8 +43,7 @@ public class DataControllerImp implements DataController {
 
     @Override
     public <T> void writeToFile(List<T> data, String fileName) {
-        try (FileOutputStream fos = new FileOutputStream(fileName);
-                ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        try ( FileOutputStream fos = new FileOutputStream(fileName);  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(data);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -53,8 +57,7 @@ public class DataControllerImp implements DataController {
         List<T> data = new ArrayList<>();
         File file = new File(fileName);
         if (file.length() > 0) {
-            try (FileInputStream fis = new FileInputStream(file);
-                    ObjectInputStream ois = new ObjectInputStream(fis)) {
+            try ( FileInputStream fis = new FileInputStream(file);  ObjectInputStream ois = new ObjectInputStream(fis)) {
                 data = (List<T>) ois.readObject();
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
@@ -197,6 +200,73 @@ public class DataControllerImp implements DataController {
             }
         }
         return resultList;
+    }
+
+    @Override
+    public void sortLaptopByChipASC(List<Laptop> laptops) {
+        Collections.sort(laptops, new SortLaptopByChipASC());
+    }
+
+    @Override
+    public void sortLaptopByChipDESC(List<Laptop> laptops) {
+        Collections.sort(laptops, new SortLaptopByChipDESC());
+    }
+
+    @Override
+    public void sortLaptopByRamASC(List<Laptop> laptops) {
+        Collections.sort(laptops, new SortLaptopByRamASC());
+    }
+
+    @Override
+    public void sortLaptopByRamDESC(List<Laptop> laptops) {
+        Collections.sort(laptops, new SortLaptopByRamDESC());
+    }
+
+    @Override
+    public List<Laptop> searchLaptopBySerial(List<Laptop> laptops, String key) {
+        List<Laptop> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Laptop laptop : laptops) {
+            matcher = pattern.matcher(laptop.getSerial());
+            if (matcher.matches()) {
+                resultList.add(laptop);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Laptop> searchLaptopByName(List<Laptop> laptops, String key) {
+        List<Laptop> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Laptop laptop : laptops) {
+            matcher = pattern.matcher(laptop.getName());
+            if (matcher.matches()) {
+                resultList.add(laptop);
+            }
+        }
+        return resultList;
+
+    }
+
+    @Override
+    public List<Laptop> searchLaptopByRam(List<Laptop> laptops, String key) {
+        List<Laptop> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Laptop laptop : laptops) {
+            matcher = pattern.matcher(laptop.getRam());
+            if (matcher.matches()) {
+                resultList.add(laptop);
+            }
+        }
+        return resultList;
+
     }
 
 }

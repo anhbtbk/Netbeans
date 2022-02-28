@@ -5,6 +5,7 @@
 package net.devicemanagement.controller;
 
 import java.util.List;
+import net.devicemanagement.view.model.Laptop;
 import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
@@ -27,7 +28,7 @@ public interface DataController {
     String PHONE_FILE = "PHONE.DAT";
 
     String PC_FILE = "PC.DAT";
-    
+
     String LAPTOP_FILE = "LAPTOP.DAT";
 
     <T> void writeToFile(List<T> data, String fileName);
@@ -62,6 +63,18 @@ public interface DataController {
 
     List<Pc> searchPcByRam(List<Pc> pcs, String key);
 
+    void sortLaptopByChipASC(List<Laptop> laptops);
 
+    void sortLaptopByChipDESC(List<Laptop> laptops);
+
+    void sortLaptopByRamASC(List<Laptop> laptops);
+
+    void sortLaptopByRamDESC(List<Laptop> laptops);
+
+    List<Laptop> searchLaptopBySerial(List<Laptop> laptops, String key);
+
+    List<Laptop> searchLaptopByName(List<Laptop> laptops, String key);
+
+    List<Laptop> searchLaptopByRam(List<Laptop> laptops, String key);
 
 }

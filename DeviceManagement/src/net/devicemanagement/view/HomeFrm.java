@@ -1245,6 +1245,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             removeLaptop();
         } else if (obj.equals(btnEditLaptop)) {
             editLaptop();
+        } else if (obj.equals(rbSortChipLaptopASC)
+                || obj.equals(rbSortChipLaptopDESC)
+                || obj.equals(rbSortRamLaptopASC)
+                || obj.equals(rbSortRamLaptopDESC)) {
+            sortLaptops(obj);
+        } else if (obj.equals(btnSearchLaptop)) {
+            searchLaptops();
+        } else if (obj.equals(btnRefreshLaptop)) {
+            refreshLaptops();
         }
     }
 
@@ -1490,6 +1499,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
         showPcs();
     }
+    
+    private void sortLaptops(Object obj) {
+        if (obj.equals(rbSortChipLaptopASC)) {
+            dataController.sortLaptopByChipASC(laptops);
+        } else if (obj.equals(rbSortChipLaptopDESC)) {
+            dataController.sortLaptopByChipDESC(laptops);
+        } else if (obj.equals(rbSortRamLaptopASC)) {
+            dataController.sortLaptopByRamASC(laptops);
+        } else if (obj.equals(rbSortRamLaptopDESC)) {
+            dataController.sortLaptopByRamDESC(laptops);
+        }
+        showLaptops();
+    }
 
     private void searchPhones() {
         if (rbSearchPhoneByImei.isSelected()) {
@@ -1566,7 +1588,47 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showDialogMessage(msg);
         }
     }
-
+    
+    private void searchLaptops() {
+        if (rbSearchLaptopBySerial.isSelected()) {
+            var key = txtSearchLaptopBySerial.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập số serial cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchLaptopBySerial(laptops, key);
+                laptops.clear();
+                laptops.addAll(result);
+                checkAndShowSearchLaptops();
+            }
+        } else if (rbSearchLaptopByName.isSelected()) {
+            var key = txtSearchLaptopByName.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập tên PC cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchLaptopByName(laptops, key);
+                laptops.clear();
+                laptops.addAll(result);
+                checkAndShowSearchLaptops();
+            }
+        } else if (rbSearchLaptopByRam.isSelected()) {
+            var key = txtSearchLaptopByRam.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập dung lượng RAM cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchLaptopByRam(laptops, key);
+                laptops.clear();
+                laptops.addAll(result);
+                checkAndShowSearchLaptops();
+            }
+        } else {
+            var msg = "Vui lòng chọn tiêu chí tìm kiếm trước!";
+            showDialogMessage(msg);
+        }
+    }
+    
     private void checkAndShowSearchResult() {
         if (phones.size() > 0) {
             showPhones();
@@ -1588,6 +1650,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         } else {
             pcs.clear();
             showPcs();
+            var msg = "Không tìm thấy kết quả nào";
+            showDialogMessage(msg);
+        }
+    }
+    
+        private void checkAndShowSearchLaptops() {
+        if (laptops.size() > 0) {
+            showLaptops();
+            var msg = "Tìm thấy " + laptops.size() + " kết quả";
+            showDialogMessage(msg);
+        } else {
+            laptops.clear();
+            showLaptops();
             var msg = "Không tìm thấy kết quả nào";
             showDialogMessage(msg);
         }
@@ -1618,6 +1693,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         pcs.clear();
         pcs.addAll(dataController.<Pc>readDataFromFile(DataController.PC_FILE));
         showPcs();
+
+    }
+    
+        private void refreshLaptops() {
+        var text = "";
+        txtSearchLaptopBySerial.setText(text);
+        txtSearchLaptopByName.setText(text);
+        txtSearchLaptopByRam.setText(text);
+        buttonGroupSortLaptop.clearSelection();
+        buttonGroupSearchLaptop.clearSelection();
+
+        laptops.clear();
+        laptops.addAll(dataController.<Laptop>readDataFromFile(DataController.LAPTOP_FILE));
+        showLaptops();
 
     }
 
