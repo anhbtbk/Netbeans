@@ -1592,9 +1592,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         } else if (obj.equals(btnRefreshLaptop)) {
             refreshLaptops();
         } else if (obj.equals(btnAddMonitor)) {
-            AddMonitorDialog addMonitorDialog = 
-                    new AddMonitorDialog(this, rootPaneCheckingEnabled);
+            AddMonitorDialog addMonitorDialog
+                    = new AddMonitorDialog(this, rootPaneCheckingEnabled);
             addMonitorDialog.setVisible(true);
+        } else if (obj.equals(btnRemoveMonitor)) {
+            removeMonitor();
+        } else if (obj.equals(btnEditMonitor)) {
+            editMonitor();
         }
     }
 
@@ -1669,7 +1673,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showLaptop(laptop);
         }
     }
-    
+
     private void showMonitors() {
         tableModelMonitor.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
         for (Monitor monitor : monitors) {
@@ -1692,7 +1696,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                         DataController.LAPTOP_FILE);
                 break;
             case DataController.MONITOR:
-                dataController.<Monitor>writeToFile(monitors, 
+                dataController.<Monitor>writeToFile(monitors,
                         DataController.MONITOR_FILE);
                 break;
         }
@@ -1752,6 +1756,24 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void removeMonitor() {
+        int selectedIndex = tblMonitor.getSelectedRow();//chọn dòng cần xóa
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            var msg = "Bạn có chắc chắn muốn xóa bản ghi này không?";
+            int confirm = JOptionPane.showConfirmDialog(rootPane, msg);
+            if (confirm == JOptionPane.OK_OPTION) {
+                monitors.remove(selectedIndex); //xóa khỏi danh sách
+                tableModelMonitor.removeRow(selectedIndex); //xóa khỏi bảng
+                dataController.<Monitor>writeToFile(monitors,
+                        DataController.MONITOR_FILE);
+            }
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để xóa!";
+            showDialogMessage(msg);
+        }
+    }
+
     private void showDialogMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
     }
@@ -1801,6 +1823,21 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void editMonitor() {
+        int selectedIndex = tblMonitor.getSelectedRow();//chọn dòng cần edit
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            Monitor monitor = monitors.get(selectedIndex);
+            EditMonitorDialog editMonitorDialog
+                    = new EditMonitorDialog(this, rootPaneCheckingEnabled, monitor);
+            editMonitorDialog.setVisible(true);
+
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để sửa!";
+            showDialogMessage(msg);
+        }
+    }
+
     public void editPhoneCallback(Phone phone) {
         int selectedIndex = tblPhone.getSelectedRow();
         phones.set(selectedIndex, phone);
@@ -1834,6 +1871,18 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         };
         tableModelLaptop.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
         saveData(DataController.LAPTOP);//lưu dữ liệu vào file PHONE
+    }
+
+    public void editMonitorCallback(Monitor monitor) {
+        int selectedIndex = tblMonitor.getSelectedRow();
+        monitors.set(selectedIndex, monitor);
+        tableModelMonitor.removeRow(selectedIndex);//xóa dòng tại vị trí đã chọn
+        Object[] row = new Object[]{
+            monitor.getSerial(), monitor.getName(), monitor.getSize(),
+            monitor.getResolution()
+        };
+        tableModelMonitor.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
+        saveData(DataController.MONITOR);//lưu dữ liệu vào file PHONE
     }
 
     private void sortPhones(Object obj) {

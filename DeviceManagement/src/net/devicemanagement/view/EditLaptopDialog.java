@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import net.devicemanagement.view.model.Laptop;
+import net.devicemanagement.view.model.Monitor;
 
 /**
  *
