@@ -127,6 +127,25 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnEditLaptop = new javax.swing.JButton();
         btnRemoveLaptop = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        rbSortNameMonitorASC = new javax.swing.JRadioButton();
+        rbSortNameMonitorDESC = new javax.swing.JRadioButton();
+        rbSortSizeMonitorASC = new javax.swing.JRadioButton();
+        rbSortSizeMonitorDESC = new javax.swing.JRadioButton();
+        jPanel14 = new javax.swing.JPanel();
+        rbSearchMonitorBySerial = new javax.swing.JRadioButton();
+        rbSearchMonitorByName = new javax.swing.JRadioButton();
+        txtSearchMonitorBySerial = new javax.swing.JTextField();
+        txtSearchMonitorByName = new javax.swing.JTextField();
+        rbSearchMonitorBySize = new javax.swing.JRadioButton();
+        btnSearchMonitor = new javax.swing.JButton();
+        txtSearchMonitorBySize = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblMonitor = new javax.swing.JTable();
+        btnRefreshMonitor = new javax.swing.JButton();
+        btnAddMonitor = new javax.swing.JButton();
+        btnEditMonitor = new javax.swing.JButton();
+        btnRemoveMonitor = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -247,7 +266,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                     .addComponent(txtSearchPhoneByImei)
                     .addComponent(txtSearchPhoneByName)
                     .addComponent(comboSearchPhoneByPhase, 0, 256, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(btnSearchPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -508,6 +527,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             }
         });
         jScrollPane2.setViewportView(tblPc);
+        if (tblPc.getColumnModel().getColumnCount() > 0) {
+            tblPc.getColumnModel().getColumn(4).setHeaderValue("Dung lượng ổ cứng");
+            tblPc.getColumnModel().getColumn(5).setHeaderValue("Card đồ họa");
+        }
 
         btnRefreshPc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRefreshPc.setText("Làm mới");
@@ -796,15 +819,228 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         jTabbedPane1.addTab("QUẢN LÝ LAPTOP", jPanel3);
 
+        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sắp xếp màn hình", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSortNameMonitorASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortNameMonitorASC.setText("Theo tên từ a - z");
+        rbSortNameMonitorASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortNameMonitorASCActionPerformed(evt);
+            }
+        });
+
+        rbSortNameMonitorDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortNameMonitorDESC.setText("Theo tên từ z - a");
+        rbSortNameMonitorDESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortNameMonitorDESCActionPerformed(evt);
+            }
+        });
+
+        rbSortSizeMonitorASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortSizeMonitorASC.setText("Theo kích thước tăng dần");
+        rbSortSizeMonitorASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortSizeMonitorASCActionPerformed(evt);
+            }
+        });
+
+        rbSortSizeMonitorDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortSizeMonitorDESC.setText("Theo kích thước giảm dần");
+        rbSortSizeMonitorDESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortSizeMonitorDESCActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortNameMonitorASC)
+                    .addComponent(rbSortNameMonitorDESC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortSizeMonitorASC)
+                    .addComponent(rbSortSizeMonitorDESC))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortNameMonitorASC)
+                    .addComponent(rbSortSizeMonitorASC))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortNameMonitorDESC)
+                    .addComponent(rbSortSizeMonitorDESC))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm màn hình", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSearchMonitorBySerial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchMonitorBySerial.setText("Theo số serial");
+
+        rbSearchMonitorByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchMonitorByName.setText("Theo tên");
+        rbSearchMonitorByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchMonitorByNameActionPerformed(evt);
+            }
+        });
+
+        txtSearchMonitorBySerial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchMonitorBySerial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchMonitorBySerialActionPerformed(evt);
+            }
+        });
+
+        txtSearchMonitorByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        rbSearchMonitorBySize.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchMonitorBySize.setText("Theo kích thước");
+        rbSearchMonitorBySize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchMonitorBySizeActionPerformed(evt);
+            }
+        });
+
+        btnSearchMonitor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchMonitor.setText("Tìm");
+
+        txtSearchMonitorBySize.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSearchMonitorByName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchMonitorBySize)
+                    .addComponent(rbSearchMonitorBySerial))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSearchMonitorByName)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addComponent(txtSearchMonitorBySize, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtSearchMonitorBySerial))
+                .addGap(18, 18, 18)
+                .addComponent(btnSearchMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchMonitorBySerial)
+                    .addComponent(txtSearchMonitorBySerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearchMonitor)
+                    .addComponent(txtSearchMonitorByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchMonitorByName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearchMonitorBySize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchMonitorBySize))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        tblMonitor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Số serial", "Tên màn hình", "Kích thước", "Độ phân giải"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblMonitor);
+
+        btnRefreshMonitor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRefreshMonitor.setText("Làm mới");
+        btnRefreshMonitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshMonitorActionPerformed(evt);
+            }
+        });
+
+        btnAddMonitor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddMonitor.setText("Thêm màn hình");
+        btnAddMonitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMonitorActionPerformed(evt);
+            }
+        });
+
+        btnEditMonitor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEditMonitor.setText("Sửa màn hình");
+        btnEditMonitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditMonitorActionPerformed(evt);
+            }
+        });
+
+        btnRemoveMonitor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRemoveMonitor.setText("Xóa màn hình");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 978, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btnRefreshMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemoveMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRefreshMonitor)
+                    .addComponent(btnAddMonitor)
+                    .addComponent(btnEditMonitor)
+                    .addComponent(btnRemoveMonitor))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("QUẢN LÝ MÀN HÌNH", jPanel4);
@@ -813,7 +1049,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 978, Short.MAX_VALUE)
+            .addGap(0, 1014, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -826,7 +1062,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 978, Short.MAX_VALUE)
+            .addGap(0, 1014, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -982,6 +1218,46 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddLaptopActionPerformed
 
+    private void rbSortNameMonitorASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortNameMonitorASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortNameMonitorASCActionPerformed
+
+    private void rbSortNameMonitorDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortNameMonitorDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortNameMonitorDESCActionPerformed
+
+    private void rbSortSizeMonitorASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortSizeMonitorASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortSizeMonitorASCActionPerformed
+
+    private void rbSortSizeMonitorDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortSizeMonitorDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortSizeMonitorDESCActionPerformed
+
+    private void rbSearchMonitorByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchMonitorByNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchMonitorByNameActionPerformed
+
+    private void txtSearchMonitorBySerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchMonitorBySerialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchMonitorBySerialActionPerformed
+
+    private void rbSearchMonitorBySizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchMonitorBySizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchMonitorBySizeActionPerformed
+
+    private void btnRefreshMonitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshMonitorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshMonitorActionPerformed
+
+    private void btnAddMonitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMonitorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddMonitorActionPerformed
+
+    private void btnEditMonitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditMonitorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditMonitorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1019,18 +1295,23 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddLaptop;
+    private javax.swing.JButton btnAddMonitor;
     private javax.swing.JButton btnAddPc;
     private javax.swing.JButton btnAddPhone;
     private javax.swing.JButton btnEditLaptop;
+    private javax.swing.JButton btnEditMonitor;
     private javax.swing.JButton btnEditPc;
     private javax.swing.JButton btnEditPhone;
     private javax.swing.JButton btnRefreshLaptop;
+    private javax.swing.JButton btnRefreshMonitor;
     private javax.swing.JButton btnRefreshPc;
     private javax.swing.JButton btnRefreshPhone;
     private javax.swing.JButton btnRemoveLaptop;
+    private javax.swing.JButton btnRemoveMonitor;
     private javax.swing.JButton btnRemovePc;
     private javax.swing.JButton btnRemovePhone;
     private javax.swing.JButton btnSearchLaptop;
+    private javax.swing.JButton btnSearchMonitor;
     private javax.swing.JButton btnSearchPc;
     private javax.swing.JButton btnSearchPhone;
     private javax.swing.ButtonGroup buttonGroupSearchLaptop;
@@ -1048,6 +1329,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1059,10 +1342,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton rbSearchLaptopByName;
     private javax.swing.JRadioButton rbSearchLaptopByRam;
     private javax.swing.JRadioButton rbSearchLaptopBySerial;
+    private javax.swing.JRadioButton rbSearchMonitorByName;
+    private javax.swing.JRadioButton rbSearchMonitorBySerial;
+    private javax.swing.JRadioButton rbSearchMonitorBySize;
     private javax.swing.JRadioButton rbSearchPcByName;
     private javax.swing.JRadioButton rbSearchPcByRam;
     private javax.swing.JRadioButton rbSearchPcBySerial;
@@ -1073,6 +1360,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortChipLaptopDESC;
     private javax.swing.JRadioButton rbSortChipPcASC;
     private javax.swing.JRadioButton rbSortChipPcDESC;
+    private javax.swing.JRadioButton rbSortNameMonitorASC;
+    private javax.swing.JRadioButton rbSortNameMonitorDESC;
     private javax.swing.JRadioButton rbSortPhoneNameASC;
     private javax.swing.JRadioButton rbSortPhoneNameDESC;
     private javax.swing.JRadioButton rbSortPhonePhaseASC;
@@ -1081,12 +1370,18 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortRamLaptopDESC;
     private javax.swing.JRadioButton rbSortRamPcASC;
     private javax.swing.JRadioButton rbSortRamPcDESC;
+    private javax.swing.JRadioButton rbSortSizeMonitorASC;
+    private javax.swing.JRadioButton rbSortSizeMonitorDESC;
     private javax.swing.JTable tblLaptop;
+    private javax.swing.JTable tblMonitor;
     private javax.swing.JTable tblPc;
     private javax.swing.JTable tblPhone;
     private javax.swing.JTextField txtSearchLaptopByName;
     private javax.swing.JTextField txtSearchLaptopByRam;
     private javax.swing.JTextField txtSearchLaptopBySerial;
+    private javax.swing.JTextField txtSearchMonitorByName;
+    private javax.swing.JTextField txtSearchMonitorBySerial;
+    private javax.swing.JTextField txtSearchMonitorBySize;
     private javax.swing.JTextField txtSearchPcByName;
     private javax.swing.JTextField txtSearchPcByRam;
     private javax.swing.JTextField txtSearchPcBySerial;
