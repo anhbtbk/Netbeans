@@ -72,6 +72,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSearchLaptop = new javax.swing.ButtonGroup();
         buttonGroupSortMonitor = new javax.swing.ButtonGroup();
         buttonGroupSearchMonitor = new javax.swing.ButtonGroup();
+        buttonGroupSortEmployee = new javax.swing.ButtonGroup();
+        buttonGroupSearchEmployee = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -154,6 +156,25 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnEditMonitor = new javax.swing.JButton();
         btnRemoveMonitor = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        rbSortEmployeeNameASC = new javax.swing.JRadioButton();
+        rbSortEmployeeNameDESC = new javax.swing.JRadioButton();
+        rbSortEmployeeIdASC = new javax.swing.JRadioButton();
+        rbSortEmployeeIdDESC = new javax.swing.JRadioButton();
+        jPanel16 = new javax.swing.JPanel();
+        rbSearchEmployeeById = new javax.swing.JRadioButton();
+        rbSearchEmployeeByName = new javax.swing.JRadioButton();
+        txtSearchEmployeeById = new javax.swing.JTextField();
+        txtSearchEmployeeByName = new javax.swing.JTextField();
+        rbSearchEmployeeByDept = new javax.swing.JRadioButton();
+        comboSearchEmployeeByDept = new javax.swing.JComboBox<>();
+        btnSearchEmployee = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblEmployee = new javax.swing.JTable();
+        btnRefreshPhone1 = new javax.swing.JButton();
+        btnAddPhone1 = new javax.swing.JButton();
+        btnEditPhone1 = new javax.swing.JButton();
+        btnRemovePhone1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -1052,15 +1073,223 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         jTabbedPane1.addTab("QUẢN LÝ MÀN HÌNH", jPanel4);
 
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sắp xếp danh sách nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSortEmployeeNameASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortEmployeeNameASC.setText("Theo tên a-z");
+        rbSortEmployeeNameASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortEmployeeNameASCActionPerformed(evt);
+            }
+        });
+
+        rbSortEmployeeNameDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortEmployeeNameDESC.setText("Theo tên z-a");
+
+        rbSortEmployeeIdASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortEmployeeIdASC.setText("Theo mã nhân viên tăng dần");
+        rbSortEmployeeIdASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortEmployeeIdASCActionPerformed(evt);
+            }
+        });
+
+        rbSortEmployeeIdDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortEmployeeIdDESC.setText("Theo mã nhân viên giảm dần");
+        rbSortEmployeeIdDESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortEmployeeIdDESCActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortEmployeeNameASC)
+                    .addComponent(rbSortEmployeeNameDESC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortEmployeeIdASC)
+                    .addComponent(rbSortEmployeeIdDESC))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortEmployeeNameASC)
+                    .addComponent(rbSortEmployeeIdASC))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortEmployeeNameDESC)
+                    .addComponent(rbSortEmployeeIdDESC))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm sinh viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSearchEmployeeById.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchEmployeeById.setText("Theo mã nhân viên");
+
+        rbSearchEmployeeByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchEmployeeByName.setText("Theo tên");
+        rbSearchEmployeeByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchEmployeeByNameActionPerformed(evt);
+            }
+        });
+
+        txtSearchEmployeeById.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchEmployeeById.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchEmployeeByIdActionPerformed(evt);
+            }
+        });
+
+        txtSearchEmployeeByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        rbSearchEmployeeByDept.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchEmployeeByDept.setText("Theo phòng ban");
+        rbSearchEmployeeByDept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchEmployeeByDeptActionPerformed(evt);
+            }
+        });
+
+        comboSearchEmployeeByDept.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboSearchEmployeeByDept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành chính", "Nhân sự", "Kế toán", "Quản lý dự án", "Phát triển sản phẩm", "Kiểm thử" }));
+
+        btnSearchEmployee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchEmployee.setText("Tìm");
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSearchEmployeeByName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSearchEmployeeByDept)
+                    .addComponent(rbSearchEmployeeById))
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(txtSearchEmployeeById, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(comboSearchEmployeeByDept, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSearchEmployeeByName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchEmployeeById)
+                    .addComponent(txtSearchEmployeeById, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchEmployeeByName)
+                    .addComponent(txtSearchEmployeeByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchEmployee))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchEmployeeByDept)
+                    .addComponent(comboSearchEmployeeByDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã nhân viên", "Họ tên", "Ngày sinh", "Địa chỉ", "Email", "Số điện thoại", "Phòng ban"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tblEmployee);
+
+        btnRefreshPhone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRefreshPhone1.setText("Làm mới");
+        btnRefreshPhone1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshPhone1ActionPerformed(evt);
+            }
+        });
+
+        btnAddPhone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddPhone1.setText("Thêm nhân viên");
+        btnAddPhone1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPhone1ActionPerformed(evt);
+            }
+        });
+
+        btnEditPhone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEditPhone1.setText("Sửa nhân viên");
+
+        btnRemovePhone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRemovePhone1.setText("Xóa nhân viên");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1014, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btnRefreshPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemovePhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRefreshPhone1)
+                    .addComponent(btnAddPhone1)
+                    .addComponent(btnEditPhone1)
+                    .addComponent(btnRemovePhone1))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("THÔNG TIN NHÂN VIÊN", jPanel5);
@@ -1265,6 +1494,38 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditMonitorActionPerformed
 
+    private void rbSortEmployeeNameASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortEmployeeNameASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortEmployeeNameASCActionPerformed
+
+    private void rbSortEmployeeIdASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortEmployeeIdASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortEmployeeIdASCActionPerformed
+
+    private void rbSortEmployeeIdDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortEmployeeIdDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortEmployeeIdDESCActionPerformed
+
+    private void rbSearchEmployeeByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchEmployeeByNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchEmployeeByNameActionPerformed
+
+    private void txtSearchEmployeeByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchEmployeeByIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchEmployeeByIdActionPerformed
+
+    private void rbSearchEmployeeByDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchEmployeeByDeptActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchEmployeeByDeptActionPerformed
+
+    private void btnRefreshPhone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPhone1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshPhone1ActionPerformed
+
+    private void btnAddPhone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPhone1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddPhone1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1305,30 +1566,38 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnAddMonitor;
     private javax.swing.JButton btnAddPc;
     private javax.swing.JButton btnAddPhone;
+    private javax.swing.JButton btnAddPhone1;
     private javax.swing.JButton btnEditLaptop;
     private javax.swing.JButton btnEditMonitor;
     private javax.swing.JButton btnEditPc;
     private javax.swing.JButton btnEditPhone;
+    private javax.swing.JButton btnEditPhone1;
     private javax.swing.JButton btnRefreshLaptop;
     private javax.swing.JButton btnRefreshMonitor;
     private javax.swing.JButton btnRefreshPc;
     private javax.swing.JButton btnRefreshPhone;
+    private javax.swing.JButton btnRefreshPhone1;
     private javax.swing.JButton btnRemoveLaptop;
     private javax.swing.JButton btnRemoveMonitor;
     private javax.swing.JButton btnRemovePc;
     private javax.swing.JButton btnRemovePhone;
+    private javax.swing.JButton btnRemovePhone1;
+    private javax.swing.JButton btnSearchEmployee;
     private javax.swing.JButton btnSearchLaptop;
     private javax.swing.JButton btnSearchMonitor;
     private javax.swing.JButton btnSearchPc;
     private javax.swing.JButton btnSearchPhone;
+    private javax.swing.ButtonGroup buttonGroupSearchEmployee;
     private javax.swing.ButtonGroup buttonGroupSearchLaptop;
     private javax.swing.ButtonGroup buttonGroupSearchMonitor;
     private javax.swing.ButtonGroup buttonGroupSearchPc;
     private javax.swing.ButtonGroup buttonGroupSearchPhone;
+    private javax.swing.ButtonGroup buttonGroupSortEmployee;
     private javax.swing.ButtonGroup buttonGroupSortLaptop;
     private javax.swing.ButtonGroup buttonGroupSortMonitor;
     private javax.swing.ButtonGroup buttonGroupSortPc;
     private javax.swing.ButtonGroup buttonGroupSortPhone;
+    private javax.swing.JComboBox<String> comboSearchEmployeeByDept;
     private javax.swing.JComboBox<String> comboSearchPhoneByPhase;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -1340,6 +1609,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1352,7 +1623,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton rbSearchEmployeeByDept;
+    private javax.swing.JRadioButton rbSearchEmployeeById;
+    private javax.swing.JRadioButton rbSearchEmployeeByName;
     private javax.swing.JRadioButton rbSearchLaptopByName;
     private javax.swing.JRadioButton rbSearchLaptopByRam;
     private javax.swing.JRadioButton rbSearchLaptopBySerial;
@@ -1369,6 +1644,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortChipLaptopDESC;
     private javax.swing.JRadioButton rbSortChipPcASC;
     private javax.swing.JRadioButton rbSortChipPcDESC;
+    private javax.swing.JRadioButton rbSortEmployeeIdASC;
+    private javax.swing.JRadioButton rbSortEmployeeIdDESC;
+    private javax.swing.JRadioButton rbSortEmployeeNameASC;
+    private javax.swing.JRadioButton rbSortEmployeeNameDESC;
     private javax.swing.JRadioButton rbSortNameMonitorASC;
     private javax.swing.JRadioButton rbSortNameMonitorDESC;
     private javax.swing.JRadioButton rbSortPhoneNameASC;
@@ -1381,10 +1660,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortRamPcDESC;
     private javax.swing.JRadioButton rbSortSizeMonitorASC;
     private javax.swing.JRadioButton rbSortSizeMonitorDESC;
+    private javax.swing.JTable tblEmployee;
     private javax.swing.JTable tblLaptop;
     private javax.swing.JTable tblMonitor;
     private javax.swing.JTable tblPc;
     private javax.swing.JTable tblPhone;
+    private javax.swing.JTextField txtSearchEmployeeById;
+    private javax.swing.JTextField txtSearchEmployeeByName;
     private javax.swing.JTextField txtSearchLaptopByName;
     private javax.swing.JTextField txtSearchLaptopByRam;
     private javax.swing.JTextField txtSearchLaptopBySerial;
@@ -1434,6 +1716,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSortMonitor.add(rbSortNameMonitorDESC);
         buttonGroupSortMonitor.add(rbSortSizeMonitorASC);
         buttonGroupSortMonitor.add(rbSortSizeMonitorDESC);
+
+        buttonGroupSearchEmployee.add(rbSearchEmployeeById);
+        buttonGroupSearchEmployee.add(rbSearchEmployeeByName);
+        buttonGroupSearchEmployee.add(rbSearchEmployeeByDept);
+
+        buttonGroupSortEmployee.add(rbSortEmployeeNameASC);
+        buttonGroupSortEmployee.add(rbSortEmployeeNameDESC);
+        buttonGroupSortEmployee.add(rbSortEmployeeIdASC);
+        buttonGroupSortEmployee.add(rbSortEmployeeIdDESC);
 
     }
 
