@@ -294,4 +294,49 @@ public class DataControllerImp implements DataController {
         Collections.sort(monitors, new SortMonitorBySizeDESC());
     }
 
+    @Override
+    public List<Monitor> searchMonitorBySerial(List<Monitor> monitors, String key) {
+        List<Monitor> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Monitor monitor : monitors) {
+            matcher = pattern.matcher(monitor.getSerial());
+            if (matcher.matches()) {
+                resultList.add(monitor);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Monitor> searchMonitorByName(List<Monitor> monitors, String key) {
+       List<Monitor> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Monitor monitor : monitors) {
+            matcher = pattern.matcher(monitor.getName());
+            if (matcher.matches()) {
+                resultList.add(monitor);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Monitor> searchMonitorBySize(List<Monitor> monitors, String key) {
+       List<Monitor> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Monitor monitor : monitors) {
+            matcher = pattern.matcher(monitor.getSize());
+            if (matcher.matches()) {
+                resultList.add(monitor);
+            }
+        }
+        return resultList;
+    }
+
 }

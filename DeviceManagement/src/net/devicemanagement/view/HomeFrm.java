@@ -1604,6 +1604,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 || obj.equals(rbSortSizeMonitorASC)
                 || obj.equals(rbSortSizeMonitorDESC)) {
             sortMonitors(obj);
+        } else if (obj.equals(btnSearchMonitor)) {
+            searchMonitors();
+        } else if (obj.equals(btnRefreshMonitor)) {
+            refreshMonitors();
         }
     }
 
@@ -1928,7 +1932,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
         showLaptops();
     }
-    
+
     private void sortMonitors(Object obj) {
         if (obj.equals(rbSortNameMonitorASC)) {
             dataController.sortMonitorByNameASC(monitors);
@@ -2058,6 +2062,46 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void searchMonitors() {
+        if (rbSearchMonitorBySerial.isSelected()) {
+            var key = txtSearchMonitorBySerial.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập số serial cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchMonitorBySerial(monitors, key);
+                monitors.clear();
+                monitors.addAll(result);
+                checkAndShowSearchMonitors();
+            }
+        } else if (rbSearchMonitorByName.isSelected()) {
+            var key = txtSearchMonitorByName.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập tên PC cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchMonitorByName(monitors, key);
+                monitors.clear();
+                monitors.addAll(result);
+                checkAndShowSearchMonitors();
+            }
+        } else if (rbSearchMonitorBySize.isSelected()) {
+            var key = txtSearchMonitorBySize.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập dung lượng RAM cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchMonitorBySize(monitors, key);
+                monitors.clear();
+                monitors.addAll(result);
+                checkAndShowSearchMonitors();
+            }
+        } else {
+            var msg = "Vui lòng chọn tiêu chí tìm kiếm trước!";
+            showDialogMessage(msg);
+        }
+    }
+
     private void checkAndShowSearchResult() {
         if (phones.size() > 0) {
             showPhones();
@@ -2092,6 +2136,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         } else {
             laptops.clear();
             showLaptops();
+            var msg = "Không tìm thấy kết quả nào";
+            showDialogMessage(msg);
+        }
+    }
+
+    private void checkAndShowSearchMonitors() {
+        if (monitors.size() > 0) {
+            showMonitors();
+            var msg = "Tìm thấy " + monitors.size() + " kết quả";
+            showDialogMessage(msg);
+        } else {
+            monitors.clear();
+            showMonitors();
             var msg = "Không tìm thấy kết quả nào";
             showDialogMessage(msg);
         }
@@ -2136,6 +2193,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         laptops.clear();
         laptops.addAll(dataController.<Laptop>readDataFromFile(DataController.LAPTOP_FILE));
         showLaptops();
+
+    }
+
+    private void refreshMonitors() {
+        var text = "";
+        txtSearchMonitorBySerial.setText(text);
+        txtSearchMonitorByName.setText(text);
+        txtSearchMonitorBySize.setText(text);
+        buttonGroupSortMonitor.clearSelection();
+        buttonGroupSearchMonitor.clearSelection();
+
+        monitors.clear();
+        monitors.addAll(dataController.<Monitor>readDataFromFile(DataController.MONITOR_FILE));
+        showMonitors();
 
     }
 

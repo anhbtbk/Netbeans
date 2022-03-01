@@ -88,5 +88,12 @@ public interface DataController {
     void sortMonitorBySizeASC(List<Monitor> monitors);
 
     void sortMonitorBySizeDESC(List<Monitor> monitors);
+    
+    List<Monitor> searchMonitorBySerial(List<Monitor> monitors, String key);
+    
+    List<Monitor> searchMonitorByName(List<Monitor> monitors, String key);
+    
+    List<Monitor> searchMonitorBySize(List<Monitor> monitors, String key);
+    
 
 }
