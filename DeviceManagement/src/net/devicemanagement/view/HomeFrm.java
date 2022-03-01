@@ -1934,6 +1934,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             addEmployeeDialog.setVisible(true);
         } else if (obj.equals(btnRemoveEmployee)) {
             removeEmployee();
+        } else if (obj.equals(btnEditEmployee)) {
+            editEmployee();
         }
     }
 
@@ -2214,6 +2216,21 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void editEmployee() {
+        int selectedIndex = tblEmployee.getSelectedRow();//chọn dòng cần edit
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            Employee employee = employees.get(selectedIndex);
+            EditEmployeeDialog editEmployeeDialog
+                    = new EditEmployeeDialog(this, rootPaneCheckingEnabled, employee);
+            editEmployeeDialog.setVisible(true);
+
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để sửa!";
+            showDialogMessage(msg);
+        }
+    }
+
     public void editPhoneCallback(Phone phone) {
         int selectedIndex = tblPhone.getSelectedRow();
         phones.set(selectedIndex, phone);
@@ -2259,6 +2276,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         };
         tableModelMonitor.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
         saveData(DataController.MONITOR);//lưu dữ liệu vào file PHONE
+    }
+
+    public void editEmployeeCallback(Employee employee) {
+        int selectedIndex = tblEmployee.getSelectedRow();
+        employees.set(selectedIndex, employee);
+        tableModelEmployee.removeRow(selectedIndex);//xóa dòng tại vị trí đã chọn
+        Object[] row = new Object[]{
+            employee.getEmployeeId(), employee.getFullName(), employee.getDob(),
+            employee.getAddress(), employee.getPhoneNumber(),
+            employee.getEmployeeEmail(), employee.getEmployeeDept()
+        };
+        tableModelEmployee.insertRow(selectedIndex, row);//chèn dòng sau khi đã sửa
+        saveData(DataController.EMPLOYEE);//lưu dữ liệu vào file PHONE
     }
 
     private void sortPhones(Object obj) {
