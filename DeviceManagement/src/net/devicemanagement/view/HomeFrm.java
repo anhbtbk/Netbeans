@@ -2051,6 +2051,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 dataController.<Monitor>writeToFile(monitors,
                         DataController.MONITOR_FILE);
                 break;
+            case DataController.EMPLOYEE:
+                dataController.<Employee>writeToFile(employees, 
+                        DataController.EMPLOYEE_FILE);
+                break;
         }
     }
 

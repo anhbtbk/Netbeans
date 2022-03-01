@@ -63,16 +63,18 @@ public class Person implements Serializable {
     }
 
     public String getFullName() {
-        return fullName.last + " " + this.fullName.mid + this.fullName.last;
+        return fullName.last + " " + this.fullName.mid + this.fullName.first;
     }
 
     public void setFullName(String fullName) {
         var words = fullName.split("\\s+");
         this.fullName.first = words[words.length - 1];
         this.fullName.last = words[0];
-        for (int i = 1; i < words.length; i++) {
-            this.fullName.mid += words[i] + " ";
+        var mid = "";
+        for (int i = 1; i < words.length -1; i++) {
+            mid += words[i] + " ";
         }
+        this.fullName.mid = mid;
     }
 
     public String getDob() {
