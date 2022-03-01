@@ -1932,6 +1932,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             AddEmployeeDialog addEmployeeDialog
                     = new AddEmployeeDialog(this, rootPaneCheckingEnabled);
             addEmployeeDialog.setVisible(true);
+        } else if (obj.equals(btnRemoveEmployee)) {
+            removeEmployee();
         }
     }
 
@@ -2025,8 +2027,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             showMonitor(monitor);
         }
     }
-    
-        private void showEmployees() {
+
+    private void showEmployees() {
         tableModelEmployee.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
         for (Employee employee : employees) {
             showEmployee(employee);
@@ -2052,7 +2054,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                         DataController.MONITOR_FILE);
                 break;
             case DataController.EMPLOYEE:
-                dataController.<Employee>writeToFile(employees, 
+                dataController.<Employee>writeToFile(employees,
                         DataController.EMPLOYEE_FILE);
                 break;
         }
@@ -2123,6 +2125,24 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 tableModelMonitor.removeRow(selectedIndex); //xóa khỏi bảng
                 dataController.<Monitor>writeToFile(monitors,
                         DataController.MONITOR_FILE);
+            }
+        } else {
+            var msg = "Vui lòng chọn 1 bản ghi để xóa!";
+            showDialogMessage(msg);
+        }
+    }
+
+    private void removeEmployee() {
+        int selectedIndex = tblEmployee.getSelectedRow();//chọn dòng cần xóa
+        //chỉ số dòng trong bảng chính là chỉ số dòng trong danh sách
+        if (selectedIndex > -1) {
+            var msg = "Bạn có chắc chắn muốn xóa bản ghi này không?";
+            int confirm = JOptionPane.showConfirmDialog(rootPane, msg);
+            if (confirm == JOptionPane.OK_OPTION) {
+                employees.remove(selectedIndex); //xóa khỏi danh sách
+                tableModelEmployee.removeRow(selectedIndex); //xóa khỏi bảng
+                dataController.<Employee>writeToFile(employees,
+                        DataController.EMPLOYEE_FILE);
             }
         } else {
             var msg = "Vui lòng chọn 1 bản ghi để xóa!";
