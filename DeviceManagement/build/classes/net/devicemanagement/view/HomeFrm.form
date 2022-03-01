@@ -1619,13 +1619,13 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                              <Component id="btnRefreshPhone1" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="btnRefreshEmployee" min="-2" pref="150" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnAddPhone1" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="btnAddEmployee" min="-2" pref="150" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnEditPhone1" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="btnEditEmployee" min="-2" pref="150" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnRemovePhone1" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="btnRemoveEmployee" min="-2" pref="150" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -1645,10 +1645,10 @@
                       <Component id="jScrollPane5" min="-2" pref="308" max="-2" attributes="0"/>
                       <EmptySpace pref="23" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnRefreshPhone1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnAddPhone1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnEditPhone1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnRemovePhone1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRefreshEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAddEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEditEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRemoveEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
@@ -1905,8 +1905,8 @@
                         <Column editable="false" title="H&#x1ecd; t&#xea;n" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y sinh" type="java.lang.Object"/>
                         <Column editable="false" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.Object"/>
+                        <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.Object"/>
                         <Column editable="false" title="Email" type="java.lang.Object"/>
-                        <Column editable="true" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.Object"/>
                         <Column editable="false" title="Ph&#xf2;ng ban" type="java.lang.Object"/>
                       </Table>
                     </Property>
@@ -1956,7 +1956,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnRefreshPhone1">
+            <Component class="javax.swing.JButton" name="btnRefreshEmployee">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -1964,10 +1964,10 @@
                 <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshPhone1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshEmployeeActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAddPhone1">
+            <Component class="javax.swing.JButton" name="btnAddEmployee">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -1975,10 +1975,10 @@
                 <Property name="text" type="java.lang.String" value="Th&#xea;m nh&#xe2;n vi&#xea;n"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddPhone1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddEmployeeActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnEditPhone1">
+            <Component class="javax.swing.JButton" name="btnEditEmployee">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -1986,7 +1986,7 @@
                 <Property name="text" type="java.lang.String" value="S&#x1eed;a nh&#xe2;n vi&#xea;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnRemovePhone1">
+            <Component class="javax.swing.JButton" name="btnRemoveEmployee">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>

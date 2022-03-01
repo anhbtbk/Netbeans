@@ -7,6 +7,7 @@ package net.devicemanagement.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import net.devicemanagement.view.model.Employee;
 import net.devicemanagement.view.model.Phone;
 
 /**
@@ -14,9 +15,9 @@ import net.devicemanagement.view.model.Phone;
  * @author Tuan Anh
  */
 public class AddEmployeeDialog extends javax.swing.JDialog implements ActionListener {
-    
+
     private HomeFrm homeFrm;
-    private Phone phone;
+    private Employee employee;
 
     /**
      * Creates new form AddPhoneDialog
@@ -26,7 +27,7 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         initComponents();
         setLocationRelativeTo(null); //hiển thị ra chính giữa màn hình
         addActionListener();
-        phone = new Phone(); //khi click vào add new sẽ mặc định tạo mới 1 đối tượng phone, 
+        employee = new Employee(); //khi click vào add new sẽ mặc định tạo mới 1 đối tượng phone, 
         //không khai báo sẽ bị lỗi không gọi được this.phone
         homeFrm = (HomeFrm) parent;
     }
@@ -40,28 +41,29 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        canvas1 = new java.awt.Canvas();
         jLabel1 = new javax.swing.JLabel();
         btnClear = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnAddNew = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtPersionId = new javax.swing.JTextField();
+        txtPersonId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtPersionName = new javax.swing.JTextField();
+        txtPersonName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtPersionDob = new javax.swing.JTextField();
-        txtPersionAddress = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        txtPersonDob = new javax.swing.JTextField();
+        txtPersonAddress = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtPersionEmail = new javax.swing.JTextField();
-        txtPersionPhone = new javax.swing.JTextField();
+        txtPersonPhone = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtEmployee = new javax.swing.JTextField();
+        txtEmployeeId = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         comboEmployeeDept = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        txtEmployeeEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("THÊM MỚI ĐIỆN THOẠI");
@@ -99,17 +101,17 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Số CCCD/HC");
 
-        txtPersionId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPersionId.addActionListener(new java.awt.event.ActionListener() {
+        txtPersonId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPersonId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPersionIdActionPerformed(evt);
+                txtPersonIdActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Họ và tên");
 
-        txtPersionName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPersonName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Ngày sinh");
@@ -117,29 +119,19 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Địa chỉ");
 
-        txtPersionDob.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPersionDob.addActionListener(new java.awt.event.ActionListener() {
+        txtPersonDob.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPersonDob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPersionDobActionPerformed(evt);
+                txtPersonDobActionPerformed(evt);
             }
         });
 
-        txtPersionAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Email");
+        txtPersonAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Số điện thoại");
 
-        txtPersionEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPersionEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPersionEmailActionPerformed(evt);
-            }
-        });
-
-        txtPersionPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPersonPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,15 +139,7 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPersionEmail)
-                            .addComponent(txtPersionPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -163,18 +147,22 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
-                                .addComponent(txtPersionAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPersonAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(77, 77, 77)
-                                .addComponent(txtPersionDob, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtPersonDob, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPersionId, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                            .addComponent(txtPersionName))))
+                            .addComponent(txtPersonId, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                            .addComponent(txtPersonName)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPersonPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,28 +171,24 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPersionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPersonId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtPersionName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPersonName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtPersionDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPersonDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtPersionAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPersonAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtPersionEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtPersionPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(txtPersonPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -212,10 +196,10 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Mã nhân viên");
 
-        txtEmployee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtEmployee.addActionListener(new java.awt.event.ActionListener() {
+        txtEmployeeId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtEmployeeId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmployeeActionPerformed(evt);
+                txtEmployeeIdActionPerformed(evt);
             }
         });
 
@@ -225,33 +209,53 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         comboEmployeeDept.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboEmployeeDept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành chính", "Nhân sự", "Kế toán", "Quản lý dự án", "Phát triển sản phẩm", "Kiểm thử" }));
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Email");
+
+        txtEmployeeEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtEmployeeEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmployeeEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7))
-                .addGap(56, 56, 56)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtEmployee)
-                    .addComponent(comboEmployeeDept, 0, 299, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(107, 107, 107)
+                        .addComponent(txtEmployeeEmail))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7))
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmployeeId)
+                            .addComponent(comboEmployeeDept, 0, 299, Short.MAX_VALUE))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmployeeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmployeeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(comboEmployeeDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -280,9 +284,9 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddNew)
@@ -294,9 +298,9 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPersionIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersionIdActionPerformed
+    private void txtPersonIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersonIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPersionIdActionPerformed
+    }//GEN-LAST:event_txtPersonIdActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
@@ -310,17 +314,17 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddNewActionPerformed
 
-    private void txtEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeActionPerformed
+    private void txtEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmployeeActionPerformed
+    }//GEN-LAST:event_txtEmployeeIdActionPerformed
 
-    private void txtPersionDobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersionDobActionPerformed
+    private void txtPersonDobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersonDobActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPersionDobActionPerformed
+    }//GEN-LAST:event_txtPersonDobActionPerformed
 
-    private void txtPersionEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersionEmailActionPerformed
+    private void txtEmployeeEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPersionEmailActionPerformed
+    }//GEN-LAST:event_txtEmployeeEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,6 +373,7 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
     private javax.swing.JButton btnAddNew;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnClear;
+    private java.awt.Canvas canvas1;
     private javax.swing.JComboBox<String> comboEmployeeDept;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -381,22 +386,22 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtEmployee;
-    private javax.swing.JTextField txtPersionAddress;
-    private javax.swing.JTextField txtPersionDob;
-    private javax.swing.JTextField txtPersionEmail;
-    private javax.swing.JTextField txtPersionId;
-    private javax.swing.JTextField txtPersionName;
-    private javax.swing.JTextField txtPersionPhone;
+    private javax.swing.JTextField txtEmployeeEmail;
+    private javax.swing.JTextField txtEmployeeId;
+    private javax.swing.JTextField txtPersonAddress;
+    private javax.swing.JTextField txtPersonDob;
+    private javax.swing.JTextField txtPersonId;
+    private javax.swing.JTextField txtPersonName;
+    private javax.swing.JTextField txtPersonPhone;
     // End of variables declaration//GEN-END:variables
 
     private void addActionListener() {
         btnAddNew.addActionListener(this);
         btnClear.addActionListener(this);
         btnCancel.addActionListener(this);
-        
+
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         var obj = e.getSource();
@@ -405,33 +410,49 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         } else if (obj.equals(btnClear)) {
             clearInputData();
         } else if (obj.equals(btnAddNew)) {
-            addNewPhone();
+            addNewEmployee();
         }
     }
-    
+
     private void clearInputData() {
         var emptyText = "";
-        txtPersionId.setText(emptyText);
-        txtPersionName.setText(emptyText);
+        txtPersonId.setText(emptyText);
+        txtPersonName.setText(emptyText);
+        txtPersonDob.setText(emptyText);
+        txtPersonAddress.setText(emptyText);
+        txtPersonPhone.setText(emptyText);
+        txtEmployeeId.setText(emptyText);
+        txtEmployeeEmail.setText(emptyText);
         comboEmployeeDept.setSelectedIndex(0);
     }
-    
-    private void addNewPhone() {
-        var imeiString = txtPersionId.getText(); //get imei nhưng ở dạng String
-        var name = txtPersionName.getText();
-        var phase = comboEmployeeDept.getSelectedItem().toString();
-        if (!imeiString.isEmpty() && !name.isEmpty()) {            
-            phone.setImei(Long.parseLong(imeiString)); //cẩn phải ép ngược lại 
-            //kiểu long mới có thể truyền vào pt setImei bên Phone.java
-            phone.setName(name);            
-            phone.setPhase(phase);
-            homeFrm.addPhoneCallback(phone);//đẩy thông tin vào bảng
-            JOptionPane.showMessageDialog(rootPane, "Thêm điện thoại thành công");
+
+    private void addNewEmployee() {
+        var pId = txtPersonId.getText();
+        var fullName = txtPersonName.getText();
+        var dob = txtPersonDob.getText();
+        var address = txtPersonAddress.getText();
+        var phoneNumber = txtPersonPhone.getText();
+        var employeeId = txtEmployeeId.getText();
+        var email = txtEmployeeEmail.getText();
+        var dept = comboEmployeeDept.getSelectedItem().toString();
+        if (!pId.isEmpty() && !fullName.isEmpty() && !dob.isEmpty() 
+                && !address.isEmpty() && !phoneNumber.isEmpty() 
+                && !employeeId.isEmpty() && !email.isEmpty() && !dept.isEmpty() ) {
+            employee.setId(pId);
+            employee.setFullName(fullName);
+            employee.setDob(dob);
+            employee.setAddress(address);
+            employee.setPhoneNumber(phoneNumber);
+            employee.setEmployeeId(employeeId);
+            employee.setEmployeeEmail(employeeId);
+            employee.setEmployeeDept(dept);
+            homeFrm.addEmployeeCallback(employee);//đẩy thông tin vào bảng
+            JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công");
             dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane,
                     "Các ô nhập liệu không được để trống");
         }
     }
-    
+
 }

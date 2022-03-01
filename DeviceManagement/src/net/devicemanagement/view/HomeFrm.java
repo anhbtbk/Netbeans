@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.devicemanagement.controller.DataController;
 import net.devicemanagement.controller.DataControllerImp;
+import net.devicemanagement.view.model.Employee;
 import net.devicemanagement.view.model.Laptop;
 import net.devicemanagement.view.model.Monitor;
 import net.devicemanagement.view.model.Pc;
@@ -32,6 +33,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private DefaultTableModel tableModelLaptop;
     private List<Monitor> monitors; //tạo list các màn hình
     private DefaultTableModel tableModelMonitor;
+    private List<Employee> employees; //tạo list các nhân viên
+    private DefaultTableModel tableModelEmployee;
 
     /**
      * Creates new form HomeFrm
@@ -49,6 +52,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelLaptop = (DefaultTableModel) tblLaptop.getModel();
         monitors = new ArrayList<>();
         tableModelMonitor = (DefaultTableModel) tblMonitor.getModel();
+        employees = new ArrayList<>();
+        tableModelEmployee = (DefaultTableModel) tblEmployee.getModel();
         //khi ứng dụng được kích hoạt, dữ liệu tự load và hiển thị lên
         dataController = new DataControllerImp();
         LoadData();
@@ -171,10 +176,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnSearchEmployee = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblEmployee = new javax.swing.JTable();
-        btnRefreshPhone1 = new javax.swing.JButton();
-        btnAddPhone1 = new javax.swing.JButton();
-        btnEditPhone1 = new javax.swing.JButton();
-        btnRemovePhone1 = new javax.swing.JButton();
+        btnRefreshEmployee = new javax.swing.JButton();
+        btnAddEmployee = new javax.swing.JButton();
+        btnEditEmployee = new javax.swing.JButton();
+        btnRemoveEmployee = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -1215,11 +1220,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
             },
             new String [] {
-                "Mã nhân viên", "Họ tên", "Ngày sinh", "Địa chỉ", "Email", "Số điện thoại", "Phòng ban"
+                "Mã nhân viên", "Họ tên", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Email", "Phòng ban"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1228,27 +1233,27 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         });
         jScrollPane5.setViewportView(tblEmployee);
 
-        btnRefreshPhone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnRefreshPhone1.setText("Làm mới");
-        btnRefreshPhone1.addActionListener(new java.awt.event.ActionListener() {
+        btnRefreshEmployee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRefreshEmployee.setText("Làm mới");
+        btnRefreshEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshPhone1ActionPerformed(evt);
+                btnRefreshEmployeeActionPerformed(evt);
             }
         });
 
-        btnAddPhone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAddPhone1.setText("Thêm nhân viên");
-        btnAddPhone1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddEmployee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddEmployee.setText("Thêm nhân viên");
+        btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddPhone1ActionPerformed(evt);
+                btnAddEmployeeActionPerformed(evt);
             }
         });
 
-        btnEditPhone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnEditPhone1.setText("Sửa nhân viên");
+        btnEditEmployee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEditEmployee.setText("Sửa nhân viên");
 
-        btnRemovePhone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnRemovePhone1.setText("Xóa nhân viên");
+        btnRemoveEmployee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRemoveEmployee.setText("Xóa nhân viên");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1264,13 +1269,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                         .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addComponent(btnRefreshPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRefreshEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditPhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRemovePhone1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRemoveEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1285,10 +1290,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRefreshPhone1)
-                    .addComponent(btnAddPhone1)
-                    .addComponent(btnEditPhone1)
-                    .addComponent(btnRemovePhone1))
+                    .addComponent(btnRefreshEmployee)
+                    .addComponent(btnAddEmployee)
+                    .addComponent(btnEditEmployee)
+                    .addComponent(btnRemoveEmployee))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -1518,13 +1523,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbSearchEmployeeByDeptActionPerformed
 
-    private void btnRefreshPhone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPhone1ActionPerformed
+    private void btnRefreshEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshEmployeeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRefreshPhone1ActionPerformed
+    }//GEN-LAST:event_btnRefreshEmployeeActionPerformed
 
-    private void btnAddPhone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPhone1ActionPerformed
+    private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddPhone1ActionPerformed
+    }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1562,26 +1567,26 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddEmployee;
     private javax.swing.JButton btnAddLaptop;
     private javax.swing.JButton btnAddMonitor;
     private javax.swing.JButton btnAddPc;
     private javax.swing.JButton btnAddPhone;
-    private javax.swing.JButton btnAddPhone1;
+    private javax.swing.JButton btnEditEmployee;
     private javax.swing.JButton btnEditLaptop;
     private javax.swing.JButton btnEditMonitor;
     private javax.swing.JButton btnEditPc;
     private javax.swing.JButton btnEditPhone;
-    private javax.swing.JButton btnEditPhone1;
+    private javax.swing.JButton btnRefreshEmployee;
     private javax.swing.JButton btnRefreshLaptop;
     private javax.swing.JButton btnRefreshMonitor;
     private javax.swing.JButton btnRefreshPc;
     private javax.swing.JButton btnRefreshPhone;
-    private javax.swing.JButton btnRefreshPhone1;
+    private javax.swing.JButton btnRemoveEmployee;
     private javax.swing.JButton btnRemoveLaptop;
     private javax.swing.JButton btnRemoveMonitor;
     private javax.swing.JButton btnRemovePc;
     private javax.swing.JButton btnRemovePhone;
-    private javax.swing.JButton btnRemovePhone1;
     private javax.swing.JButton btnSearchEmployee;
     private javax.swing.JButton btnSearchLaptop;
     private javax.swing.JButton btnSearchMonitor;
@@ -1794,6 +1799,22 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         rbSortSizeMonitorASC.addActionListener(this);
         rbSortSizeMonitorDESC.addActionListener(this);
 
+        //tab quản lý nhân viên
+        btnAddEmployee.addActionListener(this);
+        btnEditEmployee.addActionListener(this);
+        btnRefreshEmployee.addActionListener(this);
+        btnRemoveEmployee.addActionListener(this);
+        btnSearchEmployee.addActionListener(this);
+
+        rbSearchEmployeeById.addActionListener(this);
+        rbSearchEmployeeByName.addActionListener(this);
+        rbSearchEmployeeByDept.addActionListener(this);
+
+        rbSortEmployeeNameASC.addActionListener(this);
+        rbSortEmployeeNameDESC.addActionListener(this);
+        rbSortEmployeeIdASC.addActionListener(this);
+        rbSortEmployeeIdDESC.addActionListener(this);
+
     }
 
     public void addPhoneCallback(Phone phone) {  //ở cái table sẽ gọi đến phương 
@@ -1825,6 +1846,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         monitors.add(monitor);
         showMonitor(monitor);
         saveData(DataController.MONITOR);//lưu màn hình
+    }
+
+    public void addEmployeeCallback(Employee employee) {
+        //ở cái table sẽ gọi đến phương 
+        //thức vào và truyền đến list nhân viên nhận được
+        employees.add(employee);
+        showEmployee(employee);
+        saveData(DataController.EMPLOYEE);//lưu màn hình
     }
 
     @Override
@@ -1899,6 +1928,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             searchMonitors();
         } else if (obj.equals(btnRefreshMonitor)) {
             refreshMonitors();
+        } else if (obj.equals(btnAddEmployee)) {
+            AddEmployeeDialog addEmployeeDialog
+                    = new AddEmployeeDialog(this, rootPaneCheckingEnabled);
+            addEmployeeDialog.setVisible(true);
         }
     }
 
@@ -1934,6 +1967,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelMonitor.addRow(row); //thêm các thông số bên trên vào bảng
     }
 
+    private void showEmployee(Employee employee) {
+        Object[] row = new Object[]{
+            employee.getEmployeeId(), employee.getFullName(), employee.getDob(),
+            employee.getAddress(), employee.getPhoneNumber(),
+            employee.getEmployeeEmail(), employee.getEmployeeDept()
+        };
+        tableModelEmployee.addRow(row); //thêm các thông số bên trên vào bảng
+    }
+
     private void LoadData() {
         //đọc danh sách các điện thoại
         phones = dataController.<Phone>readDataFromFile(DataController.PHONE_FILE);
@@ -1943,6 +1985,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         laptops = dataController.<Laptop>readDataFromFile(DataController.LAPTOP_FILE);
         //đọc danh sách các màn hình
         monitors = dataController.<Monitor>readDataFromFile(DataController.MONITOR_FILE);
+        //đọc danh sách các màn hình
+        employees = dataController.<Employee>readDataFromFile(DataController.EMPLOYEE_FILE);
     }
 
     private void ShowData() {
@@ -1950,6 +1994,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         showPcs();
         showLaptops();
         showMonitors();
+        showEmployees();
 
     }
 
@@ -1978,6 +2023,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelMonitor.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
         for (Monitor monitor : monitors) {
             showMonitor(monitor);
+        }
+    }
+    
+        private void showEmployees() {
+        tableModelEmployee.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
+        for (Employee employee : employees) {
+            showEmployee(employee);
         }
     }
 
