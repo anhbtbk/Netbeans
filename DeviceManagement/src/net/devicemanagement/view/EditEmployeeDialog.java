@@ -422,7 +422,7 @@ public class EditEmployeeDialog extends javax.swing.JDialog implements ActionLis
             employee.setAddress(address);
             employee.setPhoneNumber(phoneNumber);
             employee.setEmployeeId(employeeId);
-            employee.setEmployeeEmail(employeeId);
+            employee.setEmployeeEmail(email);
             employee.setEmployeeDept(dept);
             
             homeFrm.editEmployeeCallback(employee);//đẩy thông tin vào bảng

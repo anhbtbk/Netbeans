@@ -444,10 +444,10 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
             employee.setAddress(address);
             employee.setPhoneNumber(phoneNumber);
             employee.setEmployeeId(employeeId);
-            employee.setEmployeeEmail(employeeId);
+            employee.setEmployeeEmail(email);
             employee.setEmployeeDept(dept);
             homeFrm.addEmployeeCallback(employee);//đẩy thông tin vào bảng
-            JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công");
+//            JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công");
             dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane,
