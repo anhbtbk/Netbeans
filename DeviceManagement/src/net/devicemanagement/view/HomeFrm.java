@@ -1936,6 +1936,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             removeEmployee();
         } else if (obj.equals(btnEditEmployee)) {
             editEmployee();
+        } else if (obj.equals(rbSortEmployeeNameASC)
+                || obj.equals(rbSortEmployeeNameDESC)
+                || obj.equals(rbSortEmployeeIdASC)
+                || obj.equals(rbSortEmployeeIdDESC)) {
+            sortEmployees(obj);
         }
     }
 
@@ -2341,6 +2346,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             dataController.sortMonitorBySizeDESC(monitors);
         }
         showMonitors();
+    }
+
+    private void sortEmployees(Object obj) {
+        if (obj.equals(rbSortEmployeeNameASC)) {
+            dataController.sortEmployeeByNameASC(employees);
+        } else if (obj.equals(rbSortEmployeeNameDESC)) {
+            dataController.sortEmployeeByNameDESC(employees);
+        } else if (obj.equals(rbSortEmployeeIdASC)) {
+            dataController.sortEmployeeByIdASC(employees);
+        } else if (obj.equals(rbSortEmployeeIdDESC)) {
+            dataController.sortEmployeeByIdDESC(employees);
+        }
+        showEmployees();
     }
 
     private void searchPhones() {

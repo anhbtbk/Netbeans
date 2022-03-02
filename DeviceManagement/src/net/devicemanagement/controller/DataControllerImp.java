@@ -18,6 +18,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.devicemanagement.controller.sort.SortEmployeeByIdASC;
+import net.devicemanagement.controller.sort.SortEmployeeByIdDESC;
+import net.devicemanagement.controller.sort.SortEmployeeByNameASC;
+import net.devicemanagement.controller.sort.SortEmployeeByNameDESC;
 import net.devicemanagement.controller.sort.SortLaptopByChipASC;
 import net.devicemanagement.controller.sort.SortLaptopByChipDESC;
 import net.devicemanagement.controller.sort.SortLaptopByRamASC;
@@ -34,6 +38,7 @@ import net.devicemanagement.controller.sort.SortPhoneByNameASC;
 import net.devicemanagement.controller.sort.SortPhoneByNameDESC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseASC;
 import net.devicemanagement.controller.sort.SortPhoneByPhaseDESC;
+import net.devicemanagement.view.model.Employee;
 import net.devicemanagement.view.model.Laptop;
 import net.devicemanagement.view.model.Monitor;
 import net.devicemanagement.view.model.Pc;
@@ -48,7 +53,7 @@ public class DataControllerImp implements DataController {
 
     @Override
     public <T> void writeToFile(List<T> data, String fileName) {
-        try (FileOutputStream fos = new FileOutputStream(fileName); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        try ( FileOutputStream fos = new FileOutputStream(fileName);  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(data);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -62,7 +67,7 @@ public class DataControllerImp implements DataController {
         List<T> data = new ArrayList<>();
         File file = new File(fileName);
         if (file.length() > 0) {
-            try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+            try ( FileInputStream fis = new FileInputStream(file);  ObjectInputStream ois = new ObjectInputStream(fis)) {
                 data = (List<T>) ois.readObject();
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
@@ -311,7 +316,7 @@ public class DataControllerImp implements DataController {
 
     @Override
     public List<Monitor> searchMonitorByName(List<Monitor> monitors, String key) {
-       List<Monitor> resultList = new ArrayList<>();
+        List<Monitor> resultList = new ArrayList<>();
         var regex = ".*" + key + ".*";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher;
@@ -326,7 +331,7 @@ public class DataControllerImp implements DataController {
 
     @Override
     public List<Monitor> searchMonitorBySize(List<Monitor> monitors, String key) {
-       List<Monitor> resultList = new ArrayList<>();
+        List<Monitor> resultList = new ArrayList<>();
         var regex = ".*" + key + ".*";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher;
@@ -337,6 +342,26 @@ public class DataControllerImp implements DataController {
             }
         }
         return resultList;
+    }
+
+    @Override
+    public void sortEmployeeByNameASC(List<Employee> employees) {
+        Collections.sort(employees, new SortEmployeeByNameASC());
+    }
+
+    @Override
+    public void sortEmployeeByNameDESC(List<Employee> employees) {
+        Collections.sort(employees, new SortEmployeeByNameDESC());
+    }
+
+    @Override
+    public void sortEmployeeByIdASC(List<Employee> employees) {
+        Collections.sort(employees, new SortEmployeeByIdASC());
+    }
+
+    @Override
+    public void sortEmployeeByIdDESC(List<Employee> employees) {
+        Collections.sort(employees, new SortEmployeeByIdDESC());
     }
 
 }

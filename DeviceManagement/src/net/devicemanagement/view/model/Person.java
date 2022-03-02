@@ -65,6 +65,10 @@ public class Person implements Serializable {
     public String getFullName() {
         return fullName.last + " " + this.fullName.mid + this.fullName.first;
     }
+    
+    public String getFirstName() {
+        return fullName.first;
+    }
 
     public void setFullName(String fullName) {
         var words = fullName.split("\\s+");

@@ -5,6 +5,7 @@
 package net.devicemanagement.controller;
 
 import java.util.List;
+import net.devicemanagement.view.model.Employee;
 import net.devicemanagement.view.model.Laptop;
 import net.devicemanagement.view.model.Monitor;
 import net.devicemanagement.view.model.Pc;
@@ -35,7 +36,7 @@ public interface DataController {
     String LAPTOP_FILE = "LAPTOP.DAT";
 
     String MONITOR_FILE = "MONITOR.DAT";
-    
+
     String EMPLOYEE_FILE = "EMPLOYEE.DAT";
 
     <T> void writeToFile(List<T> data, String fileName);
@@ -91,12 +92,19 @@ public interface DataController {
     void sortMonitorBySizeASC(List<Monitor> monitors);
 
     void sortMonitorBySizeDESC(List<Monitor> monitors);
-    
+
     List<Monitor> searchMonitorBySerial(List<Monitor> monitors, String key);
-    
+
     List<Monitor> searchMonitorByName(List<Monitor> monitors, String key);
-    
+
     List<Monitor> searchMonitorBySize(List<Monitor> monitors, String key);
-    
+
+    void sortEmployeeByNameASC(List<Employee> employees);
+
+    void sortEmployeeByNameDESC(List<Employee> employees);
+
+    void sortEmployeeByIdASC(List<Employee> employees);
+
+    void sortEmployeeByIdDESC(List<Employee> employees);
 
 }
