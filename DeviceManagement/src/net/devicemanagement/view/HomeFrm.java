@@ -181,6 +181,27 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         btnEditEmployee = new javax.swing.JButton();
         btnRemoveEmployee = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        rbSortBorrowingNameASC = new javax.swing.JRadioButton();
+        rbSortBorrowingNameDESC = new javax.swing.JRadioButton();
+        rbSortBorrowingDateASC = new javax.swing.JRadioButton();
+        rbSortBorrowingDateDESC = new javax.swing.JRadioButton();
+        jPanel18 = new javax.swing.JPanel();
+        rbSearchBorrowingById = new javax.swing.JRadioButton();
+        rbSearchBorrowingByName = new javax.swing.JRadioButton();
+        txtSearchBorrowingById = new javax.swing.JTextField();
+        txtSearchBorrowingByName = new javax.swing.JTextField();
+        rbSearchBorrowingByDate = new javax.swing.JRadioButton();
+        btnSearchBorrowing = new javax.swing.JButton();
+        txtSearchBorrowingFrom = new javax.swing.JTextField();
+        txtSearchBorrowingTo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblBorrowing = new javax.swing.JTable();
+        btnRefreshBorrowing = new javax.swing.JButton();
+        btnAddBorrowing = new javax.swing.JButton();
+        btnRemoveBorrowing = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -1299,15 +1320,251 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
         jTabbedPane1.addTab("THÔNG TIN NHÂN VIÊN", jPanel5);
 
+        jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sắp xếp danh sách mượn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSortBorrowingNameASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortBorrowingNameASC.setText("Theo tên a-z");
+        rbSortBorrowingNameASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortBorrowingNameASCActionPerformed(evt);
+            }
+        });
+
+        rbSortBorrowingNameDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortBorrowingNameDESC.setText("Theo tên z-a");
+
+        rbSortBorrowingDateASC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortBorrowingDateASC.setText("Theo thời gian sớm - muộn");
+        rbSortBorrowingDateASC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortBorrowingDateASCActionPerformed(evt);
+            }
+        });
+
+        rbSortBorrowingDateDESC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSortBorrowingDateDESC.setText("Theo thời gian muộn - sớm");
+        rbSortBorrowingDateDESC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSortBorrowingDateDESCActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortBorrowingNameASC)
+                    .addComponent(rbSortBorrowingNameDESC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSortBorrowingDateASC)
+                    .addComponent(rbSortBorrowingDateDESC))
+                .addGap(19, 19, 19))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortBorrowingNameASC)
+                    .addComponent(rbSortBorrowingDateASC))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSortBorrowingNameDESC)
+                    .addComponent(rbSortBorrowingDateDESC))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm danh sách mượn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        rbSearchBorrowingById.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchBorrowingById.setText("Theo IMEI/Serial");
+        rbSearchBorrowingById.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchBorrowingByIdActionPerformed(evt);
+            }
+        });
+
+        rbSearchBorrowingByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchBorrowingByName.setText("Theo tên nhân viên");
+        rbSearchBorrowingByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchBorrowingByNameActionPerformed(evt);
+            }
+        });
+
+        txtSearchBorrowingById.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchBorrowingById.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchBorrowingByIdActionPerformed(evt);
+            }
+        });
+
+        txtSearchBorrowingByName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        rbSearchBorrowingByDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSearchBorrowingByDate.setText("Theo thời gian");
+        rbSearchBorrowingByDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSearchBorrowingByDateActionPerformed(evt);
+            }
+        });
+
+        btnSearchBorrowing.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchBorrowing.setText("Tìm");
+
+        txtSearchBorrowingFrom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchBorrowingFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchBorrowingFromActionPerformed(evt);
+            }
+        });
+
+        txtSearchBorrowingTo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearchBorrowingTo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchBorrowingToActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Từ ngày");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Đến ngày");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbSearchBorrowingByDate)
+                    .addComponent(rbSearchBorrowingByName)
+                    .addComponent(rbSearchBorrowingById))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(txtSearchBorrowingById, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSearchBorrowing, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(txtSearchBorrowingByName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(115, 115, 115))
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSearchBorrowingFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSearchBorrowingTo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(29, 29, 29))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rbSearchBorrowingById)
+                        .addComponent(txtSearchBorrowingById, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearchBorrowing))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchBorrowingByName)
+                    .addComponent(txtSearchBorrowingByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSearchBorrowingByDate)
+                    .addComponent(txtSearchBorrowingFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearchBorrowingTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        tblBorrowing.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã nhân viên", "Tên nhân viên", "Phòng ban", "Số IMEI/Serial", "Tên thiết bị", "Loại thiết bị", "Thời gian mượn"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tblBorrowing);
+
+        btnRefreshBorrowing.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRefreshBorrowing.setText("Làm mới");
+        btnRefreshBorrowing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshBorrowingActionPerformed(evt);
+            }
+        });
+
+        btnAddBorrowing.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddBorrowing.setText("Thêm mượn");
+        btnAddBorrowing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBorrowingActionPerformed(evt);
+            }
+        });
+
+        btnRemoveBorrowing.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRemoveBorrowing.setText("Xóa mượn");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1014, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane6)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btnRefreshBorrowing, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddBorrowing, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemoveBorrowing, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRefreshBorrowing)
+                    .addComponent(btnAddBorrowing)
+                    .addComponent(btnRemoveBorrowing))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("QUẢN LÝ MƯỢN", jPanel6);
@@ -1531,6 +1788,50 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
+    private void rbSearchBorrowingByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchBorrowingByNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchBorrowingByNameActionPerformed
+
+    private void txtSearchBorrowingByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchBorrowingByIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchBorrowingByIdActionPerformed
+
+    private void rbSearchBorrowingByDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchBorrowingByDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchBorrowingByDateActionPerformed
+
+    private void btnRefreshBorrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshBorrowingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshBorrowingActionPerformed
+
+    private void btnAddBorrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBorrowingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddBorrowingActionPerformed
+
+    private void rbSortBorrowingDateDESCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortBorrowingDateDESCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortBorrowingDateDESCActionPerformed
+
+    private void rbSortBorrowingDateASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortBorrowingDateASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortBorrowingDateASCActionPerformed
+
+    private void rbSortBorrowingNameASCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSortBorrowingNameASCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSortBorrowingNameASCActionPerformed
+
+    private void rbSearchBorrowingByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSearchBorrowingByIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSearchBorrowingByIdActionPerformed
+
+    private void txtSearchBorrowingFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchBorrowingFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchBorrowingFromActionPerformed
+
+    private void txtSearchBorrowingToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchBorrowingToActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchBorrowingToActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1567,6 +1868,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddBorrowing;
     private javax.swing.JButton btnAddEmployee;
     private javax.swing.JButton btnAddLaptop;
     private javax.swing.JButton btnAddMonitor;
@@ -1577,16 +1879,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnEditMonitor;
     private javax.swing.JButton btnEditPc;
     private javax.swing.JButton btnEditPhone;
+    private javax.swing.JButton btnRefreshBorrowing;
     private javax.swing.JButton btnRefreshEmployee;
     private javax.swing.JButton btnRefreshLaptop;
     private javax.swing.JButton btnRefreshMonitor;
     private javax.swing.JButton btnRefreshPc;
     private javax.swing.JButton btnRefreshPhone;
+    private javax.swing.JButton btnRemoveBorrowing;
     private javax.swing.JButton btnRemoveEmployee;
     private javax.swing.JButton btnRemoveLaptop;
     private javax.swing.JButton btnRemoveMonitor;
     private javax.swing.JButton btnRemovePc;
     private javax.swing.JButton btnRemovePhone;
+    private javax.swing.JButton btnSearchBorrowing;
     private javax.swing.JButton btnSearchEmployee;
     private javax.swing.JButton btnSearchLaptop;
     private javax.swing.JButton btnSearchMonitor;
@@ -1604,6 +1909,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.ButtonGroup buttonGroupSortPhone;
     private javax.swing.JComboBox<String> comboSearchEmployeeByDept;
     private javax.swing.JComboBox<String> comboSearchPhoneByPhase;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1616,6 +1923,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1629,7 +1938,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton rbSearchBorrowingByDate;
+    private javax.swing.JRadioButton rbSearchBorrowingById;
+    private javax.swing.JRadioButton rbSearchBorrowingByName;
     private javax.swing.JRadioButton rbSearchEmployeeByDept;
     private javax.swing.JRadioButton rbSearchEmployeeById;
     private javax.swing.JRadioButton rbSearchEmployeeByName;
@@ -1645,6 +1958,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSearchPhoneByImei;
     private javax.swing.JRadioButton rbSearchPhoneByName;
     private javax.swing.JRadioButton rbSearchPhoneByPhase;
+    private javax.swing.JRadioButton rbSortBorrowingDateASC;
+    private javax.swing.JRadioButton rbSortBorrowingDateDESC;
+    private javax.swing.JRadioButton rbSortBorrowingNameASC;
+    private javax.swing.JRadioButton rbSortBorrowingNameDESC;
     private javax.swing.JRadioButton rbSortChipLaptopASC;
     private javax.swing.JRadioButton rbSortChipLaptopDESC;
     private javax.swing.JRadioButton rbSortChipPcASC;
@@ -1665,11 +1982,16 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton rbSortRamPcDESC;
     private javax.swing.JRadioButton rbSortSizeMonitorASC;
     private javax.swing.JRadioButton rbSortSizeMonitorDESC;
+    private javax.swing.JTable tblBorrowing;
     private javax.swing.JTable tblEmployee;
     private javax.swing.JTable tblLaptop;
     private javax.swing.JTable tblMonitor;
     private javax.swing.JTable tblPc;
     private javax.swing.JTable tblPhone;
+    private javax.swing.JTextField txtSearchBorrowingById;
+    private javax.swing.JTextField txtSearchBorrowingByName;
+    private javax.swing.JTextField txtSearchBorrowingFrom;
+    private javax.swing.JTextField txtSearchBorrowingTo;
     private javax.swing.JTextField txtSearchEmployeeById;
     private javax.swing.JTextField txtSearchEmployeeByName;
     private javax.swing.JTextField txtSearchLaptopByName;
