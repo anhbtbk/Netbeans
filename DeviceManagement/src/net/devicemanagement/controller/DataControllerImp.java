@@ -364,4 +364,49 @@ public class DataControllerImp implements DataController {
         Collections.sort(employees, new SortEmployeeByIdDESC());
     }
 
+    @Override
+    public List<Employee> searchEmployeeById(List<Employee> employees, String key) {
+        List<Employee> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Employee employee : employees) {
+            matcher = pattern.matcher(employee.getEmployeeId());
+            if (matcher.matches()) {
+                resultList.add(employee);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Employee> searchEmployeeByName(List<Employee> employees, String key) {
+        List<Employee> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Employee employee : employees) {
+            matcher = pattern.matcher(employee.getFullName());
+            if (matcher.matches()) {
+                resultList.add(employee);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Employee> searchEmployeeByDept(List<Employee> employees, String key) {
+        List<Employee> resultList = new ArrayList<>();
+        var regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        for (Employee employee : employees) {
+            matcher = pattern.matcher(employee.getEmployeeDept());
+            if (matcher.matches()) {
+                resultList.add(employee);
+            }
+        }
+        return resultList;
+    }
+
 }

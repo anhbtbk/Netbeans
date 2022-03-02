@@ -106,5 +106,11 @@ public interface DataController {
     void sortEmployeeByIdASC(List<Employee> employees);
 
     void sortEmployeeByIdDESC(List<Employee> employees);
+    
+    List<Employee> searchEmployeeById(List<Employee> employees, String key);
+    
+    List<Employee> searchEmployeeByName(List<Employee> employees, String key);
+    
+    List<Employee> searchEmployeeByDept(List<Employee> employees, String key);
 
 }

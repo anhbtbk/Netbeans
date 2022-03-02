@@ -1941,6 +1941,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                 || obj.equals(rbSortEmployeeIdASC)
                 || obj.equals(rbSortEmployeeIdDESC)) {
             sortEmployees(obj);
+        } else if (obj.equals(btnSearchEmployee)) {
+            searchEmployees();
+        } else if (obj.equals(btnRefreshEmployee)) {
+            refreshEmployees();
         }
     }
 
@@ -2517,6 +2521,42 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void searchEmployees() {
+        if (rbSearchEmployeeById.isSelected()) {
+            var key = txtSearchEmployeeById.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập mã nhân viên cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchEmployeeById(employees, key);
+                employees.clear();
+                employees.addAll(result);
+                checkAndShowSearchEmployees();
+            }
+        } else if (rbSearchEmployeeByName.isSelected()) {
+            var key = txtSearchEmployeeByName.getText();
+            if (key.isEmpty()) {
+                var msg = "Vui lòng nhập tên nhân viên cần tìm kiếm!";
+                showDialogMessage(msg);
+            } else {
+                var result = dataController.searchEmployeeByName(employees, key);
+                employees.clear();
+                employees.addAll(result);
+                checkAndShowSearchEmployees();
+            }
+        } else if (rbSearchEmployeeByDept.isSelected()) {
+            var key = comboSearchEmployeeByDept.getSelectedItem().toString();
+            var result = dataController.searchEmployeeByDept(employees, key);
+            employees.clear();
+            employees.addAll(result);
+            checkAndShowSearchEmployees();
+
+        } else {
+            var msg = "Vui lòng chọn tiêu chí tìm kiếm trước!";
+            showDialogMessage(msg);
+        }
+    }
+
     private void checkAndShowSearchResult() {
         if (phones.size() > 0) {
             showPhones();
@@ -2564,6 +2604,19 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         } else {
             monitors.clear();
             showMonitors();
+            var msg = "Không tìm thấy kết quả nào";
+            showDialogMessage(msg);
+        }
+    }
+
+    private void checkAndShowSearchEmployees() {
+        if (employees.size() > 0) {
+            showEmployees();
+            var msg = "Tìm thấy " + employees.size() + " kết quả";
+            showDialogMessage(msg);
+        } else {
+            employees.clear();
+            showEmployees();
             var msg = "Không tìm thấy kết quả nào";
             showDialogMessage(msg);
         }
@@ -2622,6 +2675,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         monitors.clear();
         monitors.addAll(dataController.<Monitor>readDataFromFile(DataController.MONITOR_FILE));
         showMonitors();
+
+    }
+    
+    private void refreshEmployees() {
+        var text = "";
+        txtSearchEmployeeById.setText(text);
+        txtSearchEmployeeByName.setText(text);
+        comboSearchEmployeeByDept.setSelectedIndex(0);
+        buttonGroupSortEmployee.clearSelection();
+        buttonGroupSearchEmployee.clearSelection();
+
+        employees.clear();
+        employees.addAll(dataController.<Employee>readDataFromFile(DataController.EMPLOYEE_FILE));
+        showEmployees();
 
     }
 
