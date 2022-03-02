@@ -10,10 +10,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import net.buituananh.model.Registering;
-import net.buituananh.model.Student;
-import net.buituananh.model.Subject;
-import net.buituananh.model.controller.InfoFilterImp;
+import net.devicemanagement.view.model.Borrowing;
+import net.devicemanagement.view.model.Employee;
+import net.devicemanagement.view.model.Laptop;
+import net.devicemanagement.view.model.Monitor;
+import net.devicemanagement.view.model.Pc;
+import net.devicemanagement.view.model.Phone;
+
+
 
 /**
  *
@@ -22,11 +26,19 @@ import net.buituananh.model.controller.InfoFilterImp;
 public class AddBorrowingDialog extends javax.swing.JDialog implements ActionListener {
 
     private HomeFrm homeFrm;
-    private Subject subject;
-    private Student student;
-    private List<Student> students;
-    private List<Subject> subjects;
-    private List<Registering> registerings;
+    private Phone phone;
+    private Pc pc;
+    private Laptop laptop;
+    private Monitor monitor;
+    private Employee employee;
+    
+    private List<Phone> phones;
+    private List<Pc> pcs;
+    private List<Laptop> laptops;
+    private List<Monitor> monitors;
+    private List<Employee> employees;
+    
+   
 
     /**
      * Creates new form AddSubjectDialog
@@ -36,23 +48,22 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
         initComponents();
         setLocationRelativeTo(null);
         addActionListener();
-        subject = new Subject();
+        phone = new Phone();
         homeFrm = (HomeFrm) parent;
     }
 
     public AddBorrowingDialog(java.awt.Frame parent, boolean modal,
-            List<Student> students, List<Subject> subjects,
-            List<Registering> registerings) {
+            List<Employee> employees, List<Phone> phone, List<Pc> pcs, 
+            List<Laptop> laptops, List<Monitor> monitors,
+            List<Borrowing> borrowings) {
         this(parent, modal);
-        this.students = students;
-        this.subjects = subjects;
+        this.employees = this.employees;
+        this.subjects = subjects;.
+        
         this.registerings = registerings;
 
     }
 
-    AddBorrowingDialog(HomeFrm aThis, boolean b, List<Student> students, List<Subject> subjects) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

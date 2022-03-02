@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.devicemanagement.controller.DataController;
 import net.devicemanagement.controller.DataControllerImp;
+import net.devicemanagement.view.model.Borrowing;
 import net.devicemanagement.view.model.Employee;
 import net.devicemanagement.view.model.Laptop;
 import net.devicemanagement.view.model.Monitor;
@@ -35,6 +36,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private DefaultTableModel tableModelMonitor;
     private List<Employee> employees; //tạo list các nhân viên
     private DefaultTableModel tableModelEmployee;
+    private List<Borrowing> borrowings; //tạo list danh sách mượn
 
     /**
      * Creates new form HomeFrm
@@ -79,6 +81,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSearchMonitor = new javax.swing.ButtonGroup();
         buttonGroupSortEmployee = new javax.swing.ButtonGroup();
         buttonGroupSearchEmployee = new javax.swing.ButtonGroup();
+        buttonGroupSortBorrowing = new javax.swing.ButtonGroup();
+        buttonGroupSearchBorrowing = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -1897,11 +1901,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnSearchMonitor;
     private javax.swing.JButton btnSearchPc;
     private javax.swing.JButton btnSearchPhone;
+    private javax.swing.ButtonGroup buttonGroupSearchBorrowing;
     private javax.swing.ButtonGroup buttonGroupSearchEmployee;
     private javax.swing.ButtonGroup buttonGroupSearchLaptop;
     private javax.swing.ButtonGroup buttonGroupSearchMonitor;
     private javax.swing.ButtonGroup buttonGroupSearchPc;
     private javax.swing.ButtonGroup buttonGroupSearchPhone;
+    private javax.swing.ButtonGroup buttonGroupSortBorrowing;
     private javax.swing.ButtonGroup buttonGroupSortEmployee;
     private javax.swing.ButtonGroup buttonGroupSortLaptop;
     private javax.swing.ButtonGroup buttonGroupSortMonitor;
@@ -2053,6 +2059,15 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         buttonGroupSortEmployee.add(rbSortEmployeeIdASC);
         buttonGroupSortEmployee.add(rbSortEmployeeIdDESC);
 
+        buttonGroupSearchBorrowing.add(rbSearchBorrowingById);
+        buttonGroupSearchBorrowing.add(rbSearchBorrowingByName);
+        buttonGroupSearchBorrowing.add(rbSearchBorrowingByDate);
+
+        buttonGroupSortBorrowing.add(rbSortBorrowingNameASC);
+        buttonGroupSortBorrowing.add(rbSortBorrowingNameDESC);
+        buttonGroupSortBorrowing.add(rbSortBorrowingDateASC);
+        buttonGroupSortBorrowing.add(rbSortBorrowingDateDESC);
+
     }
 
     private void addActionListener() {
@@ -2136,6 +2151,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         rbSortEmployeeNameDESC.addActionListener(this);
         rbSortEmployeeIdASC.addActionListener(this);
         rbSortEmployeeIdDESC.addActionListener(this);
+
+        //tab quản lý mượn thiết bị
+        btnAddBorrowing.addActionListener(this);
+        btnRefreshBorrowing.addActionListener(this);
+        btnRemoveBorrowing.addActionListener(this);
+
+        rbSearchBorrowingById.addActionListener(this);
+        rbSearchBorrowingByName.addActionListener(this);
+        rbSearchBorrowingByDate.addActionListener(this);
+
+        rbSortBorrowingNameASC.addActionListener(this);
+        rbSortBorrowingNameDESC.addActionListener(this);
+        rbSortBorrowingDateASC.addActionListener(this);
+        rbSortBorrowingDateDESC.addActionListener(this);
 
     }
 
@@ -2267,6 +2296,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             searchEmployees();
         } else if (obj.equals(btnRefreshEmployee)) {
             refreshEmployees();
+        } else if (obj.equals(btnAddBorrowing)) {
+            addBorrowing();
         }
     }
 
@@ -2322,6 +2353,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         monitors = dataController.<Monitor>readDataFromFile(DataController.MONITOR_FILE);
         //đọc danh sách các màn hình
         employees = dataController.<Employee>readDataFromFile(DataController.EMPLOYEE_FILE);
+        //đọc danh sách các màn hình
+        borrowings = dataController.<Borrowing>readDataFromFile(DataController.BORROWING_FILE);
     }
 
     private void ShowData() {
@@ -2389,6 +2422,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
             case DataController.EMPLOYEE:
                 dataController.<Employee>writeToFile(employees,
                         DataController.EMPLOYEE_FILE);
+                break;
+            case DataController.BORROWING:
+                dataController.<Borrowing>writeToFile(borrowings, 
+                        DataController.BORROWING_FILE);
                 break;
         }
     }
@@ -2999,7 +3036,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         showMonitors();
 
     }
-    
+
     private void refreshEmployees() {
         var text = "";
         txtSearchEmployeeById.setText(text);
@@ -3012,6 +3049,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         employees.addAll(dataController.<Employee>readDataFromFile(DataController.EMPLOYEE_FILE));
         showEmployees();
 
+    }
+
+    private void addBorrowing() {
+        AddBorrowingDialog addBorrowingDialog = new AddBorrowingDialog(this, true);
+        addBorrowingDialog.setVisible(true);
     }
 
 }

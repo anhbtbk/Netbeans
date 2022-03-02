@@ -28,6 +28,7 @@ public interface DataController {
     int LAPTOP = 3;
     int MONITOR = 4;
     int EMPLOYEE = 5;
+    int BORROWING = 6;
 
     String PHONE_FILE = "PHONE.DAT";
 
@@ -38,6 +39,8 @@ public interface DataController {
     String MONITOR_FILE = "MONITOR.DAT";
 
     String EMPLOYEE_FILE = "EMPLOYEE.DAT";
+    
+    String BORROWING_FILE = "BORROWING.DAT";
 
     <T> void writeToFile(List<T> data, String fileName);
 
