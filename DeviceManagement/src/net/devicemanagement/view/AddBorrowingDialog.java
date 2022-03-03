@@ -17,8 +17,6 @@ import net.devicemanagement.view.model.Monitor;
 import net.devicemanagement.view.model.Pc;
 import net.devicemanagement.view.model.Phone;
 
-
-
 /**
  *
  * @author Tuan Anh
@@ -31,14 +29,13 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
     private Laptop laptop;
     private Monitor monitor;
     private Employee employee;
-    
+
     private List<Phone> phones;
     private List<Pc> pcs;
     private List<Laptop> laptops;
     private List<Monitor> monitors;
     private List<Employee> employees;
-    
-   
+    private List<Borrowing> borrowings;
 
     /**
      * Creates new form AddSubjectDialog
@@ -53,17 +50,19 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
     }
 
     public AddBorrowingDialog(java.awt.Frame parent, boolean modal,
-            List<Employee> employees, List<Phone> phone, List<Pc> pcs, 
+            List<Employee> employees, List<Phone> phones, List<Pc> pcs,
             List<Laptop> laptops, List<Monitor> monitors,
             List<Borrowing> borrowings) {
         this(parent, modal);
-        this.employees = this.employees;
-        this.subjects = subjects;.
-        
-        this.registerings = registerings;
+        this.employees = employees;
+        this.phones = phones;
+        this.pcs = pcs;
+        this.laptops = laptops;
+        this.monitors = monitors;
+
+        this.borrowings = borrowings;
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,31 +74,33 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnRegister = new javax.swing.JButton();
+        btnBorrowing = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtSubjectIdToSearch = new javax.swing.JTextField();
-        txtStudentIdToSearch = new javax.swing.JTextField();
-        btnSearchSubject = new javax.swing.JButton();
-        btnSearchStudent = new javax.swing.JButton();
+        txtDeviceIdToSearch = new javax.swing.JTextField();
+        txtEmployeeIdToSearch = new javax.swing.JTextField();
+        btnSearchDevice = new javax.swing.JButton();
+        btnSearchEmployee = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        comboType = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtSubjectId = new javax.swing.JTextField();
+        txtDeviceId = new javax.swing.JTextField();
         txtFullName = new javax.swing.JTextField();
-        txtStudentId = new javax.swing.JTextField();
+        txtEmployeeId = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtSubjectName = new javax.swing.JTextField();
+        txtDeviceName = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtRegisterTime = new javax.swing.JTextField();
-        txtMajor = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txtSubjectName1 = new javax.swing.JTextField();
+        txtBorrowingDate = new javax.swing.JTextField();
+        txtDept = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtDeviceType = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("THÊM MỚI MÔN HỌC");
@@ -108,11 +109,11 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Thêm mới mượn thiết bị");
 
-        btnRegister.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnRegister.setText("Thêm mới");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+        btnBorrowing.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBorrowing.setText("Thêm mới");
+        btnBorrowing.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
+                btnBorrowingActionPerformed(evt);
             }
         });
 
@@ -135,30 +136,36 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Số IMEI/Serial");
 
-        txtSubjectIdToSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDeviceIdToSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtStudentIdToSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtStudentIdToSearch.addActionListener(new java.awt.event.ActionListener() {
+        txtEmployeeIdToSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtEmployeeIdToSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStudentIdToSearchActionPerformed(evt);
+                txtEmployeeIdToSearchActionPerformed(evt);
             }
         });
 
-        btnSearchSubject.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnSearchSubject.setText("Tìm thiết bị");
-        btnSearchSubject.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchDevice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchDevice.setText("Tìm thiết bị");
+        btnSearchDevice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchSubjectActionPerformed(evt);
+                btnSearchDeviceActionPerformed(evt);
             }
         });
 
-        btnSearchStudent.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnSearchStudent.setText("Tìm nhân viên");
-        btnSearchStudent.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchEmployee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSearchEmployee.setText("Tìm nhân viên");
+        btnSearchEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchStudentActionPerformed(evt);
+                btnSearchEmployeeActionPerformed(evt);
             }
         });
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Loại thiết bị");
+
+        comboType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Điện thoại", "PC", "Laptop", "Màn hình" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,18 +173,20 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtSubjectIdToSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                    .addComponent(txtStudentIdToSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSearchStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                    .addComponent(btnSearchSubject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
+                    .addComponent(txtDeviceIdToSearch)
+                    .addComponent(txtEmployeeIdToSearch)
+                    .addComponent(comboType, 0, 269, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,14 +195,19 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtStudentIdToSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSearchStudent)))
+                        .addComponent(txtEmployeeIdToSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchEmployee)))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSubjectIdToSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSearchSubject)))
+                    .addComponent(txtDeviceIdToSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(btnSearchDevice)))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -211,28 +225,28 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Số IMEI/Serial");
 
-        txtSubjectId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDeviceId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtFullName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtStudentId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtEmployeeId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Tên thiết bị");
 
-        txtSubjectName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDeviceName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Thời gian mượn");
 
-        txtRegisterTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBorrowingDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtMajor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDept.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Loại thiết bị");
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Loại thiết bị");
 
-        txtSubjectName1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDeviceType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -241,26 +255,28 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel13)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                        .addGap(80, 80, 80)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSubjectName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                    .addComponent(txtSubjectId)
-                    .addComponent(txtRegisterTime, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFullName)
-                    .addComponent(txtMajor)
-                    .addComponent(txtSubjectName1))
-                .addGap(97, 97, 97))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel13)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtDeviceName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDeviceId, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDept, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFullName)
+                            .addComponent(txtBorrowingDate)
+                            .addComponent(txtDeviceType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(53, 53, 53)
+                        .addComponent(txtEmployeeId, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +284,7 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmployeeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -276,24 +292,24 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtSubjectId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDeviceId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDeviceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtSubjectName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(txtDeviceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtRegisterTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
+                    .addComponent(txtBorrowingDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -309,16 +325,16 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 47, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
+                .addComponent(btnBorrowing, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127)
                 .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,14 +343,14 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClear)
                     .addComponent(btnCancel)
-                    .addComponent(btnRegister))
-                .addContainerGap(42, Short.MAX_VALUE))
+                    .addComponent(btnBorrowing))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -344,21 +360,21 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+    private void btnBorrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrowingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegisterActionPerformed
+    }//GEN-LAST:event_btnBorrowingActionPerformed
 
-    private void txtStudentIdToSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStudentIdToSearchActionPerformed
+    private void txtEmployeeIdToSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIdToSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtStudentIdToSearchActionPerformed
+    }//GEN-LAST:event_txtEmployeeIdToSearchActionPerformed
 
-    private void btnSearchSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchSubjectActionPerformed
+    private void btnSearchDeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchDeviceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchSubjectActionPerformed
+    }//GEN-LAST:event_btnSearchDeviceActionPerformed
 
-    private void btnSearchStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchStudentActionPerformed
+    private void btnSearchEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmployeeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchStudentActionPerformed
+    }//GEN-LAST:event_btnSearchEmployeeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,15 +427,17 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrowing;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnClear;
-    private javax.swing.JButton btnRegister;
-    private javax.swing.JButton btnSearchStudent;
-    private javax.swing.JButton btnSearchSubject;
+    private javax.swing.JButton btnSearchDevice;
+    private javax.swing.JButton btnSearchEmployee;
+    private javax.swing.JComboBox<String> comboType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
@@ -428,15 +446,15 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtBorrowingDate;
+    private javax.swing.JTextField txtDept;
+    private javax.swing.JTextField txtDeviceId;
+    private javax.swing.JTextField txtDeviceIdToSearch;
+    private javax.swing.JTextField txtDeviceName;
+    private javax.swing.JTextField txtDeviceType;
+    private javax.swing.JTextField txtEmployeeId;
+    private javax.swing.JTextField txtEmployeeIdToSearch;
     private javax.swing.JTextField txtFullName;
-    private javax.swing.JTextField txtMajor;
-    private javax.swing.JTextField txtRegisterTime;
-    private javax.swing.JTextField txtStudentId;
-    private javax.swing.JTextField txtStudentIdToSearch;
-    private javax.swing.JTextField txtSubjectId;
-    private javax.swing.JTextField txtSubjectIdToSearch;
-    private javax.swing.JTextField txtSubjectName;
-    private javax.swing.JTextField txtSubjectName1;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -446,40 +464,42 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
             dispose();
         } else if (obj.equals(btnClear)) {
             clearInputData();
-        } else if (obj.equals(btnRegister)) {
-            addNewRegister();
-        } else if (obj.equals(btnSearchStudent)) {
-            searchStudent();
-        } else if (obj.equals(btnSearchSubject)) {
-            searchSubject();
+        } else if (obj.equals(btnBorrowing)) {
+            addNewBorrowing();
+        } else if (obj.equals(btnSearchEmployee)) {
+            searchEmployee();
+        } else if (obj.equals(btnSearchDevice)) {
+            searchDevice();
         }
     }
 
     private void addActionListener() {
-        btnRegister.addActionListener(this);
-        btnSearchStudent.addActionListener(this);
-        btnSearchSubject.addActionListener(this);
+        btnSearchEmployee.addActionListener(this);
+        btnSearchDevice.addActionListener(this);
+        btnBorrowing.addActionListener(this);
         btnClear.addActionListener(this);
         btnCancel.addActionListener(this);
     }
 
     private void clearInputData() {
         var emptyText = "";
-        txtSubjectIdToSearch.setText(emptyText);
-        txtStudentIdToSearch.setText(emptyText);
-        txtStudentId.setText(emptyText);
+        txtDeviceIdToSearch.setText(emptyText);
+        txtEmployeeIdToSearch.setText(emptyText);
+        comboType.setSelectedIndex(0);
+        txtEmployeeId.setText(emptyText);
         txtFullName.setText(emptyText);
-        txtSubjectId.setText(emptyText);
-        txtMajor.setText(emptyText);
-        txtSubjectName.setText(emptyText);
-        txtRegisterTime.setText(emptyText);
+        txtDeviceId.setText(emptyText);
+        txtDept.setText(emptyText);
+        txtDeviceName.setText(emptyText);
+        txtDeviceType.setText(emptyText);
+        txtBorrowingDate.setText(emptyText);
     }
 
     private void showMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
     }
 
-    private void addNewRegister() {
+    private void addNewBorrowing() {
         if (student == null || subject == null) {
             var msg = "Vui lòng nhập vào mã sinh viên và mã môn học trước!";
             showMessage(msg);
@@ -487,7 +507,7 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
             var currentTime = new Date();
             var format = "dd/MM/yyyy HH:mm:ss";
             var dateFormat = new SimpleDateFormat(format);
-            txtRegisterTime.setText(dateFormat.format(currentTime));
+            txtBorrowingDate.setText(dateFormat.format(currentTime));
             var checker = new InfoFilterImp();
             Registering r = new Registering(student, subject, currentTime);
             if (checker.isRecordExist(registerings, r)) {
@@ -503,56 +523,123 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
         }
     }
 
-    private void searchStudent() {
-        student = null;
-        var StudentId = txtStudentIdToSearch.getText().trim().toUpperCase();
-        if (StudentId.isEmpty()) {
-            var msg = "Vui lòng nhập mã sinh viên cần tìm!";
+    private void searchEmployee() {
+        employee = null;
+        var employeeId = txtEmployeeIdToSearch.getText().trim().toUpperCase();
+        if (employeeId.isEmpty()) {
+            var msg = "Vui lòng nhập mã nhân viên cần tìm!";
             showMessage(msg);
-        } else { //tìm kiếm sinh viên trong ds sv
-            for (Student s : students) {
-                if (s.getStudentId().compareTo(StudentId) == 0) {
-                    student = s;
+        } else { //tìm kiếm nhân viên trong ds sv
+            for (Employee s : employees) {
+                if (s.getEmployeeId().compareTo(employeeId) == 0) { //nhân viên có tồn tại trong danh sách
+                    employee = s;
                     break;
                 }
             }
-            if (student != null) {
-                txtStudentId.setText(student.getStudentId());
-                txtFullName.setText(student.getFullName());
-                txtMajor.setText(student.getMajor());
+            if (employee != null) {
+                txtEmployeeId.setText(employee.getEmployeeId());
+                txtFullName.setText(employee.getFullName());
+                txtDept.setText(employee.getEmployeeDept());
             } else {
-                txtStudentId.setText("");
+                txtEmployeeId.setText("");
                 txtFullName.setText("");
-                txtMajor.setText("");
-                var msg = "Sinh viên cần tìm không tồn tại. Vui lòng thử lại!";
+                txtDept.setText("");
+                var msg = "Nhân viên cần tìm không tồn tại. Vui lòng thử lại!";
                 showMessage(msg);
             }
         }
 
     }
 
-    private void searchSubject() {
-        subject = null;
-        var subjectIdStr = txtSubjectIdToSearch.getText();
-        if (subjectIdStr.isEmpty()) {
-            var msg = "Vui lòng nhập mã môn học cần tìm!";
+    private void searchDevice() {
+
+        var deviceIdStr = txtDeviceIdToSearch.getText();
+        if (deviceIdStr.isEmpty()) {
+            var msg = "Vui lòng nhập số IMEI/Serial thiết bị cần tìm!";
             showMessage(msg);
-        } else { //tìm kiếm môn học trong ds môn học         
-            var subjectId = Integer.parseInt(subjectIdStr);
-            for (Subject s : subjects) {
-                if (s.getId() == subjectId) {
-                    subject = s;
-                    break;
+        } else { //tìm kiếm thiết bị trong ds các thiết bị  
+            var s1 = "Điện thoại";
+            var s2 = "PC";
+            var s3 = "Laptop";
+            var s4 = "Màn hình";
+            var type = comboType.getSelectedItem().toString();
+            if (type.equals(s1)) {
+                phone = null;
+                var phoneImei = Long.parseLong(deviceIdStr);
+                for (Phone p : phones) {
+                    if (p.getImei() == phoneImei) {
+                        phone = p;
+                        break;
+                    }
                 }
-            }
-            if (subject != null) {
-                txtSubjectName.setText(subject.getName());
-                txtSubjectId.setText(subject.getId() + "");
-            } else {
-                txtSubjectName.setText("");
-                txtSubjectId.setText("");
-                var msg = "Môn học cần tìm không tồn tại. Vui lòng thử lại!";
-                showMessage(msg);
+                if (phone != null) {
+                    txtDeviceId.setText(phone.getImei()+ "");
+                    txtDeviceName.setText(phone.getName());
+                    txtDeviceType.setText(s1);
+                } else {
+                    txtDeviceName.setText("");
+                    txtDeviceId.setText("");
+                    txtDeviceType.setText("");
+                    var msg = "Điện thoại cần tìm không tồn tại. Vui lòng thử lại!";
+                    showMessage(msg);
+                }
+            } else if (type.equals(s2)) {
+                pc = null;               
+                for (Pc p : pcs) {
+                    if (p.getSerial().compareTo(deviceIdStr) == 0) {
+                        pc = p;
+                        break;
+                    }
+                }
+                if (pc != null) {
+                    txtDeviceId.setText(pc.getSerial());
+                    txtDeviceName.setText(pc.getName());
+                    txtDeviceType.setText(s2);
+                } else {
+                    txtDeviceName.setText("");
+                    txtDeviceId.setText("");
+                    txtDeviceType.setText("");
+                    var msg = "PC cần tìm không tồn tại. Vui lòng thử lại!";
+                    showMessage(msg);
+                }
+            } else if (type.equals(s3)) {
+                laptop = null;               
+                for (Laptop p : laptops) {
+                    if (p.getSerial().compareTo(deviceIdStr) == 0) {
+                        laptop = p;
+                        break;
+                    }
+                }
+                if (laptop != null) {
+                    txtDeviceId.setText(laptop.getSerial());
+                    txtDeviceName.setText(laptop.getName());
+                    txtDeviceType.setText(s3);
+                } else {
+                    txtDeviceName.setText("");
+                    txtDeviceId.setText("");
+                    txtDeviceType.setText("");
+                    var msg = "Laptop cần tìm không tồn tại. Vui lòng thử lại!";
+                    showMessage(msg);
+                }
+            } else if (type.equals(s4)) {
+                monitor = null;               
+                for (Monitor p : monitors) {
+                    if (p.getSerial().compareTo(deviceIdStr) == 0) {
+                        monitor = p;
+                        break;
+                    }
+                }
+                if (monitor != null) {
+                    txtDeviceId.setText(monitor.getSerial());
+                    txtDeviceName.setText(monitor.getName());
+                    txtDeviceType.setText(s4);
+                } else {
+                    txtDeviceName.setText("");
+                    txtDeviceId.setText("");
+                    txtDeviceType.setText("");
+                    var msg = "Màn hình cần tìm không tồn tại. Vui lòng thử lại!";
+                    showMessage(msg);
+                }
             }
         }
     }

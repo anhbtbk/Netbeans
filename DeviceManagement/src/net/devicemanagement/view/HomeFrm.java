@@ -6,8 +6,10 @@ package net.devicemanagement.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.print.attribute.Size2DSyntax;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.devicemanagement.controller.DataController;
@@ -37,6 +39,8 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     private List<Employee> employees; //tạo list các nhân viên
     private DefaultTableModel tableModelEmployee;
     private List<Borrowing> borrowings; //tạo list danh sách mượn
+    private DefaultTableModel tableModelBorrowing;
+    private SimpleDateFormat simpleDateFormat;
 
     /**
      * Creates new form HomeFrm
@@ -56,8 +60,10 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelMonitor = (DefaultTableModel) tblMonitor.getModel();
         employees = new ArrayList<>();
         tableModelEmployee = (DefaultTableModel) tblEmployee.getModel();
+        tableModelBorrowing = (DefaultTableModel) tblBorrowing.getModel();
         //khi ứng dụng được kích hoạt, dữ liệu tự load và hiển thị lên
         dataController = new DataControllerImp();
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");       
         LoadData();
         ShowData();
     }
@@ -2207,6 +2213,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         saveData(DataController.EMPLOYEE);//lưu màn hình
     }
 
+    public void addBorrowingCallback(Borrowing borrowing) {
+        //ở cái table sẽ gọi đến phương 
+        //thức vào và truyền đến list nhân viên nhận được
+        borrowings.add(borrowing);
+        showBorrowing(borrowing);
+        saveData(DataController.BORROWING);//lưu màn hình
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //thực hiện các hành động
@@ -2342,6 +2356,20 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelEmployee.addRow(row); //thêm các thông số bên trên vào bảng
     }
 
+    private void showBorrowing(Borrowing r) {
+        Object[] row = new Object[]{
+            r.getEmployee().getEmployeeId(), r.getEmployee().getFullName(), 
+            r.getEmployee().getEmployeeDept(), 
+            r.getPhone().getImei(), r.getPhone().getName(), 
+            r.getPc().getSerial(), r.getPc().getName(),
+            r.getLaptop().getSerial(), r.getLaptop().getName(),
+            r.getMonitor().getSerial(), r.getMonitor().getName(),
+            simpleDateFormat.format(r.getBorrowingDate())
+            
+        };
+        tableModelEmployee.addRow(row); //thêm các thông số bên trên vào bảng
+    }
+
     private void LoadData() {
         //đọc danh sách các điện thoại
         phones = dataController.<Phone>readDataFromFile(DataController.PHONE_FILE);
@@ -2363,6 +2391,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         showLaptops();
         showMonitors();
         showEmployees();
+        showBorrowings();
 
     }
 
@@ -2401,6 +2430,13 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    private void showBorrowings() {
+        tableModelBorrowing.setRowCount(0); //xóa hết dữ liệu cũ rồi mới hiển thị lại
+        for (Borrowing r : borrowings) {
+            showBorrowing(r);
+        }
+    }
+
     private void saveData(int choice) {
         switch (choice) {
             case DataController.PHONE:
@@ -2424,7 +2460,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                         DataController.EMPLOYEE_FILE);
                 break;
             case DataController.BORROWING:
-                dataController.<Borrowing>writeToFile(borrowings, 
+                dataController.<Borrowing>writeToFile(borrowings,
                         DataController.BORROWING_FILE);
                 break;
         }
@@ -3052,7 +3088,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
     }
 
     private void addBorrowing() {
-        AddBorrowingDialog addBorrowingDialog = new AddBorrowingDialog(this, true);
+        AddBorrowingDialog addBorrowingDialog
+                = new AddBorrowingDialog(this, true, employees, phones, pcs,
+                        laptops, monitors, borrowings);
         addBorrowingDialog.setVisible(true);
     }
 
