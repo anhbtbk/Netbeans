@@ -58,11 +58,11 @@ public class EditMonitorDialog extends javax.swing.JDialog implements ActionList
         txtMonitorSize = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("THÊM MỚI ĐIỆN THOẠI");
+        setTitle("THAY ĐỔI THÔNG TIN MÀN HÌNH");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Thêm mới màn hình");
+        jLabel1.setText("Thay đổi thông tin màn hình");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Số serial");

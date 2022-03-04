@@ -13,23 +13,17 @@ import java.util.Objects;
  * @author Tuan Anh
  */
 public class Borrowing implements Serializable {
+
     private Employee employee;
     private Phone phone;
-    private Pc pc;
-    private Laptop laptop;
-    private Monitor monitor;
     private Date borrowingDate;
 
     public Borrowing() {
     }
 
-    public Borrowing(Employee employee, Phone phone, Pc pc, Laptop laptop, 
-            Monitor monitor, Date borrowingDate) {
+    public Borrowing(Employee employee, Phone phone, Date borrowingDate) {
         this.employee = employee;
         this.phone = phone;
-        this.pc = pc;
-        this.laptop = laptop;
-        this.monitor = monitor;
         this.borrowingDate = borrowingDate;
     }
 
@@ -49,30 +43,6 @@ public class Borrowing implements Serializable {
         this.phone = phone;
     }
 
-    public Pc getPc() {
-        return pc;
-    }
-
-    public void setPc(Pc pc) {
-        this.pc = pc;
-    }
-
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
-    }
-
-    public Monitor getMonitor() {
-        return monitor;
-    }
-
-    public void setMonitor(Monitor monitor) {
-        this.monitor = monitor;
-    }
-
     public Date getBorrowingDate() {
         return borrowingDate;
     }
@@ -84,11 +54,8 @@ public class Borrowing implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.employee);
-        hash = 89 * hash + Objects.hashCode(this.phone);
-        hash = 89 * hash + Objects.hashCode(this.pc);
-        hash = 89 * hash + Objects.hashCode(this.laptop);
-        hash = 89 * hash + Objects.hashCode(this.monitor);
+        hash = 53 * hash + Objects.hashCode(this.employee);
+        hash = 53 * hash + Objects.hashCode(this.phone);
         return hash;
     }
 
@@ -110,18 +77,7 @@ public class Borrowing implements Serializable {
         if (!Objects.equals(this.phone, other.phone)) {
             return false;
         }
-        if (!Objects.equals(this.pc, other.pc)) {
-            return false;
-        }
-        if (!Objects.equals(this.laptop, other.laptop)) {
-            return false;
-        }
-        if (!Objects.equals(this.monitor, other.monitor)) {
-            return false;
-        }
         return true;
     }
-    
-    
-    
+
 }

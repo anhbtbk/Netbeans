@@ -60,7 +60,7 @@ public class AddLaptopDialog extends javax.swing.JDialog implements ActionListen
         txtLaptopVga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("THÊM MỚI ĐIỆN THOẠI");
+        setTitle("THÊM MỚI LAPTOP");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

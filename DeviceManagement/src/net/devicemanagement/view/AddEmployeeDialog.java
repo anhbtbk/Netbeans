@@ -66,7 +66,7 @@ public class AddEmployeeDialog extends javax.swing.JDialog implements ActionList
         txtEmployeeEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("THÊM MỚI ĐIỆN THOẠI");
+        setTitle("THÊM MỚI NHÂN VIÊN");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import net.devicemanagement.controller.InfoFilterImp;
 import net.devicemanagement.view.model.Borrowing;
 import net.devicemanagement.view.model.Employee;
 import net.devicemanagement.view.model.Laptop;
@@ -25,15 +26,9 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
 
     private HomeFrm homeFrm;
     private Phone phone;
-    private Pc pc;
-    private Laptop laptop;
-    private Monitor monitor;
     private Employee employee;
 
     private List<Phone> phones;
-    private List<Pc> pcs;
-    private List<Laptop> laptops;
-    private List<Monitor> monitors;
     private List<Employee> employees;
     private List<Borrowing> borrowings;
 
@@ -50,16 +45,11 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
     }
 
     public AddBorrowingDialog(java.awt.Frame parent, boolean modal,
-            List<Employee> employees, List<Phone> phones, List<Pc> pcs,
-            List<Laptop> laptops, List<Monitor> monitors,
+            List<Employee> employees, List<Phone> phones,
             List<Borrowing> borrowings) {
         this(parent, modal);
         this.employees = employees;
-        this.phones = phones;
-        this.pcs = pcs;
-        this.laptops = laptops;
-        this.monitors = monitors;
-
+        this.phones = phones;     
         this.borrowings = borrowings;
 
     }
@@ -103,7 +93,7 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
         txtDeviceType = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("THÊM MỚI MÔN HỌC");
+        setTitle("THÊM MỚI MƯỢN THIẾT BỊ");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -205,7 +195,7 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
                         .addGap(1, 1, 1)
                         .addComponent(btnSearchDevice)))
                 .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -500,8 +490,8 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
     }
 
     private void addNewBorrowing() {
-        if (student == null || subject == null) {
-            var msg = "Vui lòng nhập vào mã sinh viên và mã môn học trước!";
+        if (employee == null || phone == null) {
+            var msg = "Vui lòng nhập vào mã nhân viên và số IMEI trước!";
             showMessage(msg);
         } else {
             var currentTime = new Date();
@@ -509,14 +499,14 @@ public class AddBorrowingDialog extends javax.swing.JDialog implements ActionLis
             var dateFormat = new SimpleDateFormat(format);
             txtBorrowingDate.setText(dateFormat.format(currentTime));
             var checker = new InfoFilterImp();
-            Registering r = new Registering(student, subject, currentTime);
-            if (checker.isRecordExist(registerings, r)) {
-                var msg = "Sinh viên " + student.getFullName() + " đã "
-                        + "đăng ký môn học " + subject.getName() + " trước đó.";
+            Borrowing r = new Borrowing(employee, phone, currentTime);
+            if (checker.isRecordExist(borrowings, r)) {
+                var msg = "Nhân viên " + employee.getFullName() + " đã "
+                        + "mượn điện thoại " + phone.getName() + " trước đó.";
                 showMessage(msg);
             } else {
-                homeFrm.addRegisteringCallback(r);
-                var msg = "Đăng ký môn học thành công!";
+                homeFrm.addBorrowingCallback(r);
+                var msg = "Mượn điện thoại thành công!";
                 showMessage(msg);
 //                dispose();
             }

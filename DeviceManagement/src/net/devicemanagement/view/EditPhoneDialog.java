@@ -55,11 +55,11 @@ public class EditPhoneDialog extends javax.swing.JDialog implements ActionListen
         btnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("THÊM MỚI ĐIỆN THOẠI");
+        setTitle("THAY ĐỔI THÔNG TIN ĐIỆN THOẠI");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Sửa thông tin điện thoại");
+        jLabel1.setText("Thay đổi thông tin điện thoại");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Số IMEI");

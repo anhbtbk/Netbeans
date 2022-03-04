@@ -66,7 +66,7 @@ public class EditLaptopDialog extends javax.swing.JDialog implements ActionListe
         txtLaptopVga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("THÊM MỚI ĐIỆN THOẠI");
+        setTitle("THAY ĐỔI THÔNG TIN LAPTOP");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

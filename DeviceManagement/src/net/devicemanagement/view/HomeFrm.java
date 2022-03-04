@@ -547,11 +547,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                     .addComponent(rbSearchPcBySerial))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSearchPcByName)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(txtSearchPcByRam, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtSearchPcBySerial))
+                    .addComponent(txtSearchPcByName, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                    .addComponent(txtSearchPcBySerial)
+                    .addComponent(txtSearchPcByRam))
                 .addGap(18, 18, 18)
                 .addComponent(btnSearchPc, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -772,11 +770,9 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
                     .addComponent(rbSearchLaptopBySerial))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSearchLaptopByName)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                        .addComponent(txtSearchLaptopByRam, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtSearchLaptopBySerial))
+                    .addComponent(txtSearchLaptopByName, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                    .addComponent(txtSearchLaptopBySerial)
+                    .addComponent(txtSearchLaptopByRam))
                 .addGap(18, 18, 18)
                 .addComponent(btnSearchLaptop, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -1506,11 +1502,11 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Phòng ban", "Số IMEI/Serial", "Tên thiết bị", "Loại thiết bị", "Thời gian mượn"
+                "Mã nhân viên", "Tên nhân viên", "Phòng ban", "Số IMEI/Serial", "Tên thiết bị", "Thời gian mượn"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -2218,7 +2214,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         //thức vào và truyền đến list nhân viên nhận được
         borrowings.add(borrowing);
         showBorrowing(borrowing);
-        saveData(DataController.BORROWING);//lưu màn hình
+        saveData(DataController.BORROWING);//lưu danh sách mượn
     }
 
     @Override
@@ -2356,18 +2352,14 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
         tableModelEmployee.addRow(row); //thêm các thông số bên trên vào bảng
     }
 
-    private void showBorrowing(Borrowing r) {
+    private void showBorrowing(Borrowing r) { //hiển thị thông tin lên bảng
         Object[] row = new Object[]{
             r.getEmployee().getEmployeeId(), r.getEmployee().getFullName(), 
             r.getEmployee().getEmployeeDept(), 
-            r.getPhone().getImei(), r.getPhone().getName(), 
-            r.getPc().getSerial(), r.getPc().getName(),
-            r.getLaptop().getSerial(), r.getLaptop().getName(),
-            r.getMonitor().getSerial(), r.getMonitor().getName(),
-            simpleDateFormat.format(r.getBorrowingDate())
-            
+            r.getPhone().getImei(), r.getPhone().getName(),          
+            simpleDateFormat.format(r.getBorrowingDate())           
         };
-        tableModelEmployee.addRow(row); //thêm các thông số bên trên vào bảng
+        tableModelBorrowing.addRow(row); //thêm các thông số bên trên vào bảng
     }
 
     private void LoadData() {
@@ -3089,8 +3081,7 @@ public class HomeFrm extends javax.swing.JFrame implements ActionListener {
 
     private void addBorrowing() {
         AddBorrowingDialog addBorrowingDialog
-                = new AddBorrowingDialog(this, true, employees, phones, pcs,
-                        laptops, monitors, borrowings);
+                = new AddBorrowingDialog(this, true, employees, phones, borrowings);
         addBorrowingDialog.setVisible(true);
     }
 
